@@ -31,4 +31,8 @@ The following features are suggested to extend the functionality of this bot to 
    - The list is uni-modal - meaning that there is 1 and only 1 element that appears multiple times in the list
    - The list contains no mode at all - meaning that this list contains unique and distinct values i.e. `[1, 0, 2, 3, 5, 52, 6]`
 
-4. Range - with the list of integers we find the difference between the lowest valued element in the list and the highest valued element in the list. So from the list in the previous example, the range = 52 - 0 = 52 because the highest value in the list is 52 and the lowest value in the list is 0. 
+4. Range - with the list of integers we find the difference between the lowest valued element in the list and the highest valued element in the list. So from the list in the previous example, the range = 52 - 0 = 52 because the highest value in the list is 52 and the lowest value in the list is 0.
+
+#### Some Fun Things
+
+- The chat bot will also have the ability to send basic 1To1 conversations with a simple command *greet everyone* - in this, everyone else but the sender that typed this command will be greeted, and in fact the bot will also be keeping track of how many times the user(s) were in fact greeted.
