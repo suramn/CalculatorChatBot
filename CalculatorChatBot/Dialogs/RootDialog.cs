@@ -43,22 +43,22 @@ namespace CalculatorChatBot.Dialogs
                     if (baseCmd.Contains("add"))
                     {
                         // Complete the add functionality here
-                        await context.PostAsync("add hit");
+                        await OperationHandlers.HandleAddCommand(context, parameters); 
                     }
                     else if (baseCmd.Contains("subtract"))
                     {
                         // Complete the subtract functionality here
-                        await context.PostAsync("subtract hit");
+                        await OperationHandlers.HandleSubtractCommand(context, parameters);
                     }
                     else if (baseCmd.Contains("multiply"))
                     {
                         // Complete the multiple functionality here
-                        await context.PostAsync("multiply hit");
+                        await OperationHandlers.HandleMultiplyCommand(context, parameters);
                     }
                     else if (baseCmd.Contains("divide"))
                     {
                         // Complete the divide functionality here
-                        await context.PostAsync("divide hit");
+                        await OperationHandlers.HandleDivideCommand(context, parameters);
                     }
                     #endregion
                 }
