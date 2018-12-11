@@ -37,24 +37,28 @@ namespace CalculatorChatBot.Dialogs
                 if (split.Length >= 2)
                 {
                     var baseCmd = split[0].ToLower();
-                    var parameters = split.Skip(1).ToString();
+                    var parameters = split[1].ToString();
 
                     #region Commands
                     if (baseCmd.Contains("add"))
                     {
                         // Complete the add functionality here
+                        await context.PostAsync("add hit");
                     }
                     else if (baseCmd.Contains("subtract"))
                     {
                         // Complete the subtract functionality here
+                        await context.PostAsync("subtract hit");
                     }
                     else if (baseCmd.Contains("multiply"))
                     {
                         // Complete the multiple functionality here
+                        await context.PostAsync("multiply hit");
                     }
                     else if (baseCmd.Contains("divide"))
                     {
                         // Complete the divide functionality here
+                        await context.PostAsync("divide hit");
                     }
                     #endregion
                 }

@@ -2,13 +2,13 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.3/MicrosoftTeams.schema.json",
   "manifestVersion": "1.3",
   "version": "1.1.0",
-  "id": "aad13540-41b9-4c80-acef-c2fa139947e8",
-  "packageName": "io.ngrok.21fb76d0",
+  "id": "8b195137-41f4-4e2f-bcf9-f8be86bf90a1",
+  "packageName": "io.ngrok.c10453f5",
   "developer": {
     "name": "Pranav Krishnamurthy",
-    "websiteUrl": "https://21fb76d0.ngrok.io",
-    "privacyUrl": "https://21fb76d0.ngrok.io/privacy",
-    "termsOfUseUrl": "https://21fb76d0.ngrok.io/termsofuse"
+    "websiteUrl": "https://c10453f5.ngrok.io",
+    "privacyUrl": "https://c10453f5.ngrok.io/privacy",
+    "termsOfUseUrl": "https://c10453f5.ngrok.io/termsofuse"
   },
   "icons": {
     "color": "bot-icon-color-192x192.png",
@@ -25,7 +25,7 @@
   "accentColor": "#002244",
   "bots": [
     {
-      "botId": "aad13540-41b9-4c80-acef-c2fa139947e8",
+      "botId": "8b195137-41f4-4e2f-bcf9-f8be86bf90a1",
       "supportsFiles": true,
       "scopes": [
         "personal",
@@ -35,7 +35,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "aad13540-41b9-4c80-acef-c2fa139947e8",
+      "botId": "8b195137-41f4-4e2f-bcf9-f8be86bf90a1",
       "commands": [
       ]
     }
