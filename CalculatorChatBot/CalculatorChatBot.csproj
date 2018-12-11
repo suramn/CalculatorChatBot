@@ -147,6 +147,8 @@
   <ItemGroup>
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
+    <Content Include="Manifest\bot-icon-color-192x192.png" />
+    <Content Include="Manifest\bot-icon-outline-32x32.png" />
     <Content Include="TestBot.bot" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -167,6 +169,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Manifest\manifest.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -192,7 +195,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3978</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3978/</IISUrl>
+          <IISUrl>http://localhost:5056/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -209,4 +212,35 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild">
+    <ZipDir InputBaseDirectory="manifest" OutputFileName="$(OutputPath)\$(MSBuildProjectName).zip" OverwriteExistingFile="true" IncludeBaseDirectory="false" />
+  </Target>
+  <UsingTask TaskName="ZipDir" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <InputBaseDirectory ParameterType="System.String" Required="true" />
+      <OutputFileName ParameterType="System.String" Required="true" />
+      <OverwriteExistingFile ParameterType="System.Boolean" Required="false" />
+      <IncludeBaseDirectory ParameterType="System.Boolean" Required="false" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.IO.Compression" />
+      <Reference Include="System.IO.Compression.FileSystem" />
+      <Using Namespace="System.IO.Compression" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+      if (File.Exists(OutputFileName))
+      {
+        if (!OverwriteExistingFile)
+        {
+          return false;
+        }
+        File.Delete(OutputFileName);
+      }
+      ZipFile.CreateFromDirectory
+      (
+        InputBaseDirectory, OutputFileName,
+        CompressionLevel.Optimal, IncludeBaseDirectory
+      );
+    ]]></Code>
+    </Task>
+  </UsingTask>
 </Project>
