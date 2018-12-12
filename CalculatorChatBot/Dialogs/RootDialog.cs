@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using CalculatorChatBot.BotHelpers;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-using CalculatorChatBot.BotHelpers;
-using System.Linq;
+using System;
+using System.Threading.Tasks;
 
 namespace CalculatorChatBot.Dialogs
 {
@@ -42,23 +41,19 @@ namespace CalculatorChatBot.Dialogs
                     #region Commands
                     if (baseCmd.Contains("add"))
                     {
-                        // Complete the add functionality here
-                        await OperationHandlers.HandleAddCommand(context, parameters); 
+                        await ArithmeticHandlers.HandleAddCommand(context, parameters); 
                     }
                     else if (baseCmd.Contains("subtract"))
                     {
-                        // Complete the subtract functionality here
-                        await OperationHandlers.HandleSubtractCommand(context, parameters);
+                        await ArithmeticHandlers.HandleSubtractCommand(context, parameters);
                     }
                     else if (baseCmd.Contains("multiply"))
                     {
-                        // Complete the multiple functionality here
-                        await OperationHandlers.HandleMultiplyCommand(context, parameters);
+                        await ArithmeticHandlers.HandleMultiplyCommand(context, parameters);
                     }
                     else if (baseCmd.Contains("divide"))
                     {
-                        // Complete the divide functionality here
-                        await OperationHandlers.HandleDivideCommand(context, parameters);
+                        await ArithmeticHandlers.HandleDivideCommand(context, parameters);
                     }
                     #endregion
                 }

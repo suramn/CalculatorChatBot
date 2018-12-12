@@ -4,7 +4,7 @@
     using System;
     using System.Threading.Tasks;
 
-    public class OperationHandlers
+    public class ArithmeticHandlers
     {
         public static async Task HandleAddCommand(IDialogContext context, string parameters)
         {

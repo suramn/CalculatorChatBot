@@ -157,7 +157,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BotHelpers\MessageHelpers.cs" />
-    <Compile Include="BotHelpers\OperationHandlers.cs" />
+    <Compile Include="BotHelpers\ArithmeticHandlers.cs" />
     <Compile Include="BotMiddleware\StripBotAtMentions.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
