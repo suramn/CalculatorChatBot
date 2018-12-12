@@ -16,12 +16,14 @@ namespace CalculatorChatBot.BotHelpers
             var sb = new StringBuilder();
             sb.AppendLine(firstLine);
             sb.AppendLine();
-            sb.AppendLine("Here's what I can help you do:");
+            sb.AppendLine("# Here's what I can help you do:");
             sb.AppendLine();
             sb.AppendLine("* Add numbers");
             sb.AppendLine("* Subtract numbers");
             sb.AppendLine("* Multiply numbers");
             sb.AppendLine("* Divide numbers");
+            sb.AppendLine();
+            sb.AppendLine("# Future functionality would include the computation of basic statistical measures");
             return sb.ToString();
         }
     }
