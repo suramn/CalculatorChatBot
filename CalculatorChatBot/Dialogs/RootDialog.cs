@@ -59,7 +59,7 @@ namespace CalculatorChatBot.Dialogs
                 }
                 else if (text.Contains("help"))
                 {
-                    await MessageHelpers.SendMessage(context, MessageHelpers.CreateHelpMessage("Sure I can provide some help about me."));
+                    await MessageHelpers.SendMessage(context, MessageHelpers.CreateHelpMessage("Sure I can provide some help about me."), activity);
                 }
                 else
                 {
