@@ -55,6 +55,10 @@ namespace CalculatorChatBot.Dialogs
                     {
                         await ArithmeticHandlers.HandleDivideCommand(context, parameters);
                     }
+                    else if (baseCmd.Contains("average"))
+                    {
+                        await StatisticalHandlers.HandleAverageCommand(context, parameters);
+                    }
                     #endregion
                 }
                 else if (text.Contains("help"))

@@ -59,8 +59,8 @@
 
             if (paramInts.Length == 2 && paramInts[1] != 0)
             {
-                decimal result = paramInts[0] / paramInts[1];
-                outputMsg = $"Given the list {parameters}, the quotient = {Decimal.Round(result, 2)}";
+                decimal result = Convert.ToDecimal(paramInts[0]) / paramInts[1];
+                outputMsg = $"Given the list {parameters}, the quotient = {decimal.Round(result, 2)}";
             }
             else
             {
