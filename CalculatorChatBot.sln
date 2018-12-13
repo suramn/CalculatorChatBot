@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorChatBot", "CalculatorChatBot\CalculatorChatBot.csproj", "{5F07CFCA-2F75-42AF-8A58-49973777BA18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorChatBot.Operations", "CalculatorChatBot.Operations\CalculatorChatBot.Operations.csproj", "{44470EFB-0B9A-4CB5-B34F-396CE08BEDDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5F07CFCA-2F75-42AF-8A58-49973777BA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F07CFCA-2F75-42AF-8A58-49973777BA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F07CFCA-2F75-42AF-8A58-49973777BA18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44470EFB-0B9A-4CB5-B34F-396CE08BEDDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44470EFB-0B9A-4CB5-B34F-396CE08BEDDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44470EFB-0B9A-4CB5-B34F-396CE08BEDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44470EFB-0B9A-4CB5-B34F-396CE08BEDDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
