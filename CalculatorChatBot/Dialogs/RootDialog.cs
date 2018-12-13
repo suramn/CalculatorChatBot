@@ -63,6 +63,10 @@ namespace CalculatorChatBot.Dialogs
                     {
                         await StatisticalHandlers.HandleMedianCommand(context, parameters); 
                     }
+                    else if (baseCmd.Contains("mode"))
+                    {
+                        await StatisticalHandlers.HandleModeCommand(context, parameters); 
+                    }
                     #endregion
                 }
                 else if (text.Contains("help"))

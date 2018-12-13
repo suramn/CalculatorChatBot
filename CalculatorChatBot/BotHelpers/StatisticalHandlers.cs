@@ -2,6 +2,7 @@
 {
     using Microsoft.Bot.Builder.Dialogs;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -63,9 +64,50 @@
             await context.PostAsync($"Given the list: {parameters} - the calculated median = {decimal.Round(median, 2)}");
         }
 
+        /// <summary>
+        /// This will contain the logic of calculating the mode of a list of numbers
+        /// </summary>
+        /// <param name="context">The current conversation taking place</param>
+        /// <param name="parameters">The list of integers</param>
+        /// <returns>A unit of execution</returns>
         public static async Task HandleModeCommand(IDialogContext context, string parameters)
         {
+            // Conversion from a string to integer array
+            string[] tempInts = parameters.Split(',');
+            int[] inputInts = Array.ConvertAll(tempInts, int.Parse);
 
+            // inputList is the original list of numbers
+            List<int> inputList = new List<int>(inputInts);
+            List<int> modes = new List<int>();
+
+            // The following lines of code uses LINQ to look at the elements of the list
+            // and to count the number of occurrences of each element
+            var query = from numbers in inputList
+                        group numbers by numbers
+                            into groupedNumbers
+                        select new
+                        {
+                            Number = groupedNumbers.Key,
+                            Count = groupedNumbers.Count()
+                        };
+
+            int max = query.Max(g => g.Count);
+
+            if (max == 1)
+            {
+                int mode = 0;
+                modes.Add(mode);
+            }
+            else
+            {
+                // Find the elements of the list that appear more than once
+                modes = query.Where(x => x.Count == max).Select(x => x.Number).ToList(); 
+            }
+
+            // Hopefully rendering the list to a string
+            var modeString = modes.ToString();
+
+            await context.PostAsync($"Given the list: { parameters} - you have {modes.Count} modes, value(s): {modeString}");
         }
     }
 }
