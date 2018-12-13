@@ -62,5 +62,10 @@
 
             await context.PostAsync($"Given the list: {parameters} - the calculated median = {decimal.Round(median, 2)}");
         }
+
+        public static async Task HandleModeCommand(IDialogContext context, string parameters)
+        {
+
+        }
     }
 }
