@@ -11,8 +11,10 @@
             string[] paramTemp = parameters.Split(',');
             int[] paramInts = Array.ConvertAll(paramTemp, int.Parse);
 
-            int result = 0;
-            for (int i = 0; i < paramInts.Length; i++)
+            // Setting the result initially to the first element of the array
+            int result = paramInts[0];
+
+            for (int i = 1; i < paramInts.Length; i++)
             {
                 result += paramInts[i]; 
             }
@@ -25,8 +27,8 @@
             string[] paramTemp = parameters.Split(',');
             int[] paramInts = Array.ConvertAll(paramTemp, int.Parse);
 
-            int result = 0;
-            for (int i = 0; i < paramInts.Length; i++)
+            int result = paramInts[0];
+            for (int i = 1; i < paramInts.Length; i++)
             {
                 result -= paramInts[i];
             }
@@ -39,8 +41,8 @@
             string[] paramTemp = parameters.Split(',');
             int[] paramInts = Array.ConvertAll(paramTemp, int.Parse);
 
-            int result = 0;
-            for (int i = 0; i < paramInts.Length; i++)
+            int result = paramInts[0];
+            for (int i = 1; i < paramInts.Length; i++)
             {
                 result *= paramInts[i];
             }

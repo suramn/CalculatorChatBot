@@ -7,16 +7,9 @@ namespace CalculatorChatBot.BotHelpers
 {
     public static class MessageHelpers
     {
-        public static async Task SendMessage(IDialogContext context, string message, Activity activity = null)
+        public static async Task SendMessage(IDialogContext context, string message)
         {
-            #region Having the bot "type"
-            // Send "typing" information
-            var reply = activity.CreateReply();
-            reply.Text = activity == null ? null : "hmm.." + message;
-            reply.Type = ActivityTypes.Typing;
-            #endregion
-
-            await context.PostAsync(reply); 
+            await context.PostAsync(message); 
         }
 
         public static string CreateHelpMessage(string firstLine)
