@@ -29,14 +29,38 @@
             await context.PostAsync($"Given the list: {parameters} - the calculated average = {decimal.Round(average, 2)}");
         }
 
+        /// <summary>
+        /// This will contain the logic of calculating the median of a list of numbers
+        /// </summary>
+        /// <param name="context">The current conversation taking place</param>
+        /// <param name="parameters">The list of integers</param>
+        /// <returns>A unit of execution</returns>
         public static async Task HandleMedianCommand(IDialogContext context, string parameters)
         {
             string[] inputTemp = parameters.Split(',');
             int[] inputInts = Array.ConvertAll(inputTemp, int.Parse);
 
-            // TODO: Have the necessary logic to be able to get the median
-            // properly
-            await context.PostAsync($"bleh");
+            decimal median;
+            int size = inputInts.Length;
+            int[] copy = inputInts;
+
+            // When it comes to calculating the median you want to make sure 
+            // that your input list of integers is sorted
+            Array.Sort(copy);
+
+            // Calculating the median one of two ways
+            // 1. It's the middle number in a list of odd length
+            // 2. It's the average of the two middle numbers in a list of even length
+            if (size % 2 == 0)
+            {
+                median = Convert.ToDecimal(copy[size / 2 - 1] + copy[size / 2]) / 2;
+            }
+            else
+            {
+                median = Convert.ToDecimal(copy[(size - 1) / 2]); 
+            }
+
+            await context.PostAsync($"Given the list: {parameters} - the calculated median = {decimal.Round(median, 2)}");
         }
     }
 }
