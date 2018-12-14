@@ -29,6 +29,12 @@
             return decimal.Round(average, 2);
         }
 
+        /// <summary>
+        /// Method to find the middle of the list of integers, also known as
+        /// the median
+        /// </summary>
+        /// <param name="inputString">The list of integers that are separated by a comma</param>
+        /// <returns>The median value</returns>
         public decimal CalculateMedian(string inputString)
         {
             string[] inputStringArr = inputString.Split(',');
@@ -52,6 +58,12 @@
             return decimal.Round(median, 2);
         }
 
+        /// <summary>
+        /// This function will now calculate the mode of the list of 
+        /// integers
+        /// </summary>
+        /// <param name="inputString">List of comma separated integers</param>
+        /// <returns>The mode - either 0, one single value, or multiple integer values</returns>
         public int[] CalculateMode(string inputString)
         {
             // From string to int array
