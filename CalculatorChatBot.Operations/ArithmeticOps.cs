@@ -34,12 +34,53 @@
             int[] inputInts = Array.ConvertAll(inputArrayStr, int.Parse);
 
             int diff = inputInts[0];
-            for (int i = 0; i < inputInts.Length; i++)
+            for (int i = 1; i < inputInts.Length; i++)
             {
                 diff -= inputInts[i];
             }
 
             return diff; 
+        }
+
+        /// <summary>
+        /// Calculates the overall product - multiplying all of the elements in the list together
+        /// </summary>
+        /// <param name="inputString">The list of numbers</param>
+        /// <returns>A number representing the product</returns>
+        public int OverallProduct(string inputString)
+        {
+            string[] inputArrayStr = inputString.Split(',');
+            int[] inputInts = Array.ConvertAll(inputArrayStr, int.Parse);
+
+            int prod = inputInts[0];
+            for (int i = 1; i < inputInts.Length; i++)
+            {
+                prod *= inputInts[i]; 
+            }
+
+            return prod; 
+        }
+
+        /// <summary>
+        /// This calculates the quotient between two numbers
+        /// </summary>
+        /// <param name="inputString">The list of comma separated integers</param>
+        /// <returns>The result when you divide the two numbers in the array</returns>
+        public decimal Division(string inputString)
+        {
+            string[] inputArrayStr = inputString.Split(',');
+            int[] inputInts = Array.ConvertAll(inputArrayStr, int.Parse);
+
+            decimal quotient = 0; 
+            if (inputInts.Length == 2 && inputInts[1] != 0)
+            {
+                quotient = Convert.ToDecimal(inputInts[0]) / inputInts[1];
+                return decimal.Round(quotient, 2); 
+            }
+            else
+            {
+                return 0; 
+            }
         }
     }
 }
