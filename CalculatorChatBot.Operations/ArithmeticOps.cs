@@ -66,7 +66,7 @@
         /// </summary>
         /// <param name="inputString">The list of comma separated integers</param>
         /// <returns>The result when you divide the two numbers in the array</returns>
-        public decimal Division(string inputString)
+        public decimal OverallDivision(string inputString)
         {
             string[] inputArrayStr = inputString.Split(',');
             int[] inputInts = Array.ConvertAll(inputArrayStr, int.Parse);
