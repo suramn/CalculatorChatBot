@@ -46,27 +46,35 @@ namespace CalculatorChatBot.Operations.Tests
         public void OverallProductTest()
         {
             var arith = new ArithmeticOps();
-
             var inputString = "1,0,4";
-            var inputString2 = "1,3,-2"; 
-
+            
             var expOverallProd1 = arith.OverallProduct(inputString);
-            var expOverallProd2 = arith.OverallProduct(inputString2);
-
             int testOverallProd1 = 0;
+            
+            Assert.AreEqual(expOverallProd1, testOverallProd1);
+            
+            var scenario = testOverallProd1 == expOverallProd1;
+            if (scenario)
+            {
+                Console.Write($"Scenario - Expected overall product: {expOverallProd1}; Test overall product: {testOverallProd1}" + Environment.NewLine);
+                Console.Write("The OverallProduct test has passed");
+            }
+        }
+
+        [TestMethod]
+        public void OverallProductTest2()
+        {
+            var arith = new ArithmeticOps();
+            var inputString2 = "1,3,-2";
+            var expOverallProd2 = arith.OverallProduct(inputString2);
             int testOverallProd2 = -6;
 
-            Assert.AreEqual(expOverallProd1, testOverallProd1);
             Assert.AreEqual(expOverallProd2, testOverallProd2);
 
-            var scenario1 = testOverallProd1 == expOverallProd1;
-            var scenario2 = testOverallProd2 == expOverallProd2; 
-
-            if (scenario1 && scenario2)
+            if (testOverallProd2 == expOverallProd2)
             {
-                Console.Write($"Scenario 1 - Expected overall product: {expOverallProd1}; Test overall product: {testOverallProd1}" + Environment.NewLine);
-                Console.Write($"Scenario 2 - Expected overall product: {expOverallProd2}; Test overall product: {testOverallProd2}" + Environment.NewLine);
-                Console.Write("The OverallDifference test has passed");
+                Console.Write($"Scenario - Expected overall product: {expOverallProd2}; Test overall product: {testOverallProd2}" + Environment.NewLine);
+                Console.Write("The OverallProduct test has passed");
             }
         }
 
