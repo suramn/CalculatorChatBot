@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="ArithmeticTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Statistical.cs" />
+    <Compile Include="StatisticalTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
