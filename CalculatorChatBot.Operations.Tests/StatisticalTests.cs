@@ -22,5 +22,22 @@
                 Console.Write("The AverageTest calculations pass");
             }
         }
+
+        [TestMethod]
+        public void MedianTest()
+        {
+            var stats = new StatisticalOps();
+            string inputStr = "2,4,5,7,9";
+            decimal testMedian = 5;
+
+            var expectedMedian = stats.CalculateMedian(inputStr);
+            Assert.AreEqual(testMedian, expectedMedian);
+
+            if (testMedian == expectedMedian)
+            {
+                Console.Write($"Expected Median - {expectedMedian}, Test Median - {testMedian}" + Environment.NewLine);
+                Console.Write("The MedianTest calculations pass");
+            }
+        }
     }
 }
