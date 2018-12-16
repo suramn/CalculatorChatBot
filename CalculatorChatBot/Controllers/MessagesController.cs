@@ -1,12 +1,14 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
-
-namespace CalculatorChatBot
+﻿namespace CalculatorChatBot
 {
+    using CalculatorChatBot.BotMiddleware;
+    using CalculatorChatBot.Dialogs;
+    using Microsoft.Bot.Builder.Dialogs;
+    using Microsoft.Bot.Connector;
+    using System;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+
     [BotAuthentication]
     public class MessagesController : ApiController
     {
@@ -14,48 +16,56 @@ namespace CalculatorChatBot
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
         /// </summary>
-        public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
+        [HttpPost]
+        [Route("api/messages")]
+        public async Task<IHttpActionResult> PostAsync([FromBody]Activity activity)
         {
-            if (activity.GetActivityType() == ActivityTypes.Message)
+            // Confirmation check - if activity is null, do nothing
+            if (activity == null)
             {
-                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
+                return Ok(); 
+            }
+
+            // Message activities are generally text messages that are sent from a user.
+            if (activity.Type == ActivityTypes.Message)
+            {
+                return await HandleTextMessageAsync(activity); 
             }
             else
             {
-                HandleSystemMessage(activity);
+                // This is used to handle many other (some unsupported) types of messages
+                return await HandleSystemMessageAsync(activity); 
             }
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            return response;
         }
 
-        private Activity HandleSystemMessage(Activity message)
+        private async Task<IHttpActionResult> HandleTextMessageAsync(Activity activity)
         {
-            string messageType = message.GetActivityType();
-            if (messageType == ActivityTypes.DeleteUserData)
+            // This is used for removing the '@botName' from the incoming message so it
+            // can be parsed correctly
+            var messageActivity = StripBotAtMentions.StripAtMentionText(activity);
+            try
             {
-                // Implement user deletion here
-                // If we handle user deletion, return a real message
+                // This sends all messages to the RootDialog for processing.
+                await Conversation.SendAsync(messageActivity, () => new RootDialog());
             }
-            else if (messageType == ActivityTypes.ConversationUpdate)
+            catch (Exception ex)
             {
-                // Handle conversation state changes, like members being added and removed
-                // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
-                // Not available in all channels
+                Debug.WriteLine(ex.ToString());
             }
-            else if (messageType == ActivityTypes.ContactRelationUpdate)
+
+            return Ok();
+        }
+
+        private async Task<IHttpActionResult> HandleSystemMessageAsync(Activity message)
+        {
+            if (message.Type == ActivityTypes.ConversationUpdate)
             {
-                // Handle add/remove from contact lists
-                // Activity.From + Activity.Action represent what happened
             }
-            else if (messageType == ActivityTypes.Typing)
-            {
-                // Handle knowing that the user is typing
-            }
-            else if (messageType == ActivityTypes.Ping)
+            else if (message.Type == ActivityTypes.MessageReaction)
             {
             }
 
-            return null;
+            return Ok();
         }
     }
 }

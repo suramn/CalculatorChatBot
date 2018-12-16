@@ -161,6 +161,7 @@
     <Compile Include="BotHelpers\StatisticalHandlers.cs" />
     <Compile Include="BotMiddleware\StripBotAtMentions.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\AddDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

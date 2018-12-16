@@ -8,15 +8,8 @@ using System.Threading.Tasks;
 namespace CalculatorChatBot.Dialogs
 {
     [Serializable]
-    public class RootDialog : IDialog<object>
+    public class RootDialog : DispatchDialog
     {
-        public Task StartAsync(IDialogContext context)
-        {
-            context.Wait(MessageReceivedAsync);
-
-            return Task.CompletedTask;
-        }
-
         [RegexPattern("add")]
         [RegexPattern("addition")]
         [ScorableGroup(1)]
@@ -26,70 +19,13 @@ namespace CalculatorChatBot.Dialogs
             context.Call(new AddDialog(result), EndDialog); 
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
+        [MethodBind]
+        [ScorableGroup(2)]
+        public async Task Default(IDialogContext context, IActivity activity)
         {
-            var activity = await result as Activity;
-
-            // Strip out the mentions - As all channel messages to a bot must @mention the bot itself, 
-            // you must strip out the bot name at the very least. This would utilize the SDK function
-            // GetTextWithoutMentions to strip all the mentions
-            var text = activity.Text;
-
-            if (!string.IsNullOrEmpty(text))
-            {
-                // Check for the following commands - which would represent the four basic operations
-                // This method of text parsing would then assume that the command is the first token, 
-                // and then the parameters are the remainder
-                var split = text.Split(' ');
-
-                // If the user is asking to conduct anything below
-                if (split.Length >= 2)
-                {
-                    var baseCmd = split[0].ToLower();
-                    var parameters = split[1].ToString();
-
-                    #region Commands
-                    if (baseCmd.Contains("add"))
-                    {
-                        await ArithmeticHandlers.HandleAddCommand(context, parameters); 
-                    }
-                    else if (baseCmd.Contains("subtract"))
-                    {
-                        await ArithmeticHandlers.HandleSubtractCommand(context, parameters);
-                    }
-                    else if (baseCmd.Contains("multiply"))
-                    {
-                        await ArithmeticHandlers.HandleMultiplyCommand(context, parameters);
-                    }
-                    else if (baseCmd.Contains("divide"))
-                    {
-                        await ArithmeticHandlers.HandleDivideCommand(context, parameters);
-                    }
-                    else if (baseCmd.Contains("average"))
-                    {
-                        await StatisticalHandlers.HandleAverageCommand(context, parameters);
-                    }
-                    else if (baseCmd.Contains("median"))
-                    {
-                        await StatisticalHandlers.HandleMedianCommand(context, parameters); 
-                    }
-                    else if (baseCmd.Contains("mode"))
-                    {
-                        await StatisticalHandlers.HandleModeCommand(context, parameters); 
-                    }
-                    #endregion
-                }
-                else if (text.Contains("help"))
-                {
-                    await MessageHelpers.SendMessage(context, MessageHelpers.CreateHelpMessage("Sure I can provide some help about me."));
-                }
-                else
-                {
-                    await MessageHelpers.SendMessage(context, "I'm sorry, I did not understand you :(");
-                }
-            }
-
-            context.Wait(MessageReceivedAsync);
+            // Send message
+            await context.PostAsync("I'm sorry, but I didn't understand.");
+            context.Done<object>(null); 
         }
 
         public async Task EndDialog(IDialogContext context, IAwaitable<object> result)
