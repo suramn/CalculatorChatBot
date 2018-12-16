@@ -1,5 +1,6 @@
 ﻿using CalculatorChatBot.BotHelpers;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Scorables;
 using Microsoft.Bot.Connector;
 using System;
 using System.Threading.Tasks;
@@ -14,6 +15,15 @@ namespace CalculatorChatBot.Dialogs
             context.Wait(MessageReceivedAsync);
 
             return Task.CompletedTask;
+        }
+
+        [RegexPattern("add")]
+        [RegexPattern("addition")]
+        [ScorableGroup(1)]
+        public async Task RunAddDialog(IDialogContext context, IActivity activity)
+        {
+            var result = activity as Activity;
+            context.Call(new AddDialog(result), EndDialog); 
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
@@ -80,6 +90,11 @@ namespace CalculatorChatBot.Dialogs
             }
 
             context.Wait(MessageReceivedAsync);
+        }
+
+        public async Task EndDialog(IDialogContext context, IAwaitable<object> result)
+        {
+            context.Done<object>(null);
         }
     }
 }
