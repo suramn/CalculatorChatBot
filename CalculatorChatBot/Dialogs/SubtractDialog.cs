@@ -6,6 +6,10 @@
 
     public class SubtractDialog : IDialog<object>
     {
+        #region Dialog properties
+
+        #endregion
+
         public SubtractDialog(Activity incomingActivity)
         {
 

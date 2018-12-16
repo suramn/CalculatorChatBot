@@ -10,7 +10,6 @@
     public class RootDialog : DispatchDialog
     {
         [RegexPattern("add")]
-        [RegexPattern("addition")]
         [ScorableGroup(1)]
         public async Task RunAddDialog(IDialogContext context, IActivity activity)
         {

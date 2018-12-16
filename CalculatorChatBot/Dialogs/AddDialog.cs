@@ -8,11 +8,13 @@
     [Serializable]
     public class AddDialog : IDialog<object>
     {
+        #region Dialog properties
         public string[] InputStringArray { get; set; }
 
         public string InputString { get; set; }
 
-        public int[] InputInts { get; set; }
+        public int[] InputInts { get; set; } 
+        #endregion
 
         public AddDialog(Activity result)
         {
