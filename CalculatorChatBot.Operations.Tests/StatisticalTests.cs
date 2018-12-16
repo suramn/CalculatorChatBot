@@ -39,5 +39,24 @@
                 Console.Write("The MedianTest calculations pass");
             }
         }
+
+        [TestMethod]
+        public void ModeTest()
+        {
+            var stats = new StatisticalOps();
+            string inputStr = "1,1,2,3,5,5,7";
+            int[] testModes = stats.CalculateMode(inputStr);
+
+            int[] expectedModes = new int[] { 1, 5 };
+
+            if (testModes.Length == expectedModes.Length)
+            {
+                for (int i = 0; i < testModes.Length; i++)
+                {
+                    Assert.AreEqual(testModes[i], expectedModes[i]);
+                }
+                Console.Write("The ModeTest calculations pass");
+            }
+        }
     }
 }
