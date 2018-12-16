@@ -1,12 +1,11 @@
-﻿using CalculatorChatBot.BotHelpers;
-using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Scorables;
-using Microsoft.Bot.Connector;
-using System;
-using System.Threading.Tasks;
-
-namespace CalculatorChatBot.Dialogs
+﻿namespace CalculatorChatBot.Dialogs
 {
+    using Microsoft.Bot.Builder.Dialogs;
+    using Microsoft.Bot.Builder.Scorables;
+    using Microsoft.Bot.Connector;
+    using System;
+    using System.Threading.Tasks;
+
     [Serializable]
     public class RootDialog : DispatchDialog
     {
@@ -17,6 +16,14 @@ namespace CalculatorChatBot.Dialogs
         {
             var result = activity as Activity;
             context.Call(new AddDialog(result), EndDialog); 
+        }
+
+        [RegexPattern("subtract")]
+        [ScorableGroup(1)]
+        public async Task RunSubtractDialog(IDialogContext context, IActivity activity)
+        {
+            var result = activity as Activity;
+            context.Call(new SubtractDialog(result), EndDialog); 
         }
 
         [MethodBind]
