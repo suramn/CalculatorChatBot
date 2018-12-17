@@ -163,6 +163,7 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\AddDialog.cs" />
     <Compile Include="Dialogs\HelloDialog.cs" />
+    <Compile Include="Dialogs\MultiplyDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Dialogs\SubtractDialog.cs" />
     <Compile Include="Global.asax.cs">
