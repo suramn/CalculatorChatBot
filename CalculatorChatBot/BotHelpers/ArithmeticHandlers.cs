@@ -69,5 +69,25 @@
 
             await context.PostAsync(outputMsg);
         }
+
+        public static async Task HandleModuloCommand(IDialogContext context, string parameters)
+        {
+            string[] paramTemp = parameters.Split(',');
+            int[] paramInts = Array.ConvertAll(paramTemp, int.Parse);
+
+            var outputMsg = "";
+
+            if (paramInts.Length == 2 && paramInts[1] != 0)
+            {
+                var result = paramInts[0] % paramInts[1];
+                outputMsg = $"Given the list {parameters}, the result of the modulo operation is = {result}";
+            }
+            else
+            {
+                outputMsg = "There should be only two integers, and the second digit input cannot be 0!";
+            }
+
+            await context.PostAsync(outputMsg);
+        }
     }
 }
