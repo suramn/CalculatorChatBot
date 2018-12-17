@@ -3,6 +3,7 @@
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Builder.Scorables;
     using Microsoft.Bot.Connector;
+    using Microsoft.Bot.Connector.Teams.Models;
     using System;
     using System.Threading.Tasks;
 
@@ -16,6 +17,22 @@
         {
             var helloResult = activity as Activity;
             context.Call(new HelloDialog(helloResult), EndDialog); 
+        }
+
+        [RegexPattern("greet everyone")]
+        [ScorableGroup(1)]
+        public async Task RunGreetDialog(IDialogContext context, IActivity activity)
+        {
+            var channelData = context.Activity.GetChannelData<TeamsChannelData>();
+            if (channelData.Team != null)
+            {
+                context.Call(new GreetDialog(), EndDialog); 
+            }
+            else
+            {
+                await context.PostAsync("I'm sorry, you can only do this from within a Team.");
+                context.Done<object>(null); 
+            }
         }
 
         [RegexPattern("add")]
@@ -32,6 +49,14 @@
         {
             var result = activity as Activity;
             context.Call(new SubtractDialog(result), EndDialog); 
+        }
+
+        [RegexPattern("product")]
+        [RegexPattern("multiply")]
+        public async Task RunMultiplyDialog(IDialogContext context, IActivity activity)
+        {
+            var multiResult = activity as Activity;
+            context.Call(new MultiplyDialog(multiResult), EndDialog); 
         }
 
         [MethodBind]
