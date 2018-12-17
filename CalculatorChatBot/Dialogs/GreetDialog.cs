@@ -69,6 +69,7 @@
                 await connectorClient.Conversations.SendToConversationAsync((Activity)message);
             }
 
+            // This will pop the child dialog off the dialog stack
             context.Done<object>(null);
         }
     }

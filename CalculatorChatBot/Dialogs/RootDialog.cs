@@ -10,13 +10,14 @@
     [Serializable]
     public class RootDialog : DispatchDialog
     {
+        #region Hello World like functionality
         [RegexPattern("hello")]
         [RegexPattern("hi")]
         [ScorableGroup(1)]
         public async Task RunHelloDialog(IDialogContext context, IActivity activity)
         {
             var helloResult = activity as Activity;
-            context.Call(new HelloDialog(helloResult), EndDialog); 
+            context.Call(new HelloDialog(helloResult), EndDialog);
         }
 
         [RegexPattern("greet everyone")]
@@ -26,16 +27,18 @@
             var channelData = context.Activity.GetChannelData<TeamsChannelData>();
             if (channelData.Team != null)
             {
-                context.Call(new GreetDialog(), EndDialog); 
+                context.Call(new GreetDialog(), EndDialog);
             }
             else
             {
                 await context.PostAsync("I'm sorry, you can only do this from within a Team.");
-                context.Done<object>(null); 
+                context.Done<object>(null);
             }
-        }
+        } 
+        #endregion
 
         [RegexPattern("add")]
+        [RegexPattern("sum")]
         [ScorableGroup(1)]
         public async Task RunAddDialog(IDialogContext context, IActivity activity)
         {
@@ -44,6 +47,7 @@
         }
 
         [RegexPattern("subtract")]
+        [RegexPattern("difference")]
         [ScorableGroup(1)]
         public async Task RunSubtractDialog(IDialogContext context, IActivity activity)
         {
@@ -53,10 +57,19 @@
 
         [RegexPattern("product")]
         [RegexPattern("multiply")]
+        [ScorableGroup(1)]
         public async Task RunMultiplyDialog(IDialogContext context, IActivity activity)
         {
             var multiResult = activity as Activity;
             context.Call(new MultiplyDialog(multiResult), EndDialog); 
+        }
+
+        [RegexPattern("divide")]
+        [RegexPattern("quotient")]
+        public async Task RunDivideDialog(IDialogContext context, IActivity activity)
+        {
+            var divideResult = activity as Activity;
+            context.Call(new DivideDialog(divideResult), EndDialog);
         }
 
         [MethodBind]
