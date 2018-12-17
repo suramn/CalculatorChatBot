@@ -32,9 +32,30 @@
             }
         }
 
-        public Task StartAsync(IDialogContext context)
+        public async Task StartAsync(IDialogContext context)
         {
-            throw new System.NotImplementedException();
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context)); 
+            }
+
+            if (InputInts.Length > 1)
+            {
+                int diff = InputInts[0];
+                for (int i = 1; i < InputInts.Length; i++)
+                {
+                    diff -= InputInts[i];
+                }
+
+                await context.PostAsync($"Given the list of {InputString}, the difference = {diff}");
+            }
+            else
+            {
+                await context.PostAsync($"The input list is too short - you need more numbers");
+            }
+
+            // Return back to the RootDialog - popping this child dialog off the stack
+            context.Done<object>(null); 
         }
     }
 }
