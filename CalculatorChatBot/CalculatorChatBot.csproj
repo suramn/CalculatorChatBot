@@ -176,6 +176,8 @@
     <Compile Include="Dialogs\Arithmetic\MultiplyDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Dialogs\Arithmetic\SubtractDialog.cs" />
+    <Compile Include="Dialogs\Statistics\MedianDialog.cs" />
+    <Compile Include="Dialogs\Statistics\ModeDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
