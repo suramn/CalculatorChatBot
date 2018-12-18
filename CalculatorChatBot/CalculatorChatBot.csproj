@@ -167,14 +167,15 @@
     <Compile Include="BotHelpers\StatisticalHandlers.cs" />
     <Compile Include="BotMiddleware\StripBotAtMentions.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Dialogs\AddDialog.cs" />
+    <Compile Include="Dialogs\Arithmetic\AddDialog.cs" />
     <Compile Include="Dialogs\AverageDialog.cs" />
-    <Compile Include="Dialogs\DivideDialog.cs" />
+    <Compile Include="Dialogs\Arithmetic\DivideDialog.cs" />
     <Compile Include="Dialogs\GreetDialog.cs" />
     <Compile Include="Dialogs\HelloDialog.cs" />
-    <Compile Include="Dialogs\MultiplyDialog.cs" />
+    <Compile Include="Dialogs\Arithmetic\ModuloDialog.cs" />
+    <Compile Include="Dialogs\Arithmetic\MultiplyDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
-    <Compile Include="Dialogs\SubtractDialog.cs" />
+    <Compile Include="Dialogs\Arithmetic\SubtractDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
