@@ -33,7 +33,7 @@ namespace CalculatorChatBot.Dialogs
                 var split = text.Split(' ');
 
                 // If the user is asking to conduct anything below
-                if (split.Length >= 2)
+                if (split.Length == 2)
                 {
                     var baseCmd = split[0].ToLower();
                     var parameters = split[1].ToString();
