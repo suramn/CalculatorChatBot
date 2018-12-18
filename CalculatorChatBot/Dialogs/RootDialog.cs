@@ -96,6 +96,22 @@
             var meanResult = activity as Activity;
             context.Call(new AverageDialog(meanResult), EndDialog);
         }
+
+        [RegexPattern("median")]
+        [ScorableGroup(1)]
+        public async Task RunMedianDialog(IDialogContext context, IActivity activity)
+        {
+            var medianResult = activity as Activity;
+            context.Call(new MedianDialog(medianResult), EndDialog);
+        }
+
+        [RegexPattern("mode")]
+        [ScorableGroup(1)]
+        public async Task RunModeDialog(IDialogContext context, IActivity activity)
+        {
+            var modeResult = activity as Activity;
+            context.Call(new ModeDialog(modeResult), EndDialog); 
+        }
         #endregion
 
         #region Generic help
