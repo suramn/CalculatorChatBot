@@ -50,7 +50,7 @@
             }
 
             // Return to the RootDialog - making sure to pop this child dialog off the stack
-
+            context.Done<object>(null);
         }
     }
 }
