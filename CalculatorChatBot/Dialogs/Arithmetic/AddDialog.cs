@@ -1,29 +1,29 @@
-﻿namespace CalculatorChatBot.Dialogs
+﻿namespace CalculatorChatBot.Dialogs.Arithmetic
 {
-    using System;
-    using System.Threading.Tasks;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using System;
+    using System.Threading.Tasks;
 
     /// <summary>
-    /// This class will produce the overall difference of a list of numbers. If the list is too short, the 
+    /// This class will produce the overall sum of a list of numbers. If the list is too short, the 
     /// bot will reply with an appropriate message.
     /// </summary>
     [Serializable]
-    public class SubtractDialog : IDialog<object>
+    public class AddDialog : IDialog<object>
     {
         #region Dialog properties
-        public string InputString { get; set; }
-
         public string[] InputStringArray { get; set; }
 
-        public int[] InputInts { get; set; }
+        public string InputString { get; set; }
+
+        public int[] InputInts { get; set; } 
         #endregion
 
-        public SubtractDialog(Activity incomingActivity)
+        public AddDialog(Activity result)
         {
             // Extract the incoming text/message
-            string[] incomingInfo = incomingActivity.Text.Split(' ');
+            string[] incomingInfo = result.Text.Split(' ');
 
             // What is the properties to be set for the necessary 
             // operation to be performed
@@ -33,7 +33,7 @@
 
                 InputStringArray = InputString.Split(',');
 
-                InputInts = Array.ConvertAll(InputStringArray, int.Parse);
+                InputInts = Array.ConvertAll(InputStringArray, int.Parse); 
             }
         }
 
@@ -41,22 +41,23 @@
         {
             if (context == null)
             {
-                throw new ArgumentNullException(nameof(context)); 
+                throw new ArgumentNullException(nameof(context));
             }
 
             if (InputInts.Length > 1)
             {
-                int diff = InputInts[0];
+                int sum = InputInts[0];
                 for (int i = 1; i < InputInts.Length; i++)
                 {
-                    diff -= InputInts[i];
+                    sum += InputInts[i];
                 }
 
-                await context.PostAsync($"Given the list of {InputString}; the difference = {diff}");
+                await context.PostAsync($"Given the list of {InputString}; the sum = {sum}");
             }
             else
             {
-                await context.PostAsync($"The input list is too short - you need more numbers");
+                // Send the message that you need more elements to calculate the sum
+                await context.PostAsync("The input list is too short -  you need more numbers");
             }
 
             // Return back to the RootDialog - popping this child dialog off the stack

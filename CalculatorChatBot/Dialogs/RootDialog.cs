@@ -2,6 +2,7 @@
 {
     using CalculatorChatBot.BotHelpers;
     using Microsoft.Bot.Builder.Dialogs;
+    using CalculatorChatBot.Dialogs.Arithmetic;
     using Microsoft.Bot.Builder.Scorables;
     using Microsoft.Bot.Connector;
     using Microsoft.Bot.Connector.Teams.Models;
@@ -73,6 +74,15 @@
         {
             var divideResult = activity as Activity;
             context.Call(new DivideDialog(divideResult), EndDialog);
+        }
+
+        [RegexPattern("remainder")]
+        [RegexPattern("modulo")]
+        [ScorableGroup(1)]
+        public async Task RunModuloDialog(IDialogContext context, IActivity activity)
+        {
+            var modResult = activity as Activity;
+            context.Call(new ModuloDialog(modResult), EndDialog);
         }
         #endregion
 

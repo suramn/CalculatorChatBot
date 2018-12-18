@@ -1,12 +1,11 @@
-﻿namespace CalculatorChatBot.Dialogs
+﻿namespace CalculatorChatBot.Dialogs.Arithmetic
 {
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
-    using System;
     using System.Threading.Tasks;
+    using System;
 
-    [Serializable]
-    public class MultiplyDialog : IDialog<object>
+    public class DivideDialog : IDialog<object>
     {
         #region Dialog properties
         public string[] InputStringArray { get; set; }
@@ -16,9 +15,9 @@
         public int[] InputInts { get; set; }
         #endregion
 
-        public MultiplyDialog(Activity incomingActivity)
+        public DivideDialog(Activity incomingActivity)
         {
-            // Extract the incoming text/message
+            // Parsing through the necessary incoming text
             string[] incomingInfo = incomingActivity.Text.Split(' ');
 
             // What is the properties to be set for the necessary 
@@ -37,25 +36,21 @@
         {
             if (context == null)
             {
-                throw new ArgumentNullException(nameof(context));
+                throw new ArgumentNullException(nameof(context)); 
             }
 
-            if (InputInts.Length > 1)
+            decimal quotient = 0;
+            if (InputInts.Length == 2 && InputInts[1] != 0)
             {
-                int product = InputInts[0];
-                for (int i = 1; i < InputInts.Length; i++)
-                {
-                    product *= InputInts[i];
-                }
-
-                await context.PostAsync($"Given the list of {InputString}; the product = {product}");
+                quotient = Convert.ToDecimal(InputInts[0]) / InputInts[1];
+                await context.PostAsync($"Given the list {InputString}; the quotient = {decimal.Round(quotient, 2)}");
             }
             else
             {
-                await context.PostAsync($"The input list is too short - you need more numbers");
+                await context.PostAsync("The list may be too long, or one of the elements could be 0 - please try again later."); 
             }
 
-            // Return back to the RootDialog - popping this child dialog off the stack
+            // Return back to the root dialog - popping this child dialog from the dialog stack
             context.Done<object>(null);
         }
     }

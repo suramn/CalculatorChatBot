@@ -1,29 +1,25 @@
-﻿namespace CalculatorChatBot.Dialogs
+﻿namespace CalculatorChatBot.Dialogs.Arithmetic
 {
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
     using System;
     using System.Threading.Tasks;
 
-    /// <summary>
-    /// This class will produce the overall sum of a list of numbers. If the list is too short, the 
-    /// bot will reply with an appropriate message.
-    /// </summary>
     [Serializable]
-    public class AddDialog : IDialog<object>
+    public class MultiplyDialog : IDialog<object>
     {
         #region Dialog properties
         public string[] InputStringArray { get; set; }
 
         public string InputString { get; set; }
 
-        public int[] InputInts { get; set; } 
+        public int[] InputInts { get; set; }
         #endregion
 
-        public AddDialog(Activity result)
+        public MultiplyDialog(Activity incomingActivity)
         {
             // Extract the incoming text/message
-            string[] incomingInfo = result.Text.Split(' ');
+            string[] incomingInfo = incomingActivity.Text.Split(' ');
 
             // What is the properties to be set for the necessary 
             // operation to be performed
@@ -33,7 +29,7 @@
 
                 InputStringArray = InputString.Split(',');
 
-                InputInts = Array.ConvertAll(InputStringArray, int.Parse); 
+                InputInts = Array.ConvertAll(InputStringArray, int.Parse);
             }
         }
 
@@ -46,22 +42,21 @@
 
             if (InputInts.Length > 1)
             {
-                int sum = InputInts[0];
+                int product = InputInts[0];
                 for (int i = 1; i < InputInts.Length; i++)
                 {
-                    sum += InputInts[i];
+                    product *= InputInts[i];
                 }
 
-                await context.PostAsync($"Given the list of {InputString}; the sum = {sum}");
+                await context.PostAsync($"Given the list of {InputString}; the product = {product}");
             }
             else
             {
-                // Send the message that you need more elements to calculate the sum
-                await context.PostAsync("The input list is too short -  you need more numbers");
+                await context.PostAsync($"The input list is too short - you need more numbers");
             }
 
             // Return back to the RootDialog - popping this child dialog off the stack
-            context.Done<object>(null); 
+            context.Done<object>(null);
         }
     }
 }
