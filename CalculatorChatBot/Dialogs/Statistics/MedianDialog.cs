@@ -32,7 +32,31 @@
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("Hit the Median dialog here");
+            // Performing some type of validation on the incoming data
+            if (InputInts.Length > 2)
+            {
+                decimal median;
+                int size = InputInts.Length;
+                int[] copyArr = InputInts;
+
+                // Sorting the array
+                Array.Sort(copyArr);
+
+                if (size % 2 == 0)
+                {
+                    median = Convert.ToDecimal(copyArr[size / 2 - 1] + copyArr[size / 2]) / 2;
+                }
+                else
+                {
+                    median = Convert.ToDecimal(copyArr[(size - 1) / 2]);
+                }
+
+                await context.PostAsync($"Given the list: {InputString}; the median = {decimal.Round(median, 2)}");
+            }
+            else
+            {
+                await context.PostAsync($"Please double check the input: {InputString} and try again");
+            }
 
             // Making sure to return back to the RootDialog
             context.Done<object>(null);
