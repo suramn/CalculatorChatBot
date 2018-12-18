@@ -1,5 +1,6 @@
 ﻿namespace CalculatorChatBot.Dialogs
 {
+    using CalculatorChatBot.BotHelpers;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Builder.Scorables;
     using Microsoft.Bot.Connector;
@@ -34,16 +35,17 @@
                 await context.PostAsync("I'm sorry, you can only do this from within a Team.");
                 context.Done<object>(null);
             }
-        } 
+        }
         #endregion
 
+        #region Arithmetic Operations
         [RegexPattern("add")]
         [RegexPattern("sum")]
         [ScorableGroup(1)]
         public async Task RunAddDialog(IDialogContext context, IActivity activity)
         {
             var result = activity as Activity;
-            context.Call(new AddDialog(result), EndDialog); 
+            context.Call(new AddDialog(result), EndDialog);
         }
 
         [RegexPattern("subtract")]
@@ -52,7 +54,7 @@
         public async Task RunSubtractDialog(IDialogContext context, IActivity activity)
         {
             var result = activity as Activity;
-            context.Call(new SubtractDialog(result), EndDialog); 
+            context.Call(new SubtractDialog(result), EndDialog);
         }
 
         [RegexPattern("product")]
@@ -61,15 +63,37 @@
         public async Task RunMultiplyDialog(IDialogContext context, IActivity activity)
         {
             var multiResult = activity as Activity;
-            context.Call(new MultiplyDialog(multiResult), EndDialog); 
+            context.Call(new MultiplyDialog(multiResult), EndDialog);
         }
 
         [RegexPattern("divide")]
         [RegexPattern("quotient")]
+        [ScorableGroup(1)]
         public async Task RunDivideDialog(IDialogContext context, IActivity activity)
         {
             var divideResult = activity as Activity;
             context.Call(new DivideDialog(divideResult), EndDialog);
+        }
+        #endregion
+
+        #region Statistical Operations
+        [RegexPattern("average")]
+        [RegexPattern("mean")]
+        [ScorableGroup(1)]
+        public async Task RunAverageDialog(IDialogContext context, IActivity activity)
+        {
+            var meanResult = activity as Activity;
+            context.Call(new AverageDialog(meanResult), EndDialog);
+        }
+        #endregion
+
+        [RegexPattern("help")]
+        [ScorableGroup(1)]
+        public async Task GetHelp(IDialogContext context, IActivity activity)
+        {
+            // Send the generic help message
+            await context.PostAsync(MessageHelpers.CreateHelpMessage(""));
+            context.Done<object>(null); 
         }
 
         [MethodBind]

@@ -43,7 +43,7 @@
             if (InputInts.Length == 2 && InputInts[1] != 0)
             {
                 quotient = Convert.ToDecimal(InputInts[0]) / InputInts[1];
-                await context.PostAsync($"Given the list {InputString}, the quotient = {decimal.Round(quotient, 2)}");
+                await context.PostAsync($"Given the list {InputString}; the quotient = {decimal.Round(quotient, 2)}");
             }
             else
             {

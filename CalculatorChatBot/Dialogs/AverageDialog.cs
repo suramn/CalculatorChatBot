@@ -5,25 +5,18 @@
     using System;
     using System.Threading.Tasks;
 
-    /// <summary>
-    /// This class will produce the overall sum of a list of numbers. If the list is too short, the 
-    /// bot will reply with an appropriate message.
-    /// </summary>
-    [Serializable]
-    public class AddDialog : IDialog<object>
+    public class AverageDialog : IDialog<object>
     {
         #region Dialog properties
-        public string[] InputStringArray { get; set; }
-
         public string InputString { get; set; }
-
-        public int[] InputInts { get; set; } 
+        public string[] InputStringArray { get; set; }
+        public int[] InputInts { get; set; }
         #endregion
 
-        public AddDialog(Activity result)
+        public AverageDialog(Activity incomingActivity)
         {
             // Extract the incoming text/message
-            string[] incomingInfo = result.Text.Split(' ');
+            string[] incomingInfo = incomingActivity.Text.Split(' ');
 
             // What is the properties to be set for the necessary 
             // operation to be performed
@@ -33,7 +26,7 @@
 
                 InputStringArray = InputString.Split(',');
 
-                InputInts = Array.ConvertAll(InputStringArray, int.Parse); 
+                InputInts = Array.ConvertAll(InputStringArray, int.Parse);
             }
         }
 
@@ -52,16 +45,17 @@
                     sum += InputInts[i];
                 }
 
-                await context.PostAsync($"Given the list of {InputString}; the sum = {sum}");
+                decimal mean = Convert.ToDecimal(sum) / InputInts.Length;
+
+                await context.PostAsync($"Given the list: {InputString}; the average = {decimal.Round(mean, 2)}");
             }
             else
             {
-                // Send the message that you need more elements to calculate the sum
-                await context.PostAsync("The input list is too short -  you need more numbers");
+                await context.PostAsync("Your list may be too small to calculate an average. Please try again later.");
             }
 
-            // Return back to the RootDialog - popping this child dialog off the stack
-            context.Done<object>(null); 
+            // Return back to the RootDialog
+            context.Done<object>(null);
         }
     }
 }

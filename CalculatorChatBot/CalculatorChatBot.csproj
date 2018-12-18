@@ -168,6 +168,7 @@
     <Compile Include="BotMiddleware\StripBotAtMentions.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\AddDialog.cs" />
+    <Compile Include="Dialogs\AverageDialog.cs" />
     <Compile Include="Dialogs\DivideDialog.cs" />
     <Compile Include="Dialogs\GreetDialog.cs" />
     <Compile Include="Dialogs\HelloDialog.cs" />

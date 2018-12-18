@@ -48,7 +48,7 @@
                     product *= InputInts[i];
                 }
 
-                await context.PostAsync($"Given the list of {InputString}, the product = {product}");
+                await context.PostAsync($"Given the list of {InputString}; the product = {product}");
             }
             else
             {

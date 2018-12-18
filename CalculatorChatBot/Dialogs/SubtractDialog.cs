@@ -52,7 +52,7 @@
                     diff -= InputInts[i];
                 }
 
-                await context.PostAsync($"Given the list of {InputString}, the difference = {diff}");
+                await context.PostAsync($"Given the list of {InputString}; the difference = {diff}");
             }
             else
             {

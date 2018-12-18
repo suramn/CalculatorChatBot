@@ -3,12 +3,12 @@
   "manifestVersion": "1.3",
   "version": "1.1.0",
   "id": "8b195137-41f4-4e2f-bcf9-f8be86bf90a1",
-  "packageName": "io.ngrok.fc446f81",
+  "packageName": "io.ngrok.027528da",
   "developer": {
     "name": "Pranav Krishnamurthy",
-    "websiteUrl": "https://fc446f81.ngrok.io",
-    "privacyUrl": "https://fc446f81.ngrok.io/privacy",
-    "termsOfUseUrl": "https://fc446f81.ngrok.io/termsofuse"
+    "websiteUrl": "https://027528da.ngrok.io",
+    "privacyUrl": "https://027528da.ngrok.io/privacy",
+    "termsOfUseUrl": "https://027528da.ngrok.io/termsofuse"
   },
   "icons": {
     "color": "bot-icon-color-192x192.png",
@@ -30,13 +30,6 @@
       "scopes": [
         "personal",
         "team"
-      ]
-    }
-  ],
-  "composeExtensions": [
-    {
-      "botId": "8b195137-41f4-4e2f-bcf9-f8be86bf90a1",
-      "commands": [
       ]
     }
   ],
