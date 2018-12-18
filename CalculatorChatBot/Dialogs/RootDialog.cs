@@ -3,6 +3,7 @@
     using CalculatorChatBot.BotHelpers;
     using Microsoft.Bot.Builder.Dialogs;
     using CalculatorChatBot.Dialogs.Arithmetic;
+    using CalculatorChatBot.Dialogs.Statistics;
     using Microsoft.Bot.Builder.Scorables;
     using Microsoft.Bot.Connector;
     using Microsoft.Bot.Connector.Teams.Models;
@@ -97,14 +98,16 @@
         }
         #endregion
 
+        #region Generic help
         [RegexPattern("help")]
         [ScorableGroup(1)]
         public async Task GetHelp(IDialogContext context, IActivity activity)
         {
             // Send the generic help message
             await context.PostAsync(MessageHelpers.CreateHelpMessage(""));
-            context.Done<object>(null); 
-        }
+            context.Done<object>(null);
+        } 
+        #endregion
 
         [MethodBind]
         [ScorableGroup(2)]

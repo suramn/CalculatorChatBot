@@ -1,4 +1,4 @@
-﻿namespace CalculatorChatBot.Dialogs
+﻿namespace CalculatorChatBot.Dialogs.Statistics
 {
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
