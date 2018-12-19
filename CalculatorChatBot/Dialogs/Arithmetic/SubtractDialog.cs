@@ -52,7 +52,9 @@
                     diff -= InputInts[i];
                 }
 
-                await context.PostAsync($"Given the list of {InputString}; the difference = {diff}");
+                #region Building out the results object to create a card
+
+                #endregion
             }
             else
             {

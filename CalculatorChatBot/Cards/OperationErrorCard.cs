@@ -1,17 +1,17 @@
 ﻿namespace CalculatorChatBot.Cards
 {
-    using AdaptiveCards;
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Connector;
     using System.Collections.Generic;
+    using AdaptiveCards;
 
-    public class OperationResultsCard
+    public class OperationErrorCard
     {
         private OperationResults results;
 
-        public OperationResultsCard(OperationResults opResults)
+        public OperationErrorCard(OperationResults results)
         {
-            this.results = opResults;
+            this.results = results;
         }
 
         public Attachment ToAttachment()
@@ -22,7 +22,7 @@
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "Results",
+                        Text = "Error",
                         HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
                         Color = AdaptiveTextColor.Accent,
                         Weight = AdaptiveTextWeight.Bolder,
@@ -40,7 +40,7 @@
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = $"Output: {results.Output}",
+                        Text = $"Output Message: {results.OutputMsg}",
                         Size = AdaptiveTextSize.Default
                     }
                 }

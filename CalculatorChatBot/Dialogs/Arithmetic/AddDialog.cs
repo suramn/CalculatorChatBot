@@ -79,8 +79,25 @@
             }
             else
             {
+                // Building the error results object for the creation of the error card
+                var errorResults = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = "0", 
+                    OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
+                    OperationType = CalculationTypes.Addition.ToString()
+                };
+
+                #region Creating the adaptive card
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorCard = new OperationErrorCard(errorResults);
+                errorReply.Attachments.Add(errorCard.ToAttachment());
+                #endregion
+
                 // Send the message that you need more elements to calculate the sum
-                await context.PostAsync("The input list is too short -  you need more numbers");
+                await context.PostAsync(errorReply);
             }
 
             // Return back to the RootDialog - popping this child dialog off the stack
