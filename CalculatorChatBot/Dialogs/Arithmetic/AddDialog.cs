@@ -4,6 +4,11 @@
     using Microsoft.Bot.Connector;
     using System;
     using System.Threading.Tasks;
+    using CalculatorChatBot.Models;
+    using AdaptiveCards;
+    using System.Diagnostics;
+    using System.Collections.Generic;
+    using CalculatorChatBot.Cards;
 
     /// <summary>
     /// This class will produce the overall sum of a list of numbers. If the list is too short, the 
@@ -46,13 +51,31 @@
 
             if (InputInts.Length > 1)
             {
+                #region Before using adaptive cards
                 int sum = InputInts[0];
                 for (int i = 1; i < InputInts.Length; i++)
                 {
                     sum += InputInts[i];
                 }
+                #endregion
 
-                await context.PostAsync($"Given the list of {InputString}; the sum = {sum}");
+                var results = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = sum.ToString(),
+                    OutputMsg = $"Given the list of {InputString}; the sum = {sum}",
+                    OperationType = CalculationTypes.Addition.ToString()
+                };
+
+                #region Creating the adaptive card
+                IMessageActivity reply = context.MakeMessage();
+                reply.Attachments = new List<Attachment>();
+
+                var operationResultsCard = new OperationResultsCard(results);
+                reply.Attachments.Add(operationResultsCard.ToAttachment());  
+                #endregion
+
+                await context.PostAsync(reply);
             }
             else
             {

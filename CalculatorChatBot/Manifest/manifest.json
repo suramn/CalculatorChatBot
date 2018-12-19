@@ -3,12 +3,12 @@
   "manifestVersion": "1.3",
   "version": "1.1.0",
   "id": "8b195137-41f4-4e2f-bcf9-f8be86bf90a1",
-  "packageName": "io.ngrok.027528da",
+  "packageName": "io.ngrok.038e8fbc",
   "developer": {
     "name": "Pranav Krishnamurthy",
-    "websiteUrl": "https://027528da.ngrok.io",
-    "privacyUrl": "https://027528da.ngrok.io/privacy",
-    "termsOfUseUrl": "https://027528da.ngrok.io/termsofuse"
+    "websiteUrl": "https://038e8fbc.ngrok.io",
+    "privacyUrl": "https://038e8fbc.ngrok.io/privacy",
+    "termsOfUseUrl": "https://038e8fbc.ngrok.io/termsofuse"
   },
   "icons": {
     "color": "bot-icon-color-192x192.png",
