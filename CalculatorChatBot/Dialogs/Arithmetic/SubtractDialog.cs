@@ -1,7 +1,10 @@
 ﻿namespace CalculatorChatBot.Dialogs.Arithmetic
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using CalculatorChatBot.Cards;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
 
@@ -52,13 +55,44 @@
                     diff -= InputInts[i];
                 }
 
-                #region Building out the results object to create a card
+                var results = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = diff.ToString(),
+                    OutputMsg = $"Given the list of {InputString}; the sum = {diff}",
+                    OperationType = CalculationTypes.Subtraction.ToString()
+                };
 
+                #region Creating the adaptive card
+                IMessageActivity reply = context.MakeMessage();
+                reply.Attachments = new List<Attachment>();
+
+                var operationResultsCard = new OperationResultsCard(results);
+                reply.Attachments.Add(operationResultsCard.ToAttachment());
                 #endregion
+
+                await context.PostAsync(reply);
             }
             else
             {
-                await context.PostAsync($"The input list is too short - you need more numbers");
+                var errorResults = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = "0",
+                    OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
+                    OperationType = CalculationTypes.Subtraction.ToString()
+                };
+
+                #region Creating the adaptive card
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorCard = new OperationErrorCard(errorResults);
+                errorReply.Attachments.Add(errorCard.ToAttachment());
+                #endregion
+
+                // Send the message that you need more elements to calculate the sum
+                await context.PostAsync(errorReply);
             }
 
             // Return back to the RootDialog - popping this child dialog off the stack
