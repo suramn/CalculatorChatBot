@@ -55,7 +55,7 @@
                 {
                     Input = InputString,
                     Output = product.ToString(),
-                    OutputMsg = $"Given the list of {InputString}; the sum = {product}",
+                    OutputMsg = $"Given the list of {InputString}; the product = {product}",
                     OperationType = CalculationTypes.Multiplication.ToString()
                 };
 

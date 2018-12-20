@@ -1,8 +1,11 @@
 ﻿namespace CalculatorChatBot.Dialogs.Arithmetic
 {
+    using CalculatorChatBot.Cards;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class ModuloDialog : IDialog<object>
@@ -42,11 +45,43 @@
             if (InputInts.Length == 2 && InputInts[1] != 0)
             {
                 int remainder = InputInts[0] % InputInts[1];
-                await context.PostAsync($"Given the list {InputString}; the remainder = {remainder}");
+
+                var results = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = remainder.ToString(), 
+                    OutputMsg = $"Given the list {InputString}; the remainder = {remainder}",
+                    OperationType = CalculationTypes.Modulo.ToString()
+                };
+
+                // Building up the adaptive card
+                IMessageActivity reply = context.MakeMessage();
+                reply.Attachments = new List<Attachment>();
+
+                var operationResultsCard = new OperationResultsCard(results);
+                reply.Attachments.Add(operationResultsCard.ToAttachment());
+                
+                await context.PostAsync(reply);
             }
             else
             {
-                await context.PostAsync($"The list: {InputString} may be invalid for this operation. Please double check, and try again");
+                // Building the error results object
+                var errorResults = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = "0",
+                    OutputMsg = $"The list: {InputString} may be invalid for this operation. Please double check, and try again",
+                    OperationType = CalculationTypes.Modulo.ToString()
+                };
+
+                // Now having the card
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorCard = new OperationErrorCard(errorResults);
+                errorReply.Attachments.Add(errorCard.ToAttachment());
+
+                await context.PostAsync(errorReply);
             }
 
             // Return to the RootDialog - making sure to pop this child dialog off the stack

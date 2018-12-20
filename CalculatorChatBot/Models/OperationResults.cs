@@ -6,6 +6,7 @@
         Subtraction,
         Multiplication,
         Division,
+        Modulo,
         Mean,
         Median,
         Mode

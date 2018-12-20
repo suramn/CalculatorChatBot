@@ -59,7 +59,7 @@
                 {
                     Input = InputString,
                     Output = diff.ToString(),
-                    OutputMsg = $"Given the list of {InputString}; the sum = {diff}",
+                    OutputMsg = $"Given the list of {InputString}; the difference = {diff}",
                     OperationType = CalculationTypes.Subtraction.ToString()
                 };
 

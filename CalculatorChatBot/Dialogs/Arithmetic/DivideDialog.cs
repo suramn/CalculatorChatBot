@@ -4,6 +4,9 @@
     using Microsoft.Bot.Connector;
     using System.Threading.Tasks;
     using System;
+    using CalculatorChatBot.Models;
+    using System.Collections.Generic;
+    using CalculatorChatBot.Cards;
 
     public class DivideDialog : IDialog<object>
     {
@@ -43,11 +46,45 @@
             if (InputInts.Length == 2 && InputInts[1] != 0)
             {
                 quotient = Convert.ToDecimal(InputInts[0]) / InputInts[1];
-                await context.PostAsync($"Given the list {InputString}; the quotient = {decimal.Round(quotient, 2)}");
+
+                var results = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = decimal.Round(quotient, 2).ToString(),
+                    OutputMsg = $"Given the list of {InputString}; the quotient = {decimal.Round(quotient, 2)}",
+                    OperationType = CalculationTypes.Division.ToString()
+                };
+
+                #region Creating the adaptive card
+                IMessageActivity reply = context.MakeMessage();
+                reply.Attachments = new List<Attachment>();
+
+                var operationResultsCard = new OperationResultsCard(results);
+                reply.Attachments.Add(operationResultsCard.ToAttachment());
+                #endregion
+
+                await context.PostAsync(reply);
             }
             else
             {
-                await context.PostAsync("The list may be too long, or one of the elements could be 0 - please try again later."); 
+                var errorResults = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = "0",
+                    OutputMsg = "The list may be too long, or one of the elements could be 0 - please try again later.",
+                    OperationType = CalculationTypes.Division.ToString()
+                };
+
+                #region Creating the adaptive card
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorCard = new OperationErrorCard(errorResults);
+                errorReply.Attachments.Add(errorCard.ToAttachment());
+                #endregion
+
+                // Send the message that you need more elements to calculate the sum
+                await context.PostAsync(errorReply);
             }
 
             // Return back to the root dialog - popping this child dialog from the dialog stack
