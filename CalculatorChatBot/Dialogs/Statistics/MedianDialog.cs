@@ -1,8 +1,11 @@
 ﻿namespace CalculatorChatBot.Dialogs.Statistics
 {
+    using CalculatorChatBot.Cards;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class MedianDialog : IDialog<object>
@@ -51,11 +54,42 @@
                     median = Convert.ToDecimal(copyArr[(size - 1) / 2]);
                 }
 
-                await context.PostAsync($"Given the list: {InputString}; the median = {decimal.Round(median, 2)}");
+                #region Building out the results object and the card
+                var opsResult = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = decimal.Round(median, 2).ToString(), 
+                    OutputMsg = $"Given the list: {InputString}; the median = {decimal.Round(median, 2)}",
+                    OperationType = CalculationTypes.Median.ToString()
+                };
+
+                IMessageActivity opsReply = context.MakeMessage();
+                opsReply.Attachments = new List<Attachment>();
+
+
+                var operationsCard = new OperationResultsCard(opsResult);
+                opsReply.Attachments.Add(operationsCard.ToAttachment());
+                #endregion
+
+                await context.PostAsync(opsReply);
             }
             else
             {
-                await context.PostAsync($"Please double check the input: {InputString} and try again");
+                var errorResult = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = "0", 
+                    OutputMsg = $"Please double check the input: {InputString} and try again",
+                    OperationType = CalculationTypes.Median.ToString()
+                };
+
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorOpsCard = new OperationErrorCard(errorResult);
+                errorReply.Attachments.Add(errorOpsCard.ToAttachment());
+
+                await context.PostAsync(errorReply);
             }
 
             // Making sure to return back to the RootDialog

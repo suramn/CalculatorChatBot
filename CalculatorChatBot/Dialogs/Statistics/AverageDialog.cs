@@ -1,8 +1,11 @@
 ﻿namespace CalculatorChatBot.Dialogs.Statistics
 {
+    using CalculatorChatBot.Cards;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class AverageDialog : IDialog<object>
@@ -47,11 +50,43 @@
 
                 decimal mean = Convert.ToDecimal(sum) / InputInts.Length;
 
-                await context.PostAsync($"Given the list: {InputString}; the average = {decimal.Round(mean, 2)}");
+                #region Building the results object and the card
+                var results = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = decimal.Round(mean, 2).ToString(), 
+                    OutputMsg = $"Given the list: {InputString}; the average = {decimal.Round(mean, 2)}",
+                    OperationType = CalculationTypes.Mean.ToString()
+                };
+
+                IMessageActivity opsReply = context.MakeMessage();
+                opsReply.Attachments = new List<Attachment>();
+
+                var opsCard = new OperationResultsCard(results);
+                opsReply.Attachments.Add(opsCard.ToAttachment());
+                #endregion
+
+                await context.PostAsync(opsReply);
             }
             else
             {
-                await context.PostAsync("Your list may be too small to calculate an average. Please try again later.");
+                #region Building the error object
+                var errorResults = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = "0",
+                    OutputMsg = "Your list may be too small to calculate an average. Please try again later.",
+                    OperationType = CalculationTypes.Mean.ToString()
+                };
+
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorOpsCard = new OperationErrorCard(errorResults);
+                errorReply.Attachments.Add(errorOpsCard.ToAttachment());
+                #endregion
+
+                await context.PostAsync(errorReply);
             }
 
             // Return back to the RootDialog

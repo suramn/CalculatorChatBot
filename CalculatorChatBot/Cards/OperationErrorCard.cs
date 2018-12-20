@@ -24,7 +24,7 @@
                     {
                         Text = "Error",
                         HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
-                        Color = AdaptiveTextColor.Accent,
+                        Color = AdaptiveTextColor.Attention,
                         Weight = AdaptiveTextWeight.Bolder,
                         Separator = true
                     },
@@ -41,7 +41,8 @@
                     new AdaptiveTextBlock
                     {
                         Text = $"Output Message: {results.OutputMsg}",
-                        Size = AdaptiveTextSize.Default
+                        Size = AdaptiveTextSize.Default,
+                        Wrap = true
                     }
                 }
             };

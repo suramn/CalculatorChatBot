@@ -6,6 +6,8 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using System.Linq;
+    using CalculatorChatBot.Models;
+    using CalculatorChatBot.Cards;
 
     public class ModeDialog : IDialog<object>
     {
@@ -62,13 +64,44 @@
                     modesList = query.Where(x => x.Count == max).Select(x => x.Number).ToList();
                 }
 
-                var outputArray = modesList.ToArray().ToString();
+                var outputArray = modesList.ToArray();
 
-                await context.PostAsync($"Given the list: {InputString}; the mode = {outputArray}");
+                #region Having the results object
+                var successResult = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString(), 
+                    OutputMsg = $"Given the list: {InputString}; the mode = {(outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString())}",
+                    OperationType = CalculationTypes.Mode.ToString()
+                };
+
+                IMessageActivity successReply = context.MakeMessage();
+                successReply.Attachments = new List<Attachment>();
+
+                var successCard = new OperationResultsCard(successResult);
+                successReply.Attachments.Add(successCard.ToAttachment());
+                #endregion
+
+                await context.PostAsync(successReply);
             }
             else
             {
-                await context.PostAsync($"Please check your input list: {InputString} and try again later");
+                // Building out the error object, reply and card
+                var errorResult = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = "",
+                    OutputMsg = $"Please check your input list: {InputString} and try again later",
+                    OperationType = CalculationTypes.Mode.ToString()
+                };
+
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorCard = new OperationErrorCard(errorResult);
+                errorReply.Attachments.Add(errorCard.ToAttachment());
+
+                await context.PostAsync(errorReply);
             }
 
             // Returning back to the RootDialog - popping this child dialog off the stack
