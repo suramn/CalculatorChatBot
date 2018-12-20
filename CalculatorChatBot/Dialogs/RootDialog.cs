@@ -42,6 +42,7 @@
 
         #region Arithmetic Operations
         [RegexPattern("add")]
+        [RegexPattern("addition")]
         [RegexPattern("sum")]
         [ScorableGroup(1)]
         public async Task RunAddDialog(IDialogContext context, IActivity activity)
@@ -51,6 +52,7 @@
         }
 
         [RegexPattern("subtract")]
+        [RegexPattern("subtraction")]
         [RegexPattern("difference")]
         [ScorableGroup(1)]
         public async Task RunSubtractDialog(IDialogContext context, IActivity activity)
@@ -60,6 +62,7 @@
         }
 
         [RegexPattern("product")]
+        [RegexPattern("multiplication")]
         [RegexPattern("multiply")]
         [ScorableGroup(1)]
         public async Task RunMultiplyDialog(IDialogContext context, IActivity activity)
@@ -69,6 +72,7 @@
         }
 
         [RegexPattern("divide")]
+        [RegexPattern("division")]
         [RegexPattern("quotient")]
         [ScorableGroup(1)]
         public async Task RunDivideDialog(IDialogContext context, IActivity activity)
@@ -88,6 +92,9 @@
         #endregion
 
         #region Statistical Operations
+        /// <summary>
+        /// This function calls the dialog to calculate the mean/average
+        /// </summary>
         [RegexPattern("average")]
         [RegexPattern("mean")]
         [ScorableGroup(1)]
@@ -97,6 +104,9 @@
             context.Call(new AverageDialog(meanResult), EndDialog);
         }
 
+        /// <summary>
+        /// This will call the dialog to calculate the median
+        /// </summary>
         [RegexPattern("median")]
         [ScorableGroup(1)]
         public async Task RunMedianDialog(IDialogContext context, IActivity activity)
@@ -105,6 +115,9 @@
             context.Call(new MedianDialog(medianResult), EndDialog);
         }
 
+        /// <summary>
+        /// This function will call the dialog to calculate the mode
+        /// </summary>
         [RegexPattern("mode")]
         [ScorableGroup(1)]
         public async Task RunModeDialog(IDialogContext context, IActivity activity)
