@@ -60,7 +60,8 @@
                     Input = InputString,
                     Output = diff.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the difference = {diff}",
-                    OperationType = CalculationTypes.Subtraction.ToString()
+                    OperationType = CalculationTypes.Subtraction.ToString(),
+                    ResultType = ResultTypes.Difference.ToString()
                 };
 
                 #region Creating the adaptive card
@@ -80,7 +81,8 @@
                     Input = InputString,
                     Output = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
-                    OperationType = CalculationTypes.Subtraction.ToString()
+                    OperationType = CalculationTypes.Subtraction.ToString(),
+                    ResultType = ResultTypes.Error.ToString()
                 };
 
                 #region Creating the adaptive card

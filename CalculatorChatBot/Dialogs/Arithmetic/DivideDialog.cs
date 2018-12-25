@@ -52,7 +52,8 @@
                     Input = InputString,
                     Output = decimal.Round(quotient, 2).ToString(),
                     OutputMsg = $"Given the list of {InputString}; the quotient = {decimal.Round(quotient, 2)}",
-                    OperationType = CalculationTypes.Division.ToString()
+                    OperationType = CalculationTypes.Division.ToString(),
+                    ResultType = ResultTypes.Difference.ToString()
                 };
 
                 #region Creating the adaptive card
@@ -72,7 +73,8 @@
                     Input = InputString,
                     Output = "0",
                     OutputMsg = "The list may be too long, or one of the elements could be 0 - please try again later.",
-                    OperationType = CalculationTypes.Division.ToString()
+                    OperationType = CalculationTypes.Division.ToString(),
+                    ResultType = ResultTypes.Error.ToString()
                 };
 
                 #region Creating the adaptive card

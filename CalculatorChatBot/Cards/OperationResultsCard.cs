@@ -40,7 +40,7 @@
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = $"Output: {results.Output}",
+                        Text = $"{results.ResultType}: {results.Output}",
                         Size = AdaptiveTextSize.Default
                     }
                 }

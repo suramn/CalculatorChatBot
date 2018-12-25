@@ -56,7 +56,8 @@
                     Input = InputString,
                     Output = product.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the product = {product}",
-                    OperationType = CalculationTypes.Multiplication.ToString()
+                    OperationType = CalculationTypes.Multiplication.ToString(),
+                    ResultType = ResultTypes.Product.ToString()
                 };
 
                 #region Creating the adaptive card
@@ -76,7 +77,8 @@
                     Input = InputString,
                     Output = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
-                    OperationType = CalculationTypes.Multiplication.ToString()
+                    OperationType = CalculationTypes.Multiplication.ToString(),
+                    ResultType = ResultTypes.Error.ToString()
                 };
 
                 #region Creating the adaptive card

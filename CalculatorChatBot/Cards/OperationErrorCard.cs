@@ -40,9 +40,10 @@
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = $"Output Message: {results.OutputMsg}",
+                        Text = $"{results.ResultType}: {results.OutputMsg}",
                         Size = AdaptiveTextSize.Default,
-                        Wrap = true
+                        Wrap = true,
+                        Color = AdaptiveTextColor.Attention
                     }
                 }
             };

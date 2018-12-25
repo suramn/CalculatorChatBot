@@ -9,7 +9,22 @@
         Modulo,
         Mean,
         Median,
-        Mode
+        Mode,
+        Range
+    }
+
+    public enum ResultTypes
+    {
+        Sum, 
+        Difference, 
+        Product, 
+        Quotient, 
+        Remainder,
+        Average,
+        Median, 
+        Mode,
+        Range,
+        Error
     }
 
     public class OperationResults
@@ -21,5 +36,7 @@
         public string Output { get; set; }
 
         public string OutputMsg { get; set; }
+
+        public string ResultType { get; set; }
     }
 }

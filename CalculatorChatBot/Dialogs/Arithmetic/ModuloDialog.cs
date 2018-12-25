@@ -51,7 +51,8 @@
                     Input = InputString, 
                     Output = remainder.ToString(), 
                     OutputMsg = $"Given the list {InputString}; the remainder = {remainder}",
-                    OperationType = CalculationTypes.Modulo.ToString()
+                    OperationType = CalculationTypes.Modulo.ToString(),
+                    ResultType = ResultTypes.Remainder.ToString()
                 };
 
                 // Building up the adaptive card
@@ -71,7 +72,8 @@
                     Input = InputString,
                     Output = "0",
                     OutputMsg = $"The list: {InputString} may be invalid for this operation. Please double check, and try again",
-                    OperationType = CalculationTypes.Modulo.ToString()
+                    OperationType = CalculationTypes.Modulo.ToString(),
+                    ResultType = ResultTypes.Error.ToString()
                 };
 
                 // Now having the card

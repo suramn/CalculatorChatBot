@@ -64,7 +64,8 @@
                     Input = InputString,
                     Output = sum.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the sum = {sum}",
-                    OperationType = CalculationTypes.Addition.ToString()
+                    OperationType = CalculationTypes.Addition.ToString(),
+                    ResultType = ResultTypes.Sum.ToString()
                 };
 
                 #region Creating the adaptive card
@@ -83,9 +84,10 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0", 
+                    Output = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
-                    OperationType = CalculationTypes.Addition.ToString()
+                    OperationType = CalculationTypes.Addition.ToString(),
+                    ResultType = ResultTypes.Error.ToString()
                 };
 
                 #region Creating the adaptive card
