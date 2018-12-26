@@ -125,6 +125,14 @@
             var modeResult = activity as Activity;
             context.Call(new ModeDialog(modeResult), EndDialog); 
         }
+
+        [RegexPattern("range")]
+        [ScorableGroup(1)]
+        public async Task RunRangeDialog(IDialogContext context, IActivity activity)
+        {
+            var rangeResult = activity as Activity;
+            context.Call(new RangeDialog(rangeResult), EndDialog);
+        }
         #endregion
 
         #region Generic help

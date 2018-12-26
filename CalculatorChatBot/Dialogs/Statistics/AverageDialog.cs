@@ -56,7 +56,8 @@
                     Input = InputString, 
                     Output = decimal.Round(mean, 2).ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the average = {decimal.Round(mean, 2)}",
-                    OperationType = CalculationTypes.Mean.ToString()
+                    OperationType = CalculationTypes.Mean.ToString(),
+                    ResultType = ResultTypes.Average.ToString()
                 };
 
                 IMessageActivity opsReply = context.MakeMessage();
@@ -76,7 +77,8 @@
                     Input = InputString,
                     Output = "0",
                     OutputMsg = "Your list may be too small to calculate an average. Please try again later.",
-                    OperationType = CalculationTypes.Mean.ToString()
+                    OperationType = CalculationTypes.Mean.ToString(),
+                    ResultType = ResultTypes.Error.ToString()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();

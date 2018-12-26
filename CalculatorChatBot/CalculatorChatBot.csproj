@@ -184,6 +184,7 @@
     <Compile Include="Dialogs\Arithmetic\SubtractDialog.cs" />
     <Compile Include="Dialogs\Statistics\MedianDialog.cs" />
     <Compile Include="Dialogs\Statistics\ModeDialog.cs" />
+    <Compile Include="Dialogs\Statistics\RangeDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -1,30 +1,27 @@
-﻿namespace CalculatorChatBot.Dialogs.Arithmetic
+﻿namespace CalculatorChatBot.Dialogs.Statistics
 {
+    using CalculatorChatBot.Cards;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
-    using System.Threading.Tasks;
     using System;
-    using CalculatorChatBot.Models;
     using System.Collections.Generic;
-    using CalculatorChatBot.Cards;
+    using System.Linq;
+    using System.Threading.Tasks;
 
-    public class DivideDialog : IDialog<object>
+    public class RangeDialog : IDialog<object>
     {
         #region Dialog properties
-        public string[] InputStringArray { get; set; }
-
         public string InputString { get; set; }
-
+        public string[] InputStringArray { get; set; }
         public int[] InputInts { get; set; }
         #endregion
 
-        public DivideDialog(Activity incomingActivity)
+        public RangeDialog(Activity incomingActivity)
         {
-            // Parsing through the necessary incoming text
             string[] incomingInfo = incomingActivity.Text.Split(' ');
 
-            // What is the properties to be set for the necessary 
-            // operation to be performed
+            // Setting the properties accordingly
             if (!string.IsNullOrEmpty(incomingInfo[1]))
             {
                 InputString = incomingInfo[1];
@@ -37,33 +34,33 @@
 
         public async Task StartAsync(IDialogContext context)
         {
-            if (context == null)
+            if (InputInts.Length >= 2)
             {
-                throw new ArgumentNullException(nameof(context)); 
-            }
+                var inputIntMax = InputInts.Max();
 
-            decimal quotient = 0;
-            if (InputInts.Length == 2 && InputInts[1] != 0)
-            {
-                quotient = Convert.ToDecimal(InputInts[0]) / InputInts[1];
+                var inputIntMin = InputInts.Min();
 
-                var results = new OperationResults()
+                // Conduct the range calculation as max - min
+                var range = inputIntMax - inputIntMin;
+
+                var successResult = new OperationResults()
                 {
                     Input = InputString,
-                    Output = decimal.Round(quotient, 2).ToString(),
-                    OutputMsg = $"Given the list of {InputString}; the quotient = {decimal.Round(quotient, 2)}",
-                    OperationType = CalculationTypes.Division.ToString(),
-                    ResultType = ResultTypes.Quotient.ToString()
+                    Output = range.ToString(),
+                    OutputMsg = $"Given the list: {InputString}; the range = {range}",
+                    OperationType = CalculationTypes.Range.ToString(),
+                    ResultType = ResultTypes.Range.ToString()
                 };
 
-                #region Creating the adaptive card
+                #region Having the adaptive card created
                 IMessageActivity reply = context.MakeMessage();
                 reply.Attachments = new List<Attachment>();
 
-                var operationResultsCard = new OperationResultsCard(results);
+                var operationResultsCard = new OperationResultsCard(successResult);
                 reply.Attachments.Add(operationResultsCard.ToAttachment());
                 #endregion
 
+                // Sending out the reply with the card
                 await context.PostAsync(reply);
             }
             else
@@ -72,12 +69,12 @@
                 {
                     Input = InputString,
                     Output = "0",
-                    OutputMsg = "The list may be too long, or one of the elements could be 0 - please try again later.",
-                    OperationType = CalculationTypes.Division.ToString(),
+                    OutputMsg = "The list may be too short, try again with more numbers.",
+                    OperationType = CalculationTypes.Range.ToString(),
                     ResultType = ResultTypes.Error.ToString()
                 };
 
-                #region Creating the adaptive card
+                #region Having the adaptive card created
                 IMessageActivity errorReply = context.MakeMessage();
                 errorReply.Attachments = new List<Attachment>();
 
@@ -85,11 +82,11 @@
                 errorReply.Attachments.Add(errorCard.ToAttachment());
                 #endregion
 
-                // Send the message that you need more elements to calculate the sum
+                // Sending the error card
                 await context.PostAsync(errorReply);
             }
 
-            // Return back to the root dialog - popping this child dialog from the dialog stack
+            // Popping back to the root dialog
             context.Done<object>(null);
         }
     }
