@@ -18,9 +18,7 @@ namespace CalculatorChatBot.BotHelpers
             var sb = new StringBuilder();
             sb.AppendLine(firstLine);
             sb.AppendLine();
-            sb.AppendLine("Here's what I can help you do: Perform basic arithmetic on a list of numbers (add, subtract, multiply, divide, modulo)");
-            sb.AppendLine();
-            sb.AppendLine("and calculate basic statistical measures (mean, median, and mode) - and a few other things...");
+            sb.AppendLine("For anything regarding help, navigate to the help tab");
             return sb.ToString();
         }
 

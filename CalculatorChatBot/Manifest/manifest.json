@@ -23,6 +23,15 @@
     "full": "This bot is something that will be conducting various basic operations"
   },
   "accentColor": "#002244",
+  "staticTabs": [
+    {
+      "entityId": "helpTab",
+      "name": "Help",
+      "contentUrl": "https://[from-ngrok].ngrok.io/Tabs/help.html",
+      "websiteUrl": "https://[from-ngrok].ngrok.io/Tabs/help.html",
+      "scopes": [ "personal", "team"]
+    }
+  ],
   "bots": [
     {
       "botId": "8b195137-41f4-4e2f-bcf9-f8be86bf90a1",
