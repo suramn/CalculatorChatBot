@@ -2,9 +2,79 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Help</title>
+    <script src="https://statics.teams.microsoft.com/sdk/v0.4/js/MicrosoftTeams.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script>
+        $(document).ready(function () {
+            microsoftTeams.initialize();
+        });
+    </script>
 </head>
 <body>
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">Calculator Chat Bot</h1>
+                <div>The content below will show a quick help guide to what this chat bot can actually do</div>
+            </div>
+        </div>
 
+        <div class="container">
+            <div class="row">
+                <h3>Arithmetic</h3>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Addition</b>
+                        <p>This is the simple addition of the numbers in the list that you provide</p>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Subtraction</b>
+                        <p>This is the simple difference among the numbers in the list that you provide</p>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Multiplication</b>
+                        <p>This is the simple product of the numbers in the list that you provide. Note that if you actually enter 0 as one of the numbers, the product overall becomes 0</p>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Division</b>
+                        <p>This is the quotient of two numbers in the list that you provide</p>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Remainder</b>
+                        <p>This is the quotient of two numbers in the list that you provide</p>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+ 
+            <div class="row">
+                <h3>Statistics</h3>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Mean</b>
+                        <p>This is the simple addition of the numbers in the list that you provide</p>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Median</b>
+                        <p>This is the simple difference among the numbers in the list that you provide</p>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Mode</b>
+                        <p>This is the simple product of the numbers in the list that you provide. Note that if you actually enter 0 as one of the numbers, the product overall becomes 0</p>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Range</b>
+                        <p>This is the quotient of two numbers in the list that you provide</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
