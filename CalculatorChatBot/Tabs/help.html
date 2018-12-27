@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-4">
                         <b>Remainder</b>
-                        <p>This is the quotient of two numbers in the list that you provide</p>
+                        <p>This is the remainder of two numbers in the list that you provide</p>
                     </div>
                 </div>
             </div>
@@ -58,11 +58,16 @@
                 <div class="row">
                     <div class="col-md-4">
                         <b>Mean</b>
-                        <p>This is the simple addition of the numbers in the list that you provide</p>
+                        <p>Given the list of numbers that you provide, the bot will then calculate the average. First the sum of all numbers gets calculated. Then the bot will divide that sum by the size of the list</p>
                     </div>
                     <div class="col-md-4">
                         <b>Median</b>
-                        <p>This is the simple difference among the numbers in the list that you provide</p>
+                        <p>The bot will find the middle of the list in the following manner:</p>
+                        <ul>
+                            <li>The list of numbers could either be in order, or be out of order. So, the bot would then make sure that the list that you provide is sorted in order</li>
+                            <li>Once the numbers have been sorted in order, the bot will then find the middle element of the list. If the list is odd length, then the bot can find the median in a straight forward manner.
+                            However, if the list is an even length, then the median is calculated as the average of the two middle elements of the list.</li>
+                        </ul>
                     </div>
                     <div class="col-md-4">
                         <b>Mode</b>
