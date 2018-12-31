@@ -101,5 +101,27 @@
 
             return modes.ToArray();
         }
+
+        public int CalculateRange(string inputString)
+        {
+            string[] inputStringArr = inputString.Split(',');
+            int[] inputIntsArr = Array.ConvertAll(inputStringArr, int.Parse);
+
+            int range;
+
+            if (inputIntsArr.Length >= 2)
+            {
+                var minVal = inputIntsArr.Min();
+                var maxVal = inputIntsArr.Max();
+
+                range = maxVal - minVal;
+            }
+            else
+            {
+                range = 0; 
+            }
+
+            return range;
+        }
     }
 }
