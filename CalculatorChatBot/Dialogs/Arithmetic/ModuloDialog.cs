@@ -8,6 +8,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    [Serializable]
     public class ModuloDialog : IDialog<object>
     {
         #region Dialog Properties

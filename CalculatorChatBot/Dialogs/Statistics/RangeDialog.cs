@@ -9,6 +9,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    [Serializable]
     public class RangeDialog : IDialog<object>
     {
         #region Dialog properties

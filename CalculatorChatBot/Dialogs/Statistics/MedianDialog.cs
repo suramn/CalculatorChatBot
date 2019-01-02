@@ -8,6 +8,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    [Serializable]
     public class MedianDialog : IDialog<object>
     {
         #region Dialog properties

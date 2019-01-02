@@ -1,14 +1,12 @@
 ﻿namespace CalculatorChatBot.Dialogs.Arithmetic
 {
+    using CalculatorChatBot.Cards;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
     using System;
-    using System.Threading.Tasks;
-    using CalculatorChatBot.Models;
-    using AdaptiveCards;
-    using System.Diagnostics;
     using System.Collections.Generic;
-    using CalculatorChatBot.Cards;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// This class will produce the overall sum of a list of numbers. If the list is too short, the 
