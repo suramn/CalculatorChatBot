@@ -45,7 +45,11 @@
             {
                 var errorResults = new OperationResults()
                 {
-
+                    Input = InputString, 
+                    Output = "0",
+                    OutputMsg = $"The input list: {InputString} is too long. I need only 2 numbers to find the length of the hypotenuse",
+                    OperationType = CalculationTypes.Pythagorean.ToString(), 
+                    ResultType = ResultTypes.Error.ToString()
                 };
             }
         }
