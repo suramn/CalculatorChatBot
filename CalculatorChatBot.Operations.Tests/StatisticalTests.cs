@@ -58,5 +58,21 @@
                 Console.Write("The ModeTest calculations pass");
             }
         }
+
+        [TestMethod]
+        public void RangeTest()
+        {
+            var stats = new StatisticalOps();
+            string inputStr = "-3, 4, 2, 1";
+            int testRange = stats.CalculateRange(inputStr);
+
+            int expectedRange = 7;
+            Assert.AreEqual(testRange, expectedRange);
+
+            if (testRange == expectedRange)
+            {
+                Console.Write("The RangeTest calculations pass");
+            }
+        }
     }
 }

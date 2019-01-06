@@ -7,6 +7,7 @@
     using System.Diagnostics;
     using System.Threading.Tasks;
 
+    [Serializable]
     public class GreetDialog : IDialog<object>
     {
         public async Task StartAsync(IDialogContext context)

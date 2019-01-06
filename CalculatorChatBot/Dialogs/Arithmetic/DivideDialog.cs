@@ -8,6 +8,7 @@
     using System.Collections.Generic;
     using CalculatorChatBot.Cards;
 
+    [Serializable]
     public class DivideDialog : IDialog<object>
     {
         #region Dialog properties
