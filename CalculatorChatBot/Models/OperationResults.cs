@@ -10,7 +10,8 @@
         Mean,
         Median,
         Mode,
-        Range
+        Range,
+        Pythagorean
     }
 
     public enum ResultTypes

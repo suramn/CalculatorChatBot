@@ -9,6 +9,7 @@
     using Microsoft.Bot.Connector.Teams.Models;
     using System;
     using System.Threading.Tasks;
+    using CalculatorChatBot.Dialogs.Geometry;
 
     [Serializable]
     public class RootDialog : DispatchDialog
@@ -132,6 +133,17 @@
         {
             var rangeResult = activity as Activity;
             context.Call(new RangeDialog(rangeResult), EndDialog);
+        }
+        #endregion
+
+        #region Geometric Operations
+        [RegexPattern("pythagoras")]
+        [RegexPattern("pythagorean")]
+        [ScorableGroup(1)]
+        public async Task RunPythagoreanDialog(IDialogContext context, IActivity activity)
+        {
+            var pythagResult = activity as Activity;
+            context.Call(new PythagoreanDialog(pythagResult), EndDialog);
         }
         #endregion
 

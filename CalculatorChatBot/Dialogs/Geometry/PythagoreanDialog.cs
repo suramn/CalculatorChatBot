@@ -1,5 +1,6 @@
 ﻿namespace CalculatorChatBot.Dialogs.Geometry
 {
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
     using System;
@@ -35,7 +36,18 @@
 
         public async Task StartAsync(IDialogContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
 
+            if (InputInts.Length > 2)
+            {
+                var errorResults = new OperationResults()
+                {
+
+                };
+            }
         }
     }
 }
