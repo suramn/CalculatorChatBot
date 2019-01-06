@@ -9,6 +9,7 @@
     using CalculatorChatBot.Models;
     using CalculatorChatBot.Cards;
 
+    [Serializable]
     public class ModeDialog : IDialog<object>
     {
         #region Dialog properties
