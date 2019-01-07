@@ -63,6 +63,35 @@
                 // Sending out the message with the error card
                 await context.PostAsync(errorReply);
             }
+            else
+            {
+                // Having the necessary calculations done
+                double a = Convert.ToDouble(InputInts[0]);
+                double b = Convert.ToDouble(InputInts[1]);
+
+                var hypotenuseSqr = Math.Pow(a, 2) + Math.Pow(b, 2);
+
+                double c = Math.Sqrt(hypotenuseSqr);
+
+                var output = $"Given the legs of ${InputInts[0]} and ${InputInts[1]}, the hypotenuse of the right triangle is ${decimal.Round(decimal.Parse(c.ToString()), 2)}";
+
+                var successResults = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = decimal.Round(decimal.Parse(c.ToString()), 2).ToString(), 
+                    OutputMsg = output,
+                    OperationType = CalculationTypes.Pythagorean.ToString(),
+                    ResultType = ResultTypes.Hypotenuse.ToString()
+                };
+
+                IMessageActivity successReply = context.MakeMessage();
+                successReply.Attachments = new List<Attachment>();
+
+                var successCard = new OperationResultsCard(successResults);
+                successReply.Attachments.Add(successCard.ToAttachment());
+
+                await context.PostAsync(successReply);
+            }
 
             // Returning back to the root dialog
             context.Done<object>(null);

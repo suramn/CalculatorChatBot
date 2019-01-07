@@ -25,6 +25,7 @@
         Median, 
         Mode,
         Range,
+        Hypotenuse,
         Error
     }
 
