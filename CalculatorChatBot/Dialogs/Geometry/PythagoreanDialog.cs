@@ -1,9 +1,11 @@
 ﻿namespace CalculatorChatBot.Dialogs.Geometry
 {
+    using CalculatorChatBot.Cards;
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     [Serializable]
@@ -51,7 +53,19 @@
                     OperationType = CalculationTypes.Pythagorean.ToString(), 
                     ResultType = ResultTypes.Error.ToString()
                 };
+
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorCard = new OperationErrorCard(errorResults);
+                errorReply.Attachments.Add(errorCard.ToAttachment());
+
+                // Sending out the message with the error card
+                await context.PostAsync(errorReply);
             }
+
+            // Returning back to the root dialog
+            context.Done<object>(null);
         }
     }
 }
