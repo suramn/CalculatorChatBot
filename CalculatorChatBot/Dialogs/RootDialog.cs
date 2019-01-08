@@ -145,6 +145,15 @@
             var pythagResult = activity as Activity;
             context.Call(new PythagoreanDialog(pythagResult), EndDialog);
         }
+
+        [RegexPattern("number of roots")]
+        [RegexPattern("discriminant")]
+        [ScorableGroup(1)]
+        public async Task RunDiscriminantDialog(IDialogContext context, IActivity activity)
+        {
+            var discrimResult = activity as Activity;
+            context.Call(new DiscriminantDialog(discrimResult), EndDialog);
+        }
         #endregion
 
         #region Generic help
