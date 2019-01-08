@@ -11,7 +11,8 @@
         Median,
         Mode,
         Range,
-        Pythagorean
+        Pythagorean,
+        Discriminant
     }
 
     public enum ResultTypes
@@ -26,6 +27,7 @@
         Mode,
         Range,
         Hypotenuse,
+        EquationRoots,
         Error
     }
 
