@@ -28,7 +28,8 @@
         Range,
         Hypotenuse,
         EquationRoots,
-        Error
+        Error,
+        Discriminant
     }
 
     public class OperationResults

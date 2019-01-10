@@ -83,10 +83,53 @@
             }
             else
             {
+                int a = InputInts[0];
+                int b = InputInts[1];
+                int c = InputInts[2];
 
+                int discriminantValue = FindDiscriminant(a, b, c);
+                var resultMsg = "";
+
+                if (discriminantValue > 0)
+                {
+                    resultMsg = $"Given your values: a = {a}, b = {b}, c = {c} - the discriminant = {discriminantValue} which means there are 2 roots";
+                }
+                else if (discriminantValue == 0)
+                {
+                    resultMsg = $"Given your values: a = {a}, b = {b}, c = {c} - the discriminant = {discriminantValue} which means there is 1 root";
+                }
+                else
+                {
+                    resultMsg = $"Given your values: a = {a}, b = {b}, c = {c} - the discriminant = {discriminantValue} which means there are no real roots";
+                }
+
+                #region Generate the reply, operation results, card, and send out the message
+                var discrimResults = new OperationResults()
+                {
+                    Input = InputString,
+                    OperationType = CalculationTypes.Discriminant.ToString(),
+                    OutputMsg = resultMsg,
+                    Output = discriminantValue.ToString(),
+                    ResultType = ResultTypes.Discriminant.ToString()
+                };
+
+                IMessageActivity discrimReply = context.MakeMessage();
+                discrimReply.Attachments = new List<Attachment>();
+
+                var discrimReplyCard = new OperationResultsCard(discrimResults);
+                discrimReply.Attachments.Add(discrimReplyCard.ToAttachment());
+
+                await context.PostAsync(discrimReply);
+                #endregion
             }
 
             context.Done<object>(null);
+        }
+
+        private static int FindDiscriminant(int a, int b, int c)
+        {
+            int disc = (int)Math.Pow(b, 2) - (4 * a * c);
+            return disc;
         }
     }
 }
