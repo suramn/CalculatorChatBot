@@ -62,7 +62,7 @@
                     Input = InputString,
                     Output = sum.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the sum = {sum}",
-                    OperationType = CalculationTypes.Addition.ToString(),
+                    OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Sum.ToString()
                 };
 
@@ -84,7 +84,7 @@
                     Input = InputString,
                     Output = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
-                    OperationType = CalculationTypes.Addition.ToString(),
+                    OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Error.ToString()
                 };
 

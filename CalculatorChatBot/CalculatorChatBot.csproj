@@ -188,6 +188,7 @@
     <Compile Include="Dialogs\Statistics\MedianDialog.cs" />
     <Compile Include="Dialogs\Statistics\ModeDialog.cs" />
     <Compile Include="Dialogs\Statistics\RangeDialog.cs" />
+    <Compile Include="Dialogs\Statistics\VarianceDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

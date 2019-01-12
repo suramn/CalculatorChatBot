@@ -52,7 +52,7 @@
                     Input = InputString, 
                     Output = remainder.ToString(), 
                     OutputMsg = $"Given the list {InputString}; the remainder = {remainder}",
-                    OperationType = CalculationTypes.Modulo.ToString(),
+                    OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Remainder.ToString()
                 };
 
@@ -73,7 +73,7 @@
                     Input = InputString,
                     Output = "0",
                     OutputMsg = $"The list: {InputString} may be invalid for this operation. Please double check, and try again",
-                    OperationType = CalculationTypes.Modulo.ToString(),
+                    OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Error.ToString()
                 };
 

@@ -61,7 +61,7 @@
                     Input = InputString,
                     Output = decimal.Round(median, 2).ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the median = {decimal.Round(median, 2)}",
-                    OperationType = CalculationTypes.Median.ToString(),
+                    OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Median.ToString()
                 };
 
@@ -82,7 +82,7 @@
                     Input = InputString, 
                     Output = "0", 
                     OutputMsg = $"Please double check the input: {InputString} and try again",
-                    OperationType = CalculationTypes.Median.ToString(),
+                    OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()
                 };
 

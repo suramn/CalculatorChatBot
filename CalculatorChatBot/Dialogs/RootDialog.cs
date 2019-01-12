@@ -101,8 +101,8 @@
         [ScorableGroup(1)]
         public async Task RunAverageDialog(IDialogContext context, IActivity activity)
         {
-            var meanResult = activity as Activity;
-            context.Call(new AverageDialog(meanResult), EndDialog);
+            var averageActivity = activity as Activity;
+            context.Call(new AverageDialog(averageActivity), EndDialog);
         }
 
         /// <summary>
@@ -112,8 +112,8 @@
         [ScorableGroup(1)]
         public async Task RunMedianDialog(IDialogContext context, IActivity activity)
         {
-            var medianResult = activity as Activity;
-            context.Call(new MedianDialog(medianResult), EndDialog);
+            var medianActivity = activity as Activity;
+            context.Call(new MedianDialog(medianActivity), EndDialog);
         }
 
         /// <summary>
@@ -123,16 +123,24 @@
         [ScorableGroup(1)]
         public async Task RunModeDialog(IDialogContext context, IActivity activity)
         {
-            var modeResult = activity as Activity;
-            context.Call(new ModeDialog(modeResult), EndDialog); 
+            var modeActivity = activity as Activity;
+            context.Call(new ModeDialog(modeActivity), EndDialog); 
         }
 
         [RegexPattern("range")]
         [ScorableGroup(1)]
         public async Task RunRangeDialog(IDialogContext context, IActivity activity)
         {
-            var rangeResult = activity as Activity;
-            context.Call(new RangeDialog(rangeResult), EndDialog);
+            var rangeActivity = activity as Activity;
+            context.Call(new RangeDialog(rangeActivity), EndDialog);
+        }
+
+        [RegexPattern("variance")]
+        [ScorableGroup(1)]
+        public async Task RunVarianceDialog(IDialogContext context, IActivity activity)
+        {
+            var varianceActivity = activity as Activity;
+            context.Call(new VarianceDialog(varianceActivity), EndDialog);
         }
         #endregion
 

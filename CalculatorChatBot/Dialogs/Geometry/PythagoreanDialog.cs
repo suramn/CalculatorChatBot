@@ -50,7 +50,7 @@
                     Input = InputString, 
                     Output = "0",
                     OutputMsg = $"The input list: {InputString} is too long. I need only 2 numbers to find the length of the hypotenuse",
-                    OperationType = CalculationTypes.Pythagorean.ToString(), 
+                    OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Error.ToString()
                 };
 
@@ -80,7 +80,7 @@
                     Input = InputString, 
                     Output = decimal.Round(decimal.Parse(c.ToString()), 2).ToString(), 
                     OutputMsg = output,
-                    OperationType = CalculationTypes.Pythagorean.ToString(),
+                    OperationType = CalculationTypes.Geometric.ToString(),
                     ResultType = ResultTypes.Hypotenuse.ToString()
                 };
 

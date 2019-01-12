@@ -2,17 +2,9 @@
 {
     public enum CalculationTypes
     {
-        Addition,
-        Subtraction,
-        Multiplication,
-        Division,
-        Modulo,
-        Mean,
-        Median,
-        Mode,
-        Range,
-        Pythagorean,
-        Discriminant
+        Arithmetic, 
+        Statistical, 
+        Geometric
     }
 
     public enum ResultTypes

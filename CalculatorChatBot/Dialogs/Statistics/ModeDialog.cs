@@ -73,7 +73,7 @@
                     Input = InputString, 
                     Output = outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the mode = {(outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString())}",
-                    OperationType = CalculationTypes.Mode.ToString(),
+                    OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Mode.ToString()
                 };
 
@@ -94,7 +94,7 @@
                     Input = InputString,
                     Output = "",
                     OutputMsg = $"Please check your input list: {InputString} and try again later",
-                    OperationType = CalculationTypes.Mode.ToString(),
+                    OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()
                 };
 
