@@ -21,7 +21,8 @@
         Hypotenuse,
         EquationRoots,
         Error,
-        Discriminant
+        Discriminant, 
+        Variance
     }
 
     public class OperationResults
