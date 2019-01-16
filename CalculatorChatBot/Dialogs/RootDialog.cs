@@ -162,6 +162,14 @@
             var discrimResult = activity as Activity;
             context.Call(new DiscriminantDialog(discrimResult), EndDialog);
         }
+
+        [RegexPattern("equation roots")]
+        [ScorableGroup(1)]
+        public async Task RunQuadraticSolverDialog(IDialogContext context, IActivity activity)
+        {
+            var quadSolverResult = activity as Activity;
+            context.Call(new QuadraticSolverDialog(quadSolverResult), EndDialog);
+        }
         #endregion
 
         #region Generic help
