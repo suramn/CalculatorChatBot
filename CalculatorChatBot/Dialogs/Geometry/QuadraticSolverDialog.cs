@@ -35,6 +35,58 @@
             {
                 throw new ArgumentNullException(nameof(context));
             }
+
+            if (InputInts.Length > 3)
+            {
+                await context.PostAsync("Please check your list of numbers - it may be too large");
+            }
+            else
+            {
+                double a = Convert.ToDouble(InputInts[0]);
+                double b = Convert.ToDouble(InputInts[1]);
+                double c = Convert.ToDouble(InputInts[2]);
+
+                // The two roots of the quadratic equation
+                double r1, r2;
+
+                var discriminant = Math.Pow(b, 2) - (4 * a * c);
+
+                int m;
+
+                if (a == 0)
+                {
+                    m = 1;
+                }
+                else if (discriminant > 0)
+                {
+                    m = 2;
+                }
+                else if (discriminant == 0)
+                {
+                    m = 3;
+                }
+                else
+                {
+                    m = 4;
+                }
+
+                switch (m)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        await context.PostAsync("Sorry I'm not sure what is going on here");
+                        break;
+                }
+            }
+
+            context.Done<object>(null);
         }
     }
 }
