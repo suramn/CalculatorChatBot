@@ -159,7 +159,9 @@
     <Content Include="Global.asax" />
     <Content Include="Manifest\bot-icon-color-192x192.png" />
     <Content Include="Manifest\bot-icon-outline-32x32.png" />
+    <Content Include="Tabs\channelconfig.html" />
     <Content Include="Tabs\help.html" />
+    <Content Include="Tabs\msteams-16.css" />
     <Content Include="TestBot.bot" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
