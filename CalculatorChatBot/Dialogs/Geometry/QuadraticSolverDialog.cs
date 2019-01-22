@@ -1,8 +1,11 @@
 ﻿namespace CalculatorChatBot.Dialogs.Geometry
 {
+    using CalculatorChatBot.Cards;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class QuadraticSolverDialog : IDialog<object>
@@ -38,13 +41,30 @@
 
             if (InputInts.Length > 3)
             {
-                await context.PostAsync("Please check your list of numbers - it may be too large");
+                var errorResults = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = "0",
+                    OutputMsg = "Your list may be too large to calculate the roots. Please try again later!",
+                    OperationType = CalculationTypes.Geometric.ToString(), 
+                    ResultType = ResultTypes.Error.ToString()
+                };
+
+                IMessageActivity errorListReply = context.MakeMessage();
+                errorListReply.Attachments = new List<Attachment>();
+
+                var errorListCard = new OperationErrorCard(errorResults);
+                errorListReply.Attachments.Add(errorListCard.ToAttachment());
+
+                await context.PostAsync(errorListReply);
             }
             else
             {
                 double a = Convert.ToDouble(InputInts[0]);
                 double b = Convert.ToDouble(InputInts[1]);
                 double c = Convert.ToDouble(InputInts[2]);
+
+                var opsSuccess, opsError, opsSuccessCard, opsErrorCard, opsSuccessReply, opsErrorReply;
 
                 // The two roots of the quadratic equation
                 double r1, r2;
@@ -73,8 +93,25 @@
                 switch (m)
                 {
                     case 1:
+                        opsError = new OperationResults()
+                        {
+                            Input = InputString,
+                            Output = "0",
+                            OutputMsg = "The information provided may lead to a linear equation!",
+                            OperationType = CalculationTypes.Geometric.ToString(),
+                            ResultType = ResultTypes.Error.ToString()
+                        };
+
+                        opsErrorReply = context.MakeMessage();
+                        opsErrorReply.Attachments = new List<Attachment>();
+
+                        opsErrorCard = new OperationErrorCard(opsError);
+                        opsErrorReply.Attachments.Add(opsErrorCard.ToAttachment());
+
+                        await context.PostAsync(opsErrorReply);
                         break;
                     case 2:
+
                         break;
                     case 3:
                         break;
