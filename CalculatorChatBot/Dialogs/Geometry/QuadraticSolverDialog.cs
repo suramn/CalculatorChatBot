@@ -64,8 +64,6 @@
                 double b = Convert.ToDouble(InputInts[1]);
                 double c = Convert.ToDouble(InputInts[2]);
 
-                var opsSuccess, opsError, opsSuccessCard, opsErrorCard, opsSuccessReply, opsErrorReply;
-
                 // The two roots of the quadratic equation
                 double r1, r2;
 
@@ -93,7 +91,7 @@
                 switch (m)
                 {
                     case 1:
-                        opsError = new OperationResults()
+                        var opsError = new OperationResults()
                         {
                             Input = InputString,
                             Output = "0",
@@ -102,16 +100,16 @@
                             ResultType = ResultTypes.Error.ToString()
                         };
 
-                        opsErrorReply = context.MakeMessage();
+                        IMessageActivity opsErrorReply = context.MakeMessage();
                         opsErrorReply.Attachments = new List<Attachment>();
 
-                        opsErrorCard = new OperationErrorCard(opsError);
+                        var opsErrorCard = new OperationErrorCard(opsError);
                         opsErrorReply.Attachments.Add(opsErrorCard.ToAttachment());
 
                         await context.PostAsync(opsErrorReply);
                         break;
                     case 2:
-
+                        
                         break;
                     case 3:
                         break;
