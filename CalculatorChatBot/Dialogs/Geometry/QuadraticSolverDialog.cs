@@ -131,7 +131,23 @@
                         break;
                     case 3:
                         r1 = r2 = (-b) / (2 * a);
-                        // TODO: Complete this later
+                        
+                        var successOpsOneRoot = new OperationResults()
+                        {
+                            Input = InputString,
+                            Output = $"{r1}, {r2}",
+                            OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]",
+                            OperationType = CalculationTypes.Geometric.ToString(),
+                            ResultType = ResultTypes.Error.ToString()
+                        };
+
+                        IMessageActivity opsSuccessReply = context.MakeMessage();
+                        opsSuccessReply.Attachments = new List<Attachment>();
+
+                        var opsSuccessCard = new OperationResultsCard(successOpsOneRoot);
+                        opsSuccessReply.Attachments.Add(opsSuccessCardOneRoot.ToAttachment());
+
+                        await context.PostAsync(opsSuccessReply);
                         break;
                     case 4:
                         break;
