@@ -141,15 +141,16 @@
                             ResultType = ResultTypes.Error.ToString()
                         };
 
-                        IMessageActivity opsSuccessReply = context.MakeMessage();
-                        opsSuccessReply.Attachments = new List<Attachment>();
+                        IMessageActivity opsSuccessOneRoot = context.MakeMessage();
+                        opsSuccessOneRoot.Attachments = new List<Attachment>();
 
-                        var opsSuccessCard = new OperationResultsCard(successOpsOneRoot);
-                        opsSuccessReply.Attachments.Add(opsSuccessCardOneRoot.ToAttachment());
+                        var opsSuccessOneRootCard = new OperationResultsCard(successOpsOneRoot);
+                        opsSuccessOneRoot.Attachments.Add(opsSuccessOneRootCard.ToAttachment());
 
-                        await context.PostAsync(opsSuccessReply);
+                        await context.PostAsync(opsSuccessOneRoot);
                         break;
                     case 4:
+                        await context.PostAsync("The roots are now imaginary");
                         break;
                     default:
                         await context.PostAsync("Sorry I'm not sure what is going on here");
