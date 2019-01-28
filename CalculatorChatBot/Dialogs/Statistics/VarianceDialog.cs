@@ -100,7 +100,7 @@
 
             for (int i = 0; i < inputInts.Length; i++)
             {
-                squareDiffs += Math.Pow(Convert.ToDouble(inputInts[i]) - mean, 2);
+                squareDiffs += Math.Pow(Math.Abs(Convert.ToDouble(inputInts[i]) - mean), 2);
             }
 
             return Convert.ToDecimal(squareDiffs / N);

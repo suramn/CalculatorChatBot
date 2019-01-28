@@ -150,7 +150,32 @@
                         await context.PostAsync(opsSuccessOneRoot);
                         break;
                     case 4:
-                        await context.PostAsync("The roots are now imaginary");
+                        var rootsDesc = "Roots are imaginary";
+                        r1 = (-b) / (2 * a);
+                        r2 = Math.Sqrt(-discriminant) / (2 * a);
+
+                        var root1Str = string.Format("First root is {0:#.##} + i {1:#.##}", r1, r2);
+                        var root2Str = string.Format("Second root is {0:#.##} - i {1:#.##}", r1, r2);
+
+                        var root1 = string.Format("{0:#.##} + i {1:#.##}", r1, r2);
+                        var root2 = string.Format("{0:#.##} - i {1:#.##}", r1, r2);
+
+                        var opsSuccessImaginRootsResults = new OperationResults()
+                        {
+                            Input = InputString, 
+                            Output = $"{root1}, {root2}",
+                            OutputMsg = rootsDesc + " " + root1Str + " " + root2Str,
+                            OperationType = CalculationTypes.Geometric.ToString(), 
+                            ResultType = ResultTypes.EquationRoots.ToString()
+                        };
+
+                        IMessageActivity opsSuccessImagReply = context.MakeMessage();
+                        opsSuccessImagReply.Attachments = new List<Attachment>();
+
+                        var opsSuccessImaginRootCard = new OperationResultsCard(opsSuccessImaginRootsResults);
+                        opsSuccessImagReply.Attachments.Add(opsSuccessImaginRootCard.ToAttachment());
+
+                        await context.PostAsync(opsSuccessImagReply);
                         break;
                     default:
                         await context.PostAsync("Sorry I'm not sure what is going on here");

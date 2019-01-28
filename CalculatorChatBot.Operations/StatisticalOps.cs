@@ -1,7 +1,6 @@
 ﻿namespace CalculatorChatBot.Operations
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -102,6 +101,12 @@
             return modes.ToArray();
         }
 
+        /// <summary>
+        /// This method will be calculate the range in the list of numbers that is provided
+        /// by the user
+        /// </summary>
+        /// <param name="inputString">The list of integers that the user provides</param>
+        /// <returns>The difference between the largest and smallest elements in the list of integers</returns>
         public int CalculateRange(string inputString)
         {
             string[] inputStringArr = inputString.Split(',');
