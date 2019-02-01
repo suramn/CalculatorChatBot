@@ -128,5 +128,15 @@
 
             return range;
         }
+
+        public double CalculateVariance(string inputString)
+        {
+            return 0;
+        }
+
+        public double CalculateStandardDeviation(string inputString)
+        {
+            return 0;
+        }
     }
 }
