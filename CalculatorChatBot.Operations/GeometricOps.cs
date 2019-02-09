@@ -36,6 +36,8 @@
                 int c = inputIntsArr[2];
 
                 // TODO: Make sure to complete this here
+                // 1. Have the necessary logic to calculate the discriminant
+                // 2. Have the necessary logic to use the switch mechanism to return the roots
             }
 
             return resultString; 

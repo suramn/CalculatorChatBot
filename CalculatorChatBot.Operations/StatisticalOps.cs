@@ -129,6 +129,12 @@
             return range;
         }
 
+        /// <summary>
+        /// Method that would calculate the variance of a list of numbers that are provided
+        /// to the library
+        /// </summary>
+        /// <param name="inputString">The list of integers</param>
+        /// <returns>The variance</returns>
         public double CalculateVariance(string inputString)
         {
             string[] inputStringArr = inputString.Split(',');
@@ -146,9 +152,18 @@
             return squareDiffs / N;
         }
 
+        /// <summary>
+        /// Method that calculates the standard deviation
+        /// </summary>
+        /// <param name="inputString">The list of integers</param>
+        /// <returns>Standard deviation of the list of numbers</returns>
         public double CalculateStandardDeviation(string inputString)
         {
-            return 0;
+            var calculatedVariance = CalculateVariance(inputString);
+
+            double standardDev = Math.Sqrt(calculatedVariance);
+
+            return standardDev;
         }
     }
 }
