@@ -131,7 +131,19 @@
 
         public double CalculateVariance(string inputString)
         {
-            return 0;
+            string[] inputStringArr = inputString.Split(',');
+            int[] inputIntsArr = Array.ConvertAll(inputStringArr, int.Parse);
+
+            var mean = Convert.ToDouble(CalculateAverage(inputString));
+            double squareDiffs = 0;
+            int N = inputIntsArr.Length;
+
+            for (int i = 0; i < inputIntsArr.Length; i++)
+            {
+                squareDiffs += Math.Pow(Math.Abs(Convert.ToDouble(inputIntsArr[i]) - mean), 2);
+            }
+
+            return squareDiffs / N;
         }
 
         public double CalculateStandardDeviation(string inputString)

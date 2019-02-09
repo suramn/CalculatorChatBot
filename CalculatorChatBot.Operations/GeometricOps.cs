@@ -25,6 +25,19 @@
 
             var resultString = "";
 
+            if (inputIntsArr.Length != 3)
+            {
+                resultString = "ERROR";
+            }
+            else
+            {
+                int a = inputIntsArr[0];
+                int b = inputIntsArr[1];
+                int c = inputIntsArr[2];
+
+                // TODO: Make sure to complete this here
+            }
+
             return resultString; 
         }
 
@@ -46,7 +59,7 @@
             }
             else
             {
-                resultString = "The input is not correct for this operation";
+                resultString = "ERROR";
             }
 
             return resultString;
