@@ -2,6 +2,10 @@
 {
     using System;
 
+    /// <summary>
+    /// This class represents all of the operations that are classified under the category
+    /// of arithmetic. In essence, these are the arithmetic operations that the bot could conduct
+    /// </summary>
     public class ArithmeticOps
     {
         /// <summary>

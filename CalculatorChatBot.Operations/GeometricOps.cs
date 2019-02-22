@@ -2,8 +2,18 @@
 {
     using System;
 
+    /// <summary>
+    /// This class represents all of the possible operations that this bot could do
+    /// that belong to the Geometric category
+    /// </summary>
     public class GeometricOps
     {
+        /// <summary>
+        /// Calculates the discriminant given three integers, a value for A, a value for B, and 
+        /// a value for C
+        /// </summary>
+        /// <param name="inputString">The three integers</param>
+        /// <returns>An integer</returns>
         public int CalculateDiscriminant(string inputString)
         {
             string[] inputStringArr = inputString.Split(',');
@@ -18,6 +28,12 @@
             return discriminant;
         }
 
+        /// <summary>
+        /// Given the values of A, B, and C this function will then calculate the necessary
+        /// roots of for the equation Ax^2+Bx+C = 0
+        /// </summary>
+        /// <param name="inputString"></param>
+        /// <returns></returns>
         public string CalculateQuadraticRoots(string inputString)
         {
             string[] inputStringArr = inputString.Split(',');
@@ -85,6 +101,12 @@
             return resultString; 
         }
 
+        /// <summary>
+        /// Given the values of two legs in a right triangle, this function will actually
+        /// calculate the value of the hypotenuse
+        /// </summary>
+        /// <param name="inputString">The values of the two legs</param>
+        /// <returns>A string that would list out the Pythagorean Triple</returns>
         public string CalculatePythagoreanTriple(string inputString)
         {
             string[] inputStringArr = inputString.Split(',');
@@ -109,6 +131,12 @@
             return resultString;
         }
 
+        /// <summary>
+        /// Method to calculate the hypotenuse
+        /// </summary>
+        /// <param name="a">First leg of the right triangle</param>
+        /// <param name="b">Second leg of the right triangle</param>
+        /// <returns>A double value that represents the hypotenuse</returns>
         private double CalculateHypotenuse(int a, int b)
         {
             var cSquared = Math.Pow(a, 2) + Math.Pow(b, 2);

@@ -4,6 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// This class represents all of the operations that are classified under the statistical
+    /// category
+    /// </summary>
     public class StatisticalOps
     {
         /// <summary>
