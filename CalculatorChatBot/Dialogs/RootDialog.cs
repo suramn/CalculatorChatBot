@@ -175,7 +175,7 @@
             context.Call(new DiscriminantDialog(discrimResult), EndDialog);
         }
 
-        [RegexPattern("equation roots")]
+        [RegexPattern(DialogMatches.EquationRootsDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunQuadraticSolverDialog(IDialogContext context, IActivity activity)
         {

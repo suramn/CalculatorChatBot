@@ -56,6 +56,8 @@
 
         public const string NumberOfRootsDialogMatch = "number of roots";
         public const string DiscriminantDialogMatch = "discriminant";
+
+        public const string EquationRootsDialogMatch = "roots of the equation";
         #endregion
     }
 }
