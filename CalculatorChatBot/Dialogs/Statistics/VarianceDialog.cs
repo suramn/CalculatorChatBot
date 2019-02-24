@@ -93,6 +93,13 @@
             context.Done<object>(null);
         }
 
+        /// <summary>
+        /// This is the method that would calculate the variance among a list
+        /// of numbers
+        /// </summary>
+        /// <param name="mean">The average</param>
+        /// <param name="inputInts">The input list of integers</param>
+        /// <returns>A decimal value that represents the variance</returns>
         private decimal CalculateVariance(double mean, int[] inputInts)
         {
             double squareDiffs = 0;

@@ -176,6 +176,7 @@
     <Compile Include="Cards\OperationResultsCard.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\Arithmetic\AddDialog.cs" />
+    <Compile Include="Dialogs\DialogMatches.cs" />
     <Compile Include="Dialogs\Geometry\DiscriminantDialog.cs" />
     <Compile Include="Dialogs\Geometry\PythagoreanDialog.cs" />
     <Compile Include="Dialogs\Geometry\QuadraticSolverDialog.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Dialogs\Statistics\MedianDialog.cs" />
     <Compile Include="Dialogs\Statistics\ModeDialog.cs" />
     <Compile Include="Dialogs\Statistics\RangeDialog.cs" />
+    <Compile Include="Dialogs\Statistics\StandardDeviationDialog.cs" />
     <Compile Include="Dialogs\Statistics\VarianceDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

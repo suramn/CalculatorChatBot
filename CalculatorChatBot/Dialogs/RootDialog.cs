@@ -15,8 +15,8 @@
     public class RootDialog : DispatchDialog
     {
         #region Hello World like functionality
-        [RegexPattern("hello")]
-        [RegexPattern("hi")]
+        [RegexPattern(DialogMatches.HelloDialogMatch)]
+        [RegexPattern(DialogMatches.HiDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunHelloDialog(IDialogContext context, IActivity activity)
         {
@@ -96,8 +96,8 @@
         /// <summary>
         /// This function calls the dialog to calculate the mean/average
         /// </summary>
-        [RegexPattern("average")]
-        [RegexPattern("mean")]
+        [RegexPattern(DialogMatches.AverageDialogMatch)]
+        [RegexPattern(DialogMatches.MeanDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunAverageDialog(IDialogContext context, IActivity activity)
         {
@@ -142,6 +142,14 @@
             var varianceActivity = activity as Activity;
             context.Call(new VarianceDialog(varianceActivity), EndDialog);
         }
+
+        [RegexPattern("standard deviation")]
+        [ScorableGroup(1)]
+        public async Task RunStandardDeviationDialog(IDialogContext context, IActivity activity)
+        {
+            var standardDevActivity = activity as Activity;
+            context.Call(new StandardDeviationDialog(standardDevActivity), EndDialog); 
+        }
         #endregion
 
         #region Geometric Operations
@@ -173,7 +181,7 @@
         #endregion
 
         #region Generic help
-        [RegexPattern("help")]
+        [RegexPattern(DialogMatches.HelpDialogMatch)]
         [ScorableGroup(1)]
         public async Task GetHelp(IDialogContext context, IActivity activity)
         {
