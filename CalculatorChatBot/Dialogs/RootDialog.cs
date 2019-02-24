@@ -24,7 +24,7 @@
             context.Call(new HelloDialog(helloResult), EndDialog);
         }
 
-        [RegexPattern("greet everyone")]
+        [RegexPattern(DialogMatches.GreetEveryoneDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunGreetDialog(IDialogContext context, IActivity activity)
         {
@@ -42,9 +42,9 @@
         #endregion
 
         #region Arithmetic Operations
-        [RegexPattern("add")]
-        [RegexPattern("addition")]
-        [RegexPattern("sum")]
+        [RegexPattern(DialogMatches.AddDialogMatch)]
+        [RegexPattern(DialogMatches.AdditionDialogMatch)]
+        [RegexPattern(DialogMatches.SumDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunAddDialog(IDialogContext context, IActivity activity)
         {
@@ -52,9 +52,9 @@
             context.Call(new AddDialog(result), EndDialog);
         }
 
-        [RegexPattern("subtract")]
-        [RegexPattern("subtraction")]
-        [RegexPattern("difference")]
+        [RegexPattern(DialogMatches.SubtractDialogMatch)]
+        [RegexPattern(DialogMatches.SubtractionDialogMatch)]
+        [RegexPattern(DialogMatches.DifferenceDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunSubtractDialog(IDialogContext context, IActivity activity)
         {
@@ -62,9 +62,9 @@
             context.Call(new SubtractDialog(result), EndDialog);
         }
 
-        [RegexPattern("product")]
-        [RegexPattern("multiplication")]
-        [RegexPattern("multiply")]
+        [RegexPattern(DialogMatches.ProductDialogMatch)]
+        [RegexPattern(DialogMatches.MultiplicationDialogMatch)]
+        [RegexPattern(DialogMatches.MultiplyDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunMultiplyDialog(IDialogContext context, IActivity activity)
         {
@@ -72,9 +72,9 @@
             context.Call(new MultiplyDialog(multiResult), EndDialog);
         }
 
-        [RegexPattern("divide")]
-        [RegexPattern("division")]
-        [RegexPattern("quotient")]
+        [RegexPattern(DialogMatches.DivideDialogMatch)]
+        [RegexPattern(DialogMatches.DivisionDialogMatch)]
+        [RegexPattern(DialogMatches.QuotientDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunDivideDialog(IDialogContext context, IActivity activity)
         {
@@ -82,8 +82,8 @@
             context.Call(new DivideDialog(divideResult), EndDialog);
         }
 
-        [RegexPattern("remainder")]
-        [RegexPattern("modulo")]
+        [RegexPattern(DialogMatches.RemainderDialogMatch)]
+        [RegexPattern(DialogMatches.ModuloDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunModuloDialog(IDialogContext context, IActivity activity)
         {
@@ -108,7 +108,8 @@
         /// <summary>
         /// This will call the dialog to calculate the median
         /// </summary>
-        [RegexPattern("median")]
+        [RegexPattern(DialogMatches.MedianDialogMatch1)]
+        [RegexPattern(DialogMatches.MedianDialogMatch2)]
         [ScorableGroup(1)]
         public async Task RunMedianDialog(IDialogContext context, IActivity activity)
         {
@@ -119,7 +120,8 @@
         /// <summary>
         /// This function will call the dialog to calculate the mode
         /// </summary>
-        [RegexPattern("mode")]
+        [RegexPattern(DialogMatches.ModeDialogMatch1)]
+        [RegexPattern(DialogMatches.ModeDialogMatch2)]
         [ScorableGroup(1)]
         public async Task RunModeDialog(IDialogContext context, IActivity activity)
         {
@@ -127,7 +129,8 @@
             context.Call(new ModeDialog(modeActivity), EndDialog); 
         }
 
-        [RegexPattern("range")]
+        [RegexPattern(DialogMatches.RangeDialogMatch1)]
+        [RegexPattern(DialogMatches.RangeDialogMatch2)]
         [ScorableGroup(1)]
         public async Task RunRangeDialog(IDialogContext context, IActivity activity)
         {
@@ -135,7 +138,7 @@
             context.Call(new RangeDialog(rangeActivity), EndDialog);
         }
 
-        [RegexPattern("variance")]
+        [RegexPattern(DialogMatches.VarianceDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunVarianceDialog(IDialogContext context, IActivity activity)
         {
@@ -143,7 +146,8 @@
             context.Call(new VarianceDialog(varianceActivity), EndDialog);
         }
 
-        [RegexPattern("standard deviation")]
+        [RegexPattern(DialogMatches.StandardDeviationDialogMatch1)]
+        [RegexPattern(DialogMatches.StandardDeviationDialogMatch2)]
         [ScorableGroup(1)]
         public async Task RunStandardDeviationDialog(IDialogContext context, IActivity activity)
         {
@@ -153,8 +157,8 @@
         #endregion
 
         #region Geometric Operations
-        [RegexPattern("pythagoras")]
-        [RegexPattern("pythagorean")]
+        [RegexPattern(DialogMatches.PythagorasDialogMatch)]
+        [RegexPattern(DialogMatches.PythagoreanDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunPythagoreanDialog(IDialogContext context, IActivity activity)
         {
@@ -162,8 +166,8 @@
             context.Call(new PythagoreanDialog(pythagResult), EndDialog);
         }
 
-        [RegexPattern("number of roots")]
-        [RegexPattern("discriminant")]
+        [RegexPattern(DialogMatches.NumberOfRootsDialogMatch)]
+        [RegexPattern(DialogMatches.DiscriminantDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunDiscriminantDialog(IDialogContext context, IActivity activity)
         {
