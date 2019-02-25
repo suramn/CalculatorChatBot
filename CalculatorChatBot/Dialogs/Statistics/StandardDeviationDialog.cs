@@ -36,7 +36,24 @@
 
         public async Task StartAsync(IDialogContext context)
         {
-            // TODO: Fill in this method later at some point in time
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (InputInts.Length > 1)
+            {
+                // TODO: Complete the calculation of the standard deviation
+                // TODO2: Make sure to build out the results card and send it
+            }
+            else
+            {
+                // TODO3: Build out the error results card and make sure
+                // that the card is then sent in the conversation
+            }
+
+            // Popping back after the completion of this dialog
+            context.Done<object>(null);
         }
     }
 }

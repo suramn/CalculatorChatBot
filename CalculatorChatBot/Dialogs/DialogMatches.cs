@@ -58,6 +58,7 @@
         public const string DiscriminantDialogMatch = "discriminant";
 
         public const string EquationRootsDialogMatch = "roots of the equation";
+        public const string QuadraticSolverDialogMatch = "quadratic solver";
         #endregion
     }
 }

@@ -176,6 +176,7 @@
         }
 
         [RegexPattern(DialogMatches.EquationRootsDialogMatch)]
+        [RegexPattern(DialogMatches.QuadraticSolverDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunQuadraticSolverDialog(IDialogContext context, IActivity activity)
         {
