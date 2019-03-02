@@ -24,13 +24,6 @@
   },
   "accentColor": "#002244",
   "staticTabs": [
-    {
-      "entityId": "helpTab",
-      "name": "Help",
-      "contentUrl": "https://535ca7f1.ngrok.io/Tabs/help.html",
-      "websiteUrl": "https://535ca7f1.ngrok.io/Tabs/help.html",
-      "scopes": [ "personal", "team" ]
-    }
   ],
   "bots": [
     {
@@ -47,6 +40,5 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "7eb7be2c.ngrok.io"
   ]
 }
