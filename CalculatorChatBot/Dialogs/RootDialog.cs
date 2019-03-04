@@ -154,6 +154,15 @@
             var standardDevActivity = activity as Activity;
             context.Call(new StandardDeviationDialog(standardDevActivity), EndDialog); 
         }
+
+        [RegexPattern(DialogMatches.GeometricAverageDialogMatch)]
+        [RegexPattern(DialogMatches.GeometricMeanDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunGeometricMeanDialog(IDialogContext context, IActivity activity)
+        {
+            var geometricMeanActivity = activity as Activity;
+            context.Call(new GeometricMeanDialog(geometricMeanActivity), EndDialog); 
+        }
         #endregion
 
         #region Geometric Operations

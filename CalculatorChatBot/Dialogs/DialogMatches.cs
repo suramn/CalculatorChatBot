@@ -35,6 +35,9 @@
         public const string AverageDialogMatch = "average";
         public const string MeanDialogMatch = "mean";
 
+        public const string GeometricMeanDialogMatch = "geometric mean";
+        public const string GeometricAverageDialogMatch = "geometric average";
+
         public const string MedianDialogMatch1 = "median";
         public const string MedianDialogMatch2 = "middle of the list";
 

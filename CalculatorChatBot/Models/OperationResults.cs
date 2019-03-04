@@ -22,7 +22,8 @@
         EquationRoots,
         Error,
         Discriminant, 
-        Variance
+        Variance, 
+        GeometricMean
     }
 
     public class OperationResults
