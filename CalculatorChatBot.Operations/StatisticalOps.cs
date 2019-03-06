@@ -169,5 +169,26 @@
 
             return standardDev;
         }
+
+        /// <summary>
+        /// Method that calculates the Geometric Mean
+        /// </summary>
+        /// <param name="inputString">The list of numbers</param>
+        /// <returns>The geometric mean of the list</returns>
+        public double CalculateGeometricMean(string inputString)
+        {
+            string[] inputStrArray = inputString.Split(',');
+            int[] inputInts = Array.ConvertAll(inputStrArray, int.Parse);
+
+            int numberOfElements = inputInts.Length;
+            int finalProduct = inputInts[0];
+            for (int i = 1; i < inputInts.Length; i++)
+            {
+                finalProduct *= inputInts[i];
+            }
+
+            var geoMean = Math.Pow(finalProduct, 1 / numberOfElements);
+            return geoMean;
+        }
     }
 }

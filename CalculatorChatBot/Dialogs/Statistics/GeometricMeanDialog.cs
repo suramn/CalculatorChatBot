@@ -54,6 +54,7 @@
                     }
                 }
 
+                // Calculating the Geometric mean here
                 var geometricMean = Math.Pow(product, 1 / InputInts.Length);
 
                 var results = new OperationResults()
