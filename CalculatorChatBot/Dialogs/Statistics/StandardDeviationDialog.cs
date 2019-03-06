@@ -43,17 +43,64 @@
 
             if (InputInts.Length > 1)
             {
-                // TODO: Complete the calculation of the standard deviation
-                // TODO2: Make sure to build out the results card and send it
+                int sum = InputInts[0];
+                for (int i = 0; i < InputInts.Length; i++)
+                {
+                    sum += InputInts[i]; 
+                }
+
+                var mean = Convert.ToDouble(sum) / InputInts.Length;
+
+                var variance = CalculateVariance(mean, InputInts);
+
+                var standardDev = Math.Sqrt((double)variance);
+
+                var results = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = standardDev.ToString(),
+                    OutputMsg = $"Given the list: {InputString}; the standard deviation = {standardDev}",
+                    OperationType = CalculationTypes.Statistical.ToString(),
+                    ResultType = ResultTypes.StandardDeviation.ToString()
+                };
+
+                // TODO: Complete this code out
             }
             else
             {
-                // TODO3: Build out the error results card and make sure
-                // that the card is then sent in the conversation
+                var errorResults = new OperationResults()
+                {
+                    Input = InputString,
+                    Output = "0",
+                    OutputMsg = "Your list may be too small to calculate the standard deviation. Please try again later",
+                    OperationType = CalculationTypes.Statistical.ToString(),
+                    ResultType = ResultTypes.Error.ToString()
+                };
+
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorOpsCard = new OperationErrorCard(errorResults);
+                errorReply.Attachments.Add(errorOpsCard.ToAttachment());
+
+                await context.PostAsync(errorReply);
             }
 
             // Popping back after the completion of this dialog
             context.Done<object>(null);
+        }
+
+        private decimal CalculateVariance(double mean, int[] inputInts)
+        {
+            double squareDiffs = 0;
+            int N = inputInts.Length;
+
+            for (int i = 0; i < inputInts.Length; i++)
+            {
+                squareDiffs += Math.Pow(Math.Abs(Convert.ToDouble(inputInts[i]) - mean), 2);
+            }
+
+            return Convert.ToDecimal(squareDiffs / N);
         }
     }
 }

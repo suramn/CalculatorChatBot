@@ -23,7 +23,8 @@
         Error,
         Discriminant, 
         Variance, 
-        GeometricMean
+        GeometricMean, 
+        StandardDeviation
     }
 
     public class OperationResults
