@@ -35,7 +35,14 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
-            await context.PostAsync("I have yet to calculate what you are looking for!");
+            if (InputInts.Length > 1)
+            {
+                // TODO: Make sure to complete the functionality here
+            }
+            else
+            {
+                // TODO2: Make sure to build out the results card accordingly
+            }
 
             context.Done<object>(null);
         }
