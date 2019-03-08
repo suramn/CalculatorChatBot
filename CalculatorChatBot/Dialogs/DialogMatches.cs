@@ -51,6 +51,9 @@
 
         public const string StandardDeviationDialogMatch1 = "standard deviation";
         public const string StandardDeviationDialogMatch2 = "distance from the mean";
+
+        public const string RootMeanSquareDialogMatch = "root mean square";
+        public const string RmsDialogMatch = "calculate the root mean square";
         #endregion
 
         #region Geometrical Dialog Matches

@@ -163,6 +163,15 @@
             var geometricMeanActivity = activity as Activity;
             context.Call(new GeometricMeanDialog(geometricMeanActivity), EndDialog); 
         }
+
+        [RegexPattern(DialogMatches.RootMeanSquareDialogMatch)]
+        [RegexPattern(DialogMatches.RmsDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunRmsDialog(IDialogContext context, IActivity activity)
+        {
+            var rmsActivity = activity as Activity;
+            context.Call(new RmsDialog(rmsActivity), EndDialog);
+        }
         #endregion
 
         #region Geometric Operations
