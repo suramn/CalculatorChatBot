@@ -1,8 +1,68 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {},
-    "variables": {},
+    "parameters": {
+        "botAppId": {
+            "type": "string", 
+            "metadata": {
+                "description": "This is the Microsoft Application ID"
+            }
+        }, 
+        "botAppPwd": {
+            "type": "string", 
+            "metadata": {
+                "description": "This is the Microsoft Application Password"
+            }
+        },
+        "botDisplayName": {
+            "type": "string", 
+            "metadata": {
+                "description": "This is the name that you would like to see for your bot in Microsoft Teams"
+            }, 
+            "defaultValue": "MSTC (Microsoft Teams Calculator)"
+        }, 
+        "botDescription": {
+            "type": "string", 
+            "metadata": {
+                "description": "Give a description of what the bot does"
+            }
+        },
+        "botIconUrl": {
+            "type": "string", 
+            "metadata": {
+                "description": "This is the link to an icon for the bot, and it must resolve to a PNG file"
+            }
+        },
+        "repoUrl": {
+            "type": "string", 
+            "metadata": {
+                "description": "This is the website link to the source code for your MS Teams bot"
+            }
+        }, 
+        "repoBranch": {
+            "type": "string", 
+            "metadata": {
+                "description": "If there are some custom code changes that were made to the source code on a separate branch, provide the branch name here"
+            }, 
+            "defaultValue": "master"
+        }
+    },
+    "variables": {
+        "botName": "[concat('mstc-', uniqueString(resourceGroup().id))]"
+    },
     "resources": [],
-    "outputs": {}
+    "outputs": {
+        "outputBotHandle": {
+            "type": "string", 
+            "value": "[variables('botName')]"
+        }, 
+        "outputBotDisplayName": {
+            "type": "string", 
+            "value": "[parameters('botDisplayName')]"
+        }, 
+        "outputBotAppId": {
+            "type": "string", 
+            "value": "[parameters('botAppId')]"
+        }
+    }
 }
