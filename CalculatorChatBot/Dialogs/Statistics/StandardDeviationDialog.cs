@@ -64,7 +64,14 @@
                     ResultType = ResultTypes.StandardDeviation.ToString()
                 };
 
-                // TODO: Complete this code out
+                // Sending out the reply
+                IMessageActivity successReply = context.MakeMessage();
+                successReply.Attachments = new List<Attachment>();
+
+                var successOpsCard = new OperationResultsCard(results);
+                successReply.Attachments.Add(successOpsCard.ToAttachment());
+
+                await context.PostAsync(successReply); 
             }
             else
             {

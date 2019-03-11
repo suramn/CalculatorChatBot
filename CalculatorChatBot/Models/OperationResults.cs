@@ -24,7 +24,8 @@
         Discriminant, 
         Variance, 
         GeometricMean, 
-        StandardDeviation
+        StandardDeviation, 
+        RootMeanSquare
     }
 
     public class OperationResults
