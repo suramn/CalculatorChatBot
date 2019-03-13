@@ -190,5 +190,26 @@
             var geoMean = Math.Pow(finalProduct, 1 / numberOfElements);
             return geoMean;
         }
+
+        /// <summary>
+        /// Function to calculate the root mean square among a set of numbers
+        /// </summary>
+        /// <param name="inputString">The list of numbers that are being provided to the bot</param>
+        /// <returns>The root mean square of the list</returns>
+        public double CalculateRootMeanSquare(string inputString)
+        {
+            string[] inputStrArray = inputString.Split(',');
+            int[] inputInts = Array.ConvertAll(inputStrArray, int.Parse);
+
+            var sumOfSquares = inputInts[0];
+            for (int i = 1; i < inputInts.Length; i++)
+            {
+                sumOfSquares += (int)Math.Pow(inputInts[i], 2);
+            }
+
+            var calculatedResult = Math.Sqrt(sumOfSquares / inputInts.Length);
+
+            return calculatedResult; 
+        }
     }
 }
