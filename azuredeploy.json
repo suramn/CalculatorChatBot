@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "botAppId": {
+        "botAppID": {
             "type": "string", 
             "metadata": {
                 "description": "This is the Microsoft Application ID"
@@ -50,7 +50,48 @@
     "variables": {
         "botName": "[concat('mstc-', uniqueString(resourceGroup().id))]"
     },
-    "resources": [],
+    "resources": [
+        {
+            "name": "[variables('botName')]",
+            "type": "Microsoft.BotServices/botServices", 
+            "apiVersion": "2018-07-12",
+            "location": "global", 
+            "tags": {}, 
+            "sku": {
+                "name": "F0"
+            }, 
+            "kind":"sdk", 
+            "properties": {
+                "displayName": "[parameters('botDisplayName')]", 
+                "description": "[parameters('botDescription')]", 
+                "endpoint": "[concat('https://', variables('botName'), '-svc.azurewebsites.net/api/messages')]", 
+                "iconUrl": "[parameters('botIconUrl')]", 
+                "msaAppId": "[parameters('botAppID')]"
+            }, 
+            "resources":[
+                {
+                    "name": "[concat(variables('botName'), '/MsTeamsChannel')]",
+                    "type": "Microsoft.BotService/botServices/channels",
+                    "apiVersion": "2018-07-12",
+                    "location": "global",
+                    "tags": {},
+                    "sku": {
+                        "name": "F0"
+                    },
+                    "properties": {
+                        "channelName": "MsTeamsChannel",
+                        "location": "global",
+                        "properties": {
+                            "isEnabled": true
+                        }
+                    },
+                    "dependsOn": [
+                        "[concat('Microsoft.BotService/botServices/', variables('botName'))]"
+                    ]
+                }
+            ]
+        }
+    ],
     "outputs": {
         "outputBotHandle": {
             "type": "string", 
