@@ -24,3 +24,19 @@ Connect-AzureAD
 
 # Getting the name of the application/bot
 $appName = Read-Host -Prompt "Enter the name of your app"
+
+# Getting the description of our bot
+$appDescription = Read-Host -Prompt "Enter the description for your app"
+
+# Ensuring that this is in-fact a multi-tenant app because of the fact that we need to automate
+# the registration with Bot Framework
+$isMultiTenant = $true;
+
+# Now having the registration of the app in AAD through the cmdlet
+$appVars = New-AzureADApplication -DisplayName $appName -AvailableToOtherTenants $isMultiTenant
+
+# Get the app logo
+$appLogoFolder = Get-Location
+
+# Make sure to have the logo later
+$appLogoLocation = -Join($appLogoFolder, '\Assets\logo.jpg')
