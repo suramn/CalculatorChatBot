@@ -21,3 +21,6 @@ Install-Module AzureRM -AllowClobber -Scope CurrentUser
 
 # Prompting the user to authenticate and log in before moving forward
 Connect-AzureAD
+
+# Getting the name of the application/bot
+$appName = Read-Host -Prompt "Enter the name of your app"
