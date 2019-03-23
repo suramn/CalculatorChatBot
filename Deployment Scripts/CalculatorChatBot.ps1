@@ -37,6 +37,14 @@ $appVars = New-AzureADApplication -DisplayName $appName -AvailableToOtherTenants
 
 # Get the app logo
 $appLogoFolder = Get-Location
-
-# Make sure to have the logo later
 $appLogoLocation = -Join($appLogoFolder, '\Assets\logo.jpg')
+
+# Setting our logo for the Azure Application
+Set-AzureADApplicationLogo -ObjectId $appVars.ObjectId -FilePath $appLogoLocation
+
+# Get the Repo URL and branch
+$repoUrl = Read-Host -Prompt "Please provide the GitHub URL for the source code"
+$branch = Read-Host -Prompt "Enter the branch name (i.e. master)"
+
+# TODO: Make sure to have the necessary JSON file
+# to kick off the deployment
