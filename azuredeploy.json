@@ -103,6 +103,85 @@
             "properties": {
                 "name": "mstcHostingPlan"
             }
+        },
+        {
+            "type": "Microsoft.Web/sites", 
+            "kind":"app", 
+            "name": "[concat(variables('botName'), '-svc')]", 
+            "apiVersion": "2016-08-01",
+            "location": "[resourceGroup().location]",
+            "scale": null,
+            "properties":{
+                "enabled":true, 
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(variables('botName'),'-svc.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(variables('botName'),'-svc.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', 'mstcHostingPlan')]",
+                "reserved": false,
+                "siteConfig": {
+                   "appSettings": [
+                        {
+                            "name": "microsoftAppID",
+                            "value": "[parameters('botAppID')]"
+                        },
+                        {
+                            "name": "microsoftAppPassword",
+                            "value": "[parameters('botAppPwd')]"
+                        },
+                        {
+                            "name": "BotDisplayName", 
+                            "value": "[parameters('botDisplayName')]"
+                        },
+                        {
+                            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "value": "8.9.4"
+                        }
+                    ]
+                },
+                "scmSiteAlsoStopped": "false", 
+                "scmType": "ExternalGit",
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "cloningInfo": null,
+                "httpsOnly": false
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverfarms/', 'meetuplyHostingPlan')]"
+            ],
+            "resources":[
+                {
+                    "apiVersion": "2015-08-01", 
+                    "name":"web", 
+                    "type": "sourcecontrols", 
+                    "dependsOn": [
+                        "[concat('Microsoft.Web/sites/', variables('botName'), '-svc')]"
+                    ],
+                    "properties":{
+                        "RepoUrl": "[parameters('repoUrl')]", 
+                        "branch": "[parameters('repoBranch')]", 
+                        "IsManualIntegration": true
+                    }
+                }
+            ]
         }
     ],
     "outputs": {
