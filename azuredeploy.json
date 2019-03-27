@@ -165,7 +165,7 @@
                 "httpsOnly": false
             },
             "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', 'meetuplyHostingPlan')]"
+                "[concat('Microsoft.Web/serverfarms/', 'mstcHostingPlan')]"
             ],
             "resources":[
                 {
