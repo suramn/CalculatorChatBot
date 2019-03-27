@@ -1,0 +1,190 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "botAppID": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the Microsoft Application ID"
+            }
+        },
+        "botAppPwd": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the Microsoft Application Password"
+            }
+        },
+        "botDisplayName": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the name that you would like to see for your bot in Microsoft Teams"
+            },
+            "defaultValue": "MSTC (Microsoft Teams Calculator)"
+        },
+        "botDescription": {
+            "type": "string",
+            "metadata": {
+                "description": "Give a description of what the bot does"
+            }
+        },
+        "botIconUrl": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the link to an icon for the bot, and it must resolve to a PNG file"
+            }
+        },
+        "repoUrl": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the website link to the source code for your MS Teams bot"
+            }
+        },
+        "repoBranch": {
+            "type": "string",
+            "metadata": {
+                "description": "If there are some custom code changes that were made to the source code on a separate branch, provide the branch name here"
+            },
+            "defaultValue": "master"
+        }
+    },
+    "variables": {
+        "botName": "[concat('mstc-', uniqueString(resourceGroup().id))]"
+    },
+    "resources": [
+        {
+            "name": "[variables('botName')]",
+            "type": "Microsoft.BotServices/botServices",
+            "apiVersion": "2018-07-12",
+            "location": "global",
+            "tags": {},
+            "sku": {
+                "name": "F0"
+            },
+            "kind": "sdk",
+            "properties": {
+                "displayName": "[parameters('botDisplayName')]",
+                "description": "[parameters('botDescription')]",
+                "endpoint": "[concat('https://', variables('botName'), '-svc.azurewebsites.net/api/messages')]",
+                "iconUrl": "[parameters('botIconUrl')]",
+                "msaAppId": "[parameters('botAppID')]"
+            },
+            "resources": [
+                {
+                    "name": "[concat(variables('botName'), '/MsTeamsChannel')]",
+                    "type": "Microsoft.BotService/botServices/channels",
+                    "apiVersion": "2018-07-12",
+                    "location": "global",
+                    "tags": {},
+                    "sku": {
+                        "name": "F0"
+                    },
+                    "properties": {
+                        "channelName": "MsTeamsChannel",
+                        "location": "global",
+                        "properties": {
+                            "isEnabled": true
+                        }
+                    },
+                    "dependsOn": [
+                        "[concat('Microsoft.BotService/botServices/', variables('botName'))]"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Web/serverfarms", 
+            "apiVersion": "2018-02-01", 
+            "location": "[resourceGroup().location]",
+            "name": "mstcHostingPlan", 
+            "sku": {
+                "name":"S1", 
+                "capacity": "0"
+            }, 
+            "properties": {
+                "name": "mstcHostingPlan"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites", 
+            "kind":"app", 
+            "name": "[concat(variables('botName'), '-svc')]", 
+            "apiVersion": "2016-08-01",
+            "location": "[resourceGroup().location]",
+            "scale": null,
+            "properties":{
+                "enabled":true, 
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(variables('botName'),'-svc.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(variables('botName'),'-svc.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', 'mstcHostingPlan')]",
+                "reserved": false,
+                "siteConfig": {
+                   "appSettings": [
+                        {
+                            "name": "microsoftAppID",
+                            "value": "[parameters('botAppID')]"
+                        },
+                        {
+                            "name": "microsoftAppPassword",
+                            "value": "[parameters('botAppPwd')]"
+                        },
+                        {
+                            "name": "BotDisplayName", 
+                            "value": "[parameters('botDisplayName')]"
+                        },
+                        {
+                            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "value": "8.9.4"
+                        }
+                    ]
+                },
+                "scmSiteAlsoStopped": "false", 
+                "scmType": "ExternalGit",
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "cloningInfo": null,
+                "httpsOnly": false
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverfarms/', 'mstcHostingPlan')]"
+            ],
+            "resources":[
+                {
+                    "apiVersion": "2015-08-01", 
+                    "name":"web", 
+                    "type": "sourcecontrols", 
+                    "dependsOn": [
+                        "[concat('Microsoft.Web/sites/', variables('botName'), '-svc')]"
+                    ],
+                    "properties":{
+                        "RepoUrl": "[parameters('repoUrl')]", 
+                        "branch": "[parameters('repoBranch')]", 
+                        "IsManualIntegration": true
+                    }
+                }
+            ]
+        }
+    ],
+    "outputs": {
+
+    }
+}
