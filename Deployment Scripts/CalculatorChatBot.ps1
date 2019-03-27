@@ -28,12 +28,18 @@ $appName = Read-Host -Prompt "Enter the name of your app"
 # Getting the description of our bot
 $appDescription = Read-Host -Prompt "Enter the description for your app"
 
+# Getting the bot Icon
+$iconUrl = Read-Host -Prompt "Enter a URL for the bot which resolves to a PNG file"
+
 # Ensuring that this is in-fact a multi-tenant app because of the fact that we need to automate
 # the registration with Bot Framework
 $isMultiTenant = $true;
 
 # Now having the registration of the app in AAD through the cmdlet
 $appVars = New-AzureADApplication -DisplayName $appName -AvailableToOtherTenants $isMultiTenant
+
+# Now making sure to have the Password generated
+$pwdVars = New-AzureADApplicationPasswordCredential -ObjectId $appVars.ObjectId
 
 # Get the app logo
 $appLogoFolder = Get-Location
@@ -46,5 +52,85 @@ Set-AzureADApplicationLogo -ObjectId $appVars.ObjectId -FilePath $appLogoLocatio
 $repoUrl = Read-Host -Prompt "Please provide the GitHub URL for the source code"
 $branch = Read-Host -Prompt "Enter the branch name (i.e. master)"
 
-# TODO: Make sure to have the necessary JSON file
-# to kick off the deployment
+# Creating the parameters.json file
+$schemaLink = "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#"
+$contentVer = "1.0.0.0"
+
+$parameters = @{
+    '$schema' = $schemaLink;
+    contentVersion = $contentVer;
+    parameters = @{
+        botAppID = @{
+            "value" = $appVars.AppId
+        }
+        botAppPwd = @{
+            "value" = $pwdVars.Value
+        }
+        botDisplayName = @{
+            "value" = $appName
+        }
+        botDescription = @{
+            "value" = $appDescription
+        }
+        botIconUrl = @{
+            "value" = $iconUrl
+        }
+        repoUrl = @{
+            "value" = $repoUrl
+        }
+        repoBranch = @{
+            "value" = $branch
+        }
+    }
+}
+
+# Generating the output parameters.json file
+$outputFolder = Get-Location
+$outputFileLoc = -Join($outputFolder, '\parameters.json');
+
+$parameters | ConverTo-Json -Depth 5 | Out-File $outputFileLoc
+
+<#
+    Now the deployment will happen
+#>
+
+# Getting the resource group name
+$resourceGroupName = Read-Host -Prompt "Please enter the name of the Resource Group"
+
+# Running to an initial check to see if the resource group actually exists
+Get-AzureRmResourceGroup -Name $resourceGroupName -ErrorVariable isPresent -ErrorAction SilentlyContinue
+
+if ($isPresent)
+{
+    Write-Host "Cannot find a Resource Group with the name "$resourceGroupName
+    Write-Host "That's okay! Create the new Resource Group named "$resourceGroupName
+
+    $rgLocation = Read-Host -Prompt "Enter a location (i.e. centralus) from the location of the Resource Group"
+
+    $deploymentName = Read-Host -Prompt "Enter a name for this deployment"
+
+    # Ensuring to have the necessary information for the deployment
+    $folderLocation = $outputFolder
+    $templateFile = -Join($folderLocation, '\azuredeploy.json')
+    $templateParamFile = $outputFileLoc
+
+    # Create the new Resource Group
+    New-AzureRmResourceGroup -Name $resourceGroupName -Location $rgLocation
+
+    # Kicking off the deployment
+    New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $deploymentName -TemplateFile $templateFile -TemplateParameterFile $templateParamFile
+}
+else
+{
+    Write-Host "Found the Resource Group "$resourceGroupName
+    Write-Host "Continuing the deployment to "$resourceGroupName
+
+    $deploymentName = Read-Host -Prompt "Enter a name for the deployment"
+
+    $folderLocation = $outputFolder
+    $templateFile = -Join($folderLocation, '\azuredeploy.json')
+    $templateParamFile = $outputFileLoc
+
+    # Continuing with the deployment now
+    New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $deploymentName -TemplateFile $templateFile -TemplateParameterFile $templateParamFile
+}
