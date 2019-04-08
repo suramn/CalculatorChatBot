@@ -3,6 +3,9 @@
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    /// <summary>
+    /// This class contains the various unit tests for the StatisticalOps.cs class
+    /// </summary>
     [TestClass]
     public class StatisticalTests
     {

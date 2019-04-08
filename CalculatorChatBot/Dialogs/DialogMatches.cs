@@ -65,6 +65,9 @@
 
         public const string EquationRootsDialogMatch = "roots of the equation";
         public const string QuadraticSolverDialogMatch = "quadratic solver";
+
+        public const string MidPointDialogMatch = "midpoint";
+        public const string MiddleOfLineSegmentDialogMatch = "middle of line segment";
         #endregion
     }
 }
