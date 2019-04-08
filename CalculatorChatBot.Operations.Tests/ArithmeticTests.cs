@@ -3,6 +3,9 @@ using System;
 
 namespace CalculatorChatBot.Operations.Tests
 {
+    /// <summary>
+    /// This class contains the unit tests of the ArithmeticOps.cs class
+    /// </summary>
     [TestClass]
     public class ArithmeticTests
     {

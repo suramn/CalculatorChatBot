@@ -38,3 +38,8 @@ The following features are suggested to extend the functionality of this bot to 
 - The chat bot will actually greet you the number of times you ask it to greet you - `hello 4`
 - Chat bot will also greet others in a team context, except the person that had invoked the `greet eveyone` intent - and it could make sure to have a track of the number of times that the `greet everyone` command in fact greeted the other team members
     - This will make sure that there are 1 on 1 conversations started with other team members - also another point of testing being done 
+
+# Deployment of the code
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcoderkrishna%2FCalculatorChatBot%2Fmaster%2Fazuredeploy.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
