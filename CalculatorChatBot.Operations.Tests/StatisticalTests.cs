@@ -74,5 +74,21 @@
                 Console.Write("The RangeTest calculations pass");
             }
         }
+
+        [TestMethod]
+        public void StandardDeviationTest()
+        {
+            var stats = new StatisticalOps();
+            string inputStr = "-3, 4, 2, 1";
+            double expectedStandardDev = 3.11;
+
+            double testStandardDev = stats.CalculateStandardDeviation(inputStr);
+            Assert.AreEqual(testStandardDev, expectedStandardDev);
+
+            if (testStandardDev == expectedStandardDev)
+            {
+                Console.Write("The StandardDeviationTest calculations pass");
+            }
+        }
     }
 }

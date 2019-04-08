@@ -165,9 +165,9 @@
         {
             var calculatedVariance = CalculateVariance(inputString);
 
-            double standardDev = Math.Sqrt(calculatedVariance);
+            decimal standardDev = decimal.Round(Convert.ToDecimal(Math.Sqrt(calculatedVariance)), 2);
 
-            return standardDev;
+            return Convert.ToDouble(standardDev);
         }
 
         /// <summary>
