@@ -153,7 +153,9 @@
                 squareDiffs += Math.Pow(Math.Abs(Convert.ToDouble(inputIntsArr[i]) - mean), 2);
             }
 
-            return squareDiffs / N;
+            var decResult =  Convert.ToDecimal(squareDiffs / N);
+
+            return Convert.ToDouble(decimal.Round(decResult, 2));
         }
 
         /// <summary>

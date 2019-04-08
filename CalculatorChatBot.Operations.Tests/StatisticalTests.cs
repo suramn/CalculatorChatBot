@@ -83,7 +83,7 @@
         {
             var stats = new StatisticalOps();
             string inputStr = "-3, 4, 2, 1";
-            double expectedStandardDev = 3.11;
+            double expectedStandardDev = 2.55;
 
             double testStandardDev = stats.CalculateStandardDeviation(inputStr);
             Assert.AreEqual(testStandardDev, expectedStandardDev);
@@ -91,6 +91,22 @@
             if (testStandardDev == expectedStandardDev)
             {
                 Console.Write("The StandardDeviationTest calculations pass");
+            }
+        }
+
+        [TestMethod]
+        public void VarianceTest()
+        {
+            var stats = new StatisticalOps();
+            string inputStr = "-3, 4, 2, 1";
+            double expectedVariance = 8.67;
+
+            double testVariance = stats.CalculateVariance(inputStr);
+            Assert.AreEqual(expectedVariance, testVariance);
+
+            if (testVariance == expectedVariance)
+            {
+                Console.Write("The VarianceTest calculations pass");
             }
         }
     }
