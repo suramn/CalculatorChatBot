@@ -201,6 +201,15 @@
             var quadSolverResult = activity as Activity;
             context.Call(new QuadraticSolverDialog(quadSolverResult), EndDialog);
         }
+
+        [RegexPattern(DialogMatches.MidPointDialogMatch)]
+        [RegexPattern(DialogMatches.MiddleOfLineSegmentDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunMidpointDialog(IDialogContext context, IActivity activity)
+        {
+            var midPointResult = activity as Activity;
+            context.Call(new MidpointDialog(midPointResult), EndDialog); 
+        }
         #endregion
 
         #region Generic help

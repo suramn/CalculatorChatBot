@@ -144,5 +144,21 @@
 
             return c;
         }
+
+        public string CalculateMidpoint(string inputString)
+        {
+            string[] inputStringArr = inputString.Split(',');
+            int[] inputInts = Array.ConvertAll(inputStringArr, int.Parse);
+
+            var resultString = "";
+            if (inputInts.Length == 4)
+            {
+
+            }
+            else
+            {
+                resultString = "ERROR";
+            }
+        }
     }
 }
