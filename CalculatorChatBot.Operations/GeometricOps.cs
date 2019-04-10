@@ -145,6 +145,11 @@
             return c;
         }
 
+        /// <summary>
+        /// Method that would calculate the midpoint of a line segment
+        /// </summary>
+        /// <param name="inputString">4 integers that would represent the 2 sets of coordinates</param>
+        /// <returns>The midpoint as a string</returns>
         public string CalculateMidpoint(string inputString)
         {
             string[] inputStringArr = inputString.Split(',');
@@ -153,12 +158,22 @@
             var resultString = "";
             if (inputInts.Length == 4)
             {
+                int x1 = inputInts[0];
+                int y1 = inputInts[1];
+                int x2 = inputInts[2];
+                int y2 = inputInts[3];
 
+                int midX = (x1 + x2) / 2;
+                int midY = (y1 + y2) / 2;
+
+                resultString = $"{midX}, {midY}"; 
             }
             else
             {
                 resultString = "ERROR";
             }
+
+            return resultString;
         }
     }
 }
