@@ -86,5 +86,28 @@
                 return 0; 
             }
         }
+
+        /// <summary>
+        /// Making sure to have the modulo operation coded for the project
+        /// </summary>
+        /// <param name="inputString">The list of integers</param>
+        /// <returns>The result of the modulo operation</returns>
+        public int OverallModulo(string inputString)
+        {
+            string[] inputArrayStr = inputString.Split(',');
+            int[] inputInts = Array.ConvertAll(inputArrayStr, int.Parse);
+
+            var modResult = 0;
+            if (inputInts.Length == 2 && inputInts[1] != 0)
+            {
+                modResult = inputInts[0] % inputInts[1]; 
+            }
+            else
+            {
+                modResult = 0; 
+            }
+
+            return modResult;
+        }
     }
 }

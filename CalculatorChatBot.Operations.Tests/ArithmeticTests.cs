@@ -99,5 +99,22 @@ namespace CalculatorChatBot.Operations.Tests
                 Console.Write("The OverallDivision test has passed");
             }
         }
+
+        [TestMethod]
+        public void OverallModuloTest()
+        {
+            var arith = new ArithmeticOps();
+            var inputString = "2,10";
+            var expectedResult = arith.OverallModulo(inputString);
+            var testResult = 2;
+
+            Assert.AreEqual(expectedResult, testResult);
+
+            if (expectedResult == testResult)
+            {
+                Console.Write($"Expected overall remainder: {expectedResult}; Test overall remainder: {testResult}" + Environment.NewLine);
+                Console.Write("The OverallModulo test has passed");
+            }
+        }
     }
 }
