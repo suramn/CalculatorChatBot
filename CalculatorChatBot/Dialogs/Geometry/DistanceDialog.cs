@@ -1,8 +1,11 @@
 ﻿namespace CalculatorChatBot.Dialogs.Geometry
 {
+    using CalculatorChatBot.Cards;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     [Serializable]
@@ -34,7 +37,36 @@
 
         public async Task StartAsync(IDialogContext context)
         {
-            // throw new NotImplementedException();
+            if (context == null)
+            {
+                throw new ArgumentException(nameof(context));
+            }
+
+            if (InputInts.Length > 1 && InputInts.Length == 4)
+            {
+                // TODO: Complete the functionality
+            }
+            else
+            {
+                var errorResults = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = "0", 
+                    OutputMsg = "There needs to be exactly 4 elements to calculate the midpoint. Please try again later", 
+                    OperationType = CalculationTypes.Geometric.ToString(), 
+                    ResultType = ResultTypes.Error.ToString()
+                };
+
+                IMessageActivity errorReply = context.MakeMessage();
+                errorReply.Attachments = new List<Attachment>();
+
+                var errorOpsCard = new OperationErrorCard(errorResults);
+                errorReply.Attachments.Add(errorOpsCard.ToAttachment());
+
+                await context.PostAsync(errorReply);
+            }
+
+            // Returning back to the main root dialog stack
             context.Done<object>(null); 
         }
     }
