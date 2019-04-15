@@ -68,6 +68,9 @@
 
         public const string MidPointDialogMatch = "midpoint";
         public const string MiddleOfLineSegmentDialogMatch = "middle of line segment";
+
+        public const string DistanceDialogMatch = "distance";
+        public const string DistanceFormulaDialogMatch = "distance formula";
         #endregion
     }
 }

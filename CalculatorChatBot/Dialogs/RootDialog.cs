@@ -210,6 +210,15 @@
             var midPointResult = activity as Activity;
             context.Call(new MidpointDialog(midPointResult), EndDialog); 
         }
+
+        [RegexPattern(DialogMatches.DistanceDialogMatch)]
+        [RegexPattern(DialogMatches.DistanceFormulaDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunDistanceDialog(IDialogContext context, IActivity activity)
+        {
+            var distanceResult = activity as Activity;
+            context.Call(new DistanceDialog(distanceResult), EndDialog); 
+        }
         #endregion
 
         #region Generic help
