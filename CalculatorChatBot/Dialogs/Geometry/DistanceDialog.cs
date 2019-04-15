@@ -5,6 +5,7 @@
     using System;
     using System.Threading.Tasks;
 
+    [Serializable]
     public class DistanceDialog : IDialog<object>
     {
         #region Dialog properties
