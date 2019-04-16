@@ -44,7 +44,15 @@
 
             if (InputInts.Length > 1 && InputInts.Length == 4)
             {
-                // TODO: Complete the functionality
+                int x1 = InputInts[0];
+                int y1 = InputInts[1];
+                int x2 = InputInts[2];
+                int y2 = InputInts[3];
+
+                var midX = (x1 + x2) / 2;
+                var midY = (y1 + y2) / 2; 
+
+                // TODO: Complete this later
             }
             else
             {
