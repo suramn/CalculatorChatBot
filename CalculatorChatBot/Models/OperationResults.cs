@@ -25,7 +25,9 @@
         Variance, 
         GeometricMean, 
         StandardDeviation, 
-        RootMeanSquare
+        RootMeanSquare, 
+        Midpoint, 
+        Distance
     }
 
     public class OperationResults

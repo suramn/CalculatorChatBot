@@ -44,7 +44,37 @@
 
             if (InputInts.Length > 1 && InputInts.Length == 4)
             {
-                // TODO: Complete the functionality
+                int x1 = InputInts[0];
+                int y1 = InputInts[1];
+
+                var point1 = $"({x1}, {y1})";
+
+                int x2 = InputInts[2];
+                int y2 = InputInts[3];
+
+                var point2 = $"({x2},{y2})";
+
+                var deltaX = x2 - x1;
+                var deltaY = y2 - y1;
+
+                var distanceFormula = Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+
+                var successResults = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = $"{distanceFormula}", 
+                    OutputMsg = $"Given the points: {point1} and {point2}, the distance = {distanceFormula}", 
+                    OperationType = CalculationTypes.Geometric.ToString(), 
+                    ResultType = ResultTypes.Distance.ToString()
+                };
+
+                IMessageActivity successReply = context.MakeMessage();
+                successReply.Attachments = new List<Attachment>();
+
+                var successOpsCard = new OperationResultsCard(successResults);
+                successReply.Attachments.Add(successOpsCard.ToAttachment());
+
+                await context.PostAsync(successReply); 
             }
             else
             {

@@ -50,9 +50,25 @@
                 int y2 = InputInts[3];
 
                 var midX = (x1 + x2) / 2;
-                var midY = (y1 + y2) / 2; 
+                var midY = (y1 + y2) / 2;
 
-                // TODO: Complete this later
+                // Successful midpoint calculation results
+                var successResults = new OperationResults()
+                {
+                    Input = InputString, 
+                    Output = $"{midX}, {midY}",
+                    OutputMsg = $"Given the list of integers: {InputString}, the midpoint = ({midX}, {midY})", 
+                    OperationType = CalculationTypes.Geometric.ToString(), 
+                    ResultType = ResultTypes.Midpoint.ToString()
+                };
+
+                IMessageActivity successReply = context.MakeMessage();
+                successReply.Attachments = new List<Attachment>();
+
+                var successOpsCard = new OperationResultsCard(successResults);
+                successReply.Attachments.Add(successOpsCard.ToAttachment());
+
+                await context.PostAsync(successReply);
             }
             else
             {

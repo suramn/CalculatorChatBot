@@ -15,7 +15,7 @@
     "outline": "bot-icon-outline-32x32.png"
   },
   "name": {
-    "short": "calc-chat-bot",
+    "short": "",
     "full": ""
   },
   "description": {
@@ -27,7 +27,7 @@
   ],
   "bots": [
     {
-      "botId": "ADD-BOT-ID",
+      "botId": "BOT-ID",
       "supportsFiles": true,
       "scopes": [
         "personal",
