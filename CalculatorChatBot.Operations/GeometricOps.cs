@@ -175,5 +175,34 @@
 
             return resultString;
         }
+
+        public double CalculateDistance(string inputString)
+        {
+            string[] inputStringArr = inputString.Split(',');
+            int[] inputInts = Array.ConvertAll(inputStringArr, int.Parse);
+
+            double result = 0;
+            if (inputInts.Length == 4)
+            {
+                int x1 = inputInts[0];
+                int y1 = inputInts[1];
+
+                int x2 = inputInts[2];
+                int y2 = inputInts[3];
+
+                var deltaX = x2 - x1;
+                var deltaY = y2 - y1;
+
+                var distanceResult = Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+
+                result = distanceResult;
+            }
+            else
+            {
+                result = 0; 
+            }
+
+            return result;
+        }
     }
 }
