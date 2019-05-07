@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -60,7 +61,7 @@
                 var results = new OperationResults()
                 {
                     Input = InputString,
-                    Output = sum.ToString(),
+                    NumericalResult = sum.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the sum = {sum}",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Sum.ToString()
@@ -68,10 +69,15 @@
 
                 #region Creating the adaptive card
                 IMessageActivity reply = context.MakeMessage();
-                reply.Attachments = new List<Attachment>();
-
-                var operationResultsCard = new OperationResultsCard(results);
-                reply.Attachments.Add(operationResultsCard.ToAttachment());  
+                var resultsCard = OperationResultsAdaptiveCard.GetCard(results);
+                reply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsCard)
+                    }
+                };
                 #endregion
 
                 await context.PostAsync(reply);
@@ -82,7 +88,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Error.ToString()

@@ -47,8 +47,8 @@
                 // Error condition here
                 var errorListTooLong = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "DNE",
+                    Input = InputString,
+                    NumericalResult = "DNE",
                     OutputMsg = $"The input list: {InputString} could be too long - there needs to be 3 numbers exactly",
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Error.ToString()
@@ -67,7 +67,7 @@
                 var errorListTooShort = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "DNE",
+                    NumericalResult = "DNE",
                     OutputMsg = $"The input list: {InputString} could be too short - there needs to be 3 numbers exactly",
                     OperationType = CalculationTypes.Geometric.ToString(),
                     ResultType = ResultTypes.Error.ToString()
@@ -109,7 +109,7 @@
                     Input = InputString,
                     OperationType = CalculationTypes.Geometric.ToString(),
                     OutputMsg = resultMsg,
-                    Output = discriminantValue.ToString(),
+                    NumericalResult = discriminantValue.ToString(),
                     ResultType = ResultTypes.Discriminant.ToString()
                 };
 

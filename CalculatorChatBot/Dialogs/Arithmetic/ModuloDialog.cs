@@ -49,8 +49,8 @@
 
                 var results = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = remainder.ToString(), 
+                    Input = InputString,
+                    NumericalResult = remainder.ToString(), 
                     OutputMsg = $"Given the list {InputString}; the remainder = {remainder}",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Remainder.ToString()
@@ -71,7 +71,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = $"The list: {InputString} may be invalid for this operation. Please double check, and try again",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Error.ToString()

@@ -51,7 +51,7 @@
                 var success = new OperationResults()
                 {
                     Input = InputString,
-                    Output = calculatedResult.ToString(),
+                    NumericalResult = calculatedResult.ToString(),
                     OutputMsg = $"", 
                     OperationType = CalculationTypes.Statistical.ToString(), 
                     ResultType = ResultTypes.RootMeanSquare.ToString()
@@ -69,8 +69,8 @@
             {
                 var error = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0", 
+                    Input = InputString,
+                    NumericalResult = "0", 
                     OutputMsg = "Your list may be too small to calculate the root mean square. Please try again later", 
                     OperationType = CalculationTypes.Statistical.ToString(), 
                     ResultType = ResultTypes.Error.ToString()

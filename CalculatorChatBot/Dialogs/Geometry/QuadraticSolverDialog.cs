@@ -44,8 +44,8 @@
             {
                 var errorResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0",
+                    Input = InputString,
+                    NumericalResult = "0",
                     OutputMsg = "Your list may be too large to calculate the roots. Please try again later!",
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Error.ToString()
@@ -95,7 +95,7 @@
                         var opsError = new OperationResults()
                         {
                             Input = InputString,
-                            Output = "0",
+                            NumericalResult = "0",
                             OutputMsg = "The information provided may lead to a linear equation!",
                             OperationType = CalculationTypes.Geometric.ToString(),
                             ResultType = ResultTypes.Error.ToString()
@@ -115,8 +115,8 @@
 
                         var successOps = new OperationResults()
                         {
-                            Input = InputString, 
-                            Output = $"{r1}, {r2}",
+                            Input = InputString,
+                            NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]", 
                             OperationType = CalculationTypes.Geometric.ToString(),
                             ResultType = ResultTypes.Error.ToString()
@@ -136,7 +136,7 @@
                         var successOpsOneRoot = new OperationResults()
                         {
                             Input = InputString,
-                            Output = $"{r1}, {r2}",
+                            NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]",
                             OperationType = CalculationTypes.Geometric.ToString(),
                             ResultType = ResultTypes.Error.ToString()
@@ -163,8 +163,8 @@
 
                         var opsSuccessImaginRootsResults = new OperationResults()
                         {
-                            Input = InputString, 
-                            Output = $"{root1}, {root2}",
+                            Input = InputString,
+                            NumericalResult = $"{root1}, {root2}",
                             OutputMsg = rootsDesc + " " + root1Str + " " + root2Str,
                             OperationType = CalculationTypes.Geometric.ToString(), 
                             ResultType = ResultTypes.EquationRoots.ToString()

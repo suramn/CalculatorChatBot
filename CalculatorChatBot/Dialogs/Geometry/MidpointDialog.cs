@@ -55,8 +55,8 @@
                 // Successful midpoint calculation results
                 var successResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = $"{midX}, {midY}",
+                    Input = InputString,
+                    NumericalResult = $"{midX}, {midY}",
                     OutputMsg = $"Given the list of integers: {InputString}, the midpoint = ({midX}, {midY})", 
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Midpoint.ToString()
@@ -75,7 +75,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = "There needs to be exactly 4 elements to calculate the midpoint. Please try again later",
                     OperationType = CalculationTypes.Geometric.ToString(),
                     ResultType = ResultTypes.Error.ToString()

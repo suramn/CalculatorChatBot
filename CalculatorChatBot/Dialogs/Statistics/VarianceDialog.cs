@@ -53,8 +53,8 @@
                 #region Building the results 
                 var results = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = decimal.Round(variance, 2).ToString(),
+                    Input = InputString,
+                    NumericalResult = decimal.Round(variance, 2).ToString(),
                     OutputMsg = $"Given the list: {InputString}; the variance = {decimal.Round(variance, 2)}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Variance.ToString()
@@ -73,8 +73,8 @@
             {
                 var errorResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0",
+                    Input = InputString,
+                    NumericalResult = "0",
                     OutputMsg = "Your list may be too small to calculate the variance. Please try again later.",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()

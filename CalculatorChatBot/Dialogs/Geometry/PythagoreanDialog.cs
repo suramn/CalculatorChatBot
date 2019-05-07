@@ -47,8 +47,8 @@
             {
                 var errorResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0",
+                    Input = InputString,
+                    NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too long. I need only 2 numbers to find the length of the hypotenuse",
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Error.ToString()
@@ -77,8 +77,8 @@
 
                 var successResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = decimal.Round(decimal.Parse(c.ToString()), 2).ToString(), 
+                    Input = InputString,
+                    NumericalResult = decimal.Round(decimal.Parse(c.ToString()), 2).ToString(), 
                     OutputMsg = output,
                     OperationType = CalculationTypes.Geometric.ToString(),
                     ResultType = ResultTypes.Hypotenuse.ToString()

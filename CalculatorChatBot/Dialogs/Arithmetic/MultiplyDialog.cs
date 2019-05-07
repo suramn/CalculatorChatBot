@@ -54,7 +54,7 @@
                 var results = new OperationResults()
                 {
                     Input = InputString,
-                    Output = product.ToString(),
+                    NumericalResult = product.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the product = {product}",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Product.ToString()
@@ -75,7 +75,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Error.ToString()

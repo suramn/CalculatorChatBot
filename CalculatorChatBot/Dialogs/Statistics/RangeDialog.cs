@@ -47,7 +47,7 @@
                 var successResult = new OperationResults()
                 {
                     Input = InputString,
-                    Output = range.ToString(),
+                    NumericalResult = range.ToString(),
                     OutputMsg = $"Given the list: {InputString}; the range = {range}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Range.ToString()
@@ -69,7 +69,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = "The list may be too short, try again with more numbers.",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()

@@ -57,8 +57,8 @@
 
                 var results = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = standardDev.ToString(),
+                    Input = InputString,
+                    NumericalResult = standardDev.ToString(),
                     OutputMsg = $"Given the list: {InputString}; the standard deviation = {standardDev}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.StandardDeviation.ToString()
@@ -78,7 +78,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = "Your list may be too small to calculate the standard deviation. Please try again later",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()

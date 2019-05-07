@@ -36,7 +36,7 @@
         
         public string Input { get; set; }
 
-        public string Output { get; set; }
+        public string NumericalResult { get; set; }
 
         public string OutputMsg { get; set; }
 

@@ -51,7 +51,7 @@
                 var results = new OperationResults()
                 {
                     Input = InputString,
-                    Output = decimal.Round(quotient, 2).ToString(),
+                    NumericalResult = decimal.Round(quotient, 2).ToString(),
                     OutputMsg = $"Given the list of {InputString}; the quotient = {decimal.Round(quotient, 2)}",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Quotient.ToString()
@@ -72,7 +72,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = "The list may be too long, or one of the elements could be 0 - please try again later.",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Error.ToString()

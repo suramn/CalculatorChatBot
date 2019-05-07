@@ -70,8 +70,8 @@
                 #region Having the results object
                 var successResult = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString(), 
+                    Input = InputString,
+                    NumericalResult = outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the mode = {(outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString())}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Mode.ToString()
@@ -92,7 +92,7 @@
                 var errorResult = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "",
+                    NumericalResult = "0",
                     OutputMsg = $"Please check your input list: {InputString} and try again later",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()

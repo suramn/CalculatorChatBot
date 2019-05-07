@@ -58,7 +58,7 @@
                 var results = new OperationResults()
                 {
                     Input = InputString,
-                    Output = diff.ToString(),
+                    NumericalResult = diff.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the difference = {diff}",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Difference.ToString()
@@ -79,7 +79,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Error.ToString()

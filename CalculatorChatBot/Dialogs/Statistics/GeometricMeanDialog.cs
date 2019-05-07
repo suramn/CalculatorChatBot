@@ -60,8 +60,8 @@
 
                 var results = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = geometricMean.ToString(),
+                    Input = InputString,
+                    NumericalResult = geometricMean.ToString(),
                     OutputMsg = $"Given the list: {InputString}; the geometric mean = ${geometricMean.ToString()}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.GeometricMean.ToString()
@@ -80,7 +80,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0", 
+                    NumericalResult = "0", 
                     OutputMsg = "Your list may be too small to calculate the geometric mean. Please try again later",
                     OperationType = CalculationTypes.Statistical.ToString(), 
                     ResultType = ResultTypes.Error.ToString()

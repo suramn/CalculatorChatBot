@@ -61,8 +61,8 @@
 
                 var successResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = $"{distanceFormula}", 
+                    Input = InputString,
+                    NumericalResult = distanceFormula.ToString(), 
                     OutputMsg = $"Given the points: {point1} and {point2}, the distance = {distanceFormula}", 
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Distance.ToString()
@@ -80,8 +80,8 @@
             {
                 var errorResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0", 
+                    Input = InputString,
+                    NumericalResult = "0", 
                     OutputMsg = "There needs to be exactly 4 elements to calculate the midpoint. Please try again later", 
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Error.ToString()

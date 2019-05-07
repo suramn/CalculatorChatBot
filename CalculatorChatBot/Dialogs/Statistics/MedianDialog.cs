@@ -59,7 +59,7 @@
                 var opsResult = new OperationResults()
                 {
                     Input = InputString,
-                    Output = decimal.Round(median, 2).ToString(), 
+                    NumericalResult = decimal.Round(median, 2).ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the median = {decimal.Round(median, 2)}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Median.ToString()
@@ -79,8 +79,8 @@
             {
                 var errorResult = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0", 
+                    Input = InputString,
+                    NumericalResult = "0", 
                     OutputMsg = $"Please double check the input: {InputString} and try again",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()
