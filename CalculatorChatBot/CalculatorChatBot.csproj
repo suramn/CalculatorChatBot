@@ -167,8 +167,6 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BotHelpers\MessageHelpers.cs" />
-    <Compile Include="BotHelpers\ArithmeticHandlers.cs" />
-    <Compile Include="BotHelpers\StatisticalHandlers.cs" />
     <Compile Include="BotMiddleware\StripBotAtMentions.cs" />
     <Compile Include="Cards\OperationErrorCard.cs" />
     <Compile Include="Cards\OperationResultsCard.cs" />
