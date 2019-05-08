@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -66,11 +67,15 @@
                 };
 
                 IMessageActivity opsReply = context.MakeMessage();
-                opsReply.Attachments = new List<Attachment>();
-
-
-                var operationsCard = new OperationResultsCard(opsResult);
-                opsReply.Attachments.Add(operationsCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(opsResult);
+                opsReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 await context.PostAsync(opsReply);

@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -55,10 +56,15 @@
 
                 #region Having the adaptive card created
                 IMessageActivity reply = context.MakeMessage();
-                reply.Attachments = new List<Attachment>();
-
-                var operationResultsCard = new OperationResultsCard(successResult);
-                reply.Attachments.Add(operationResultsCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResult);
+                reply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 // Sending out the reply with the card

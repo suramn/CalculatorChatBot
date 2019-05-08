@@ -7,6 +7,7 @@
     using System.Collections.Generic;
     using CalculatorChatBot.Models;
     using CalculatorChatBot.Cards;
+    using Newtonsoft.Json;
 
     [Serializable]
     public class RmsDialog : IDialog<object>
@@ -52,17 +53,21 @@
                 {
                     Input = InputString,
                     NumericalResult = calculatedResult.ToString(),
-                    OutputMsg = $"", 
+                    OutputMsg = $"Given the list: {InputString}, the RMS = {calculatedResult}", 
                     OperationType = CalculationTypes.Statistical.ToString(), 
                     ResultType = ResultTypes.RootMeanSquare.ToString()
                 };
 
                 IMessageActivity successReply = context.MakeMessage();
-                successReply.Attachments = new List<Attachment>();
-
-                var successOpsCard = new OperationResultsCard(success);
-                successReply.Attachments.Add(successOpsCard.ToAttachment());
-
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(success);
+                successReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(successReply);
             }
             else

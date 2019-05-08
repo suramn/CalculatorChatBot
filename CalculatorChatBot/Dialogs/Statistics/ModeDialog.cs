@@ -8,6 +8,7 @@
     using System.Linq;
     using CalculatorChatBot.Models;
     using CalculatorChatBot.Cards;
+    using Newtonsoft.Json;
 
     [Serializable]
     public class ModeDialog : IDialog<object>
@@ -78,10 +79,15 @@
                 };
 
                 IMessageActivity successReply = context.MakeMessage();
-                successReply.Attachments = new List<Attachment>();
-
-                var successCard = new OperationResultsCard(successResult);
-                successReply.Attachments.Add(successCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResult);
+                successReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 await context.PostAsync(successReply);
