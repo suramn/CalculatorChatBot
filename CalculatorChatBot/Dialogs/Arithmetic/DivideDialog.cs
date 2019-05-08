@@ -7,6 +7,7 @@
     using CalculatorChatBot.Models;
     using System.Collections.Generic;
     using CalculatorChatBot.Cards;
+    using Newtonsoft.Json;
 
     [Serializable]
     public class DivideDialog : IDialog<object>
@@ -59,10 +60,15 @@
 
                 #region Creating the adaptive card
                 IMessageActivity reply = context.MakeMessage();
-                reply.Attachments = new List<Attachment>();
-
-                var operationResultsCard = new OperationResultsCard(results);
-                reply.Attachments.Add(operationResultsCard.ToAttachment());
+                var resultsCard = OperationResultsAdaptiveCard.GetCard(results);
+                reply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive", 
+                        Content = JsonConvert.DeserializeObject(resultsCard)
+                    }
+                };
                 #endregion
 
                 await context.PostAsync(reply);

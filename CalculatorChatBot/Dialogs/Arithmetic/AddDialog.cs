@@ -69,13 +69,13 @@
 
                 #region Creating the adaptive card
                 IMessageActivity reply = context.MakeMessage();
-                var resultsCard = OperationResultsAdaptiveCard.GetCard(results);
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(results);
                 reply.Attachments = new List<Attachment>()
                 {
                     new Attachment()
                     {
                         ContentType = "application/vnd.microsoft.card.adaptive",
-                        Content = JsonConvert.DeserializeObject(resultsCard)
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
                     }
                 };
                 #endregion

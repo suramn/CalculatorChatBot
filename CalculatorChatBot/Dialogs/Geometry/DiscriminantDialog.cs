@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -114,10 +115,15 @@
                 };
 
                 IMessageActivity discrimReply = context.MakeMessage();
-                discrimReply.Attachments = new List<Attachment>();
-
-                var discrimReplyCard = new OperationResultsCard(discrimResults);
-                discrimReply.Attachments.Add(discrimReplyCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(discrimResults);
+                discrimReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
 
                 await context.PostAsync(discrimReply);
                 #endregion

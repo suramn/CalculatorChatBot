@@ -7,6 +7,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// This class will produce the overall difference of a list of numbers. If the list is too short, the 
@@ -66,10 +67,15 @@
 
                 #region Creating the adaptive card
                 IMessageActivity reply = context.MakeMessage();
-                reply.Attachments = new List<Attachment>();
-
-                var operationResultsCard = new OperationResultsCard(results);
-                reply.Attachments.Add(operationResultsCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(results);
+                reply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 await context.PostAsync(reply);

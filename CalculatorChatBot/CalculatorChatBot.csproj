@@ -170,7 +170,6 @@
     <Compile Include="BotMiddleware\StripBotAtMentions.cs" />
     <Compile Include="Cards\OperationErrorCard.cs" />
     <Compile Include="Cards\OperationResultsAdaptiveCard.cs" />
-    <Compile Include="Cards\OperationResultsCard.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\Arithmetic\AddDialog.cs" />
     <Compile Include="Dialogs\DialogMatches.cs" />

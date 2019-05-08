@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -113,7 +114,7 @@
                         r1 = (-b + Math.Sqrt(discriminant)) / (2 * a);
                         r2 = (-b - Math.Sqrt(discriminant)) / (2 * a);
 
-                        var successOps = new OperationResults()
+                        var successResults = new OperationResults()
                         {
                             Input = InputString,
                             NumericalResult = $"{r1}, {r2}",
@@ -123,11 +124,16 @@
                         };
 
                         IMessageActivity opsSuccessReply = context.MakeMessage();
-                        opsSuccessReply.Attachments = new List<Attachment>();
-
-                        var opsSuccessCard = new OperationResultsCard(successOps);
-                        opsSuccessReply.Attachments.Add(opsSuccessCard.ToAttachment());
-
+                        var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResults);
+                        opsSuccessReply.Attachments = new List<Attachment>()
+                        {
+                            new Attachment()
+                            {
+                                ContentType = "application/vnd.microsoft.card.adaptive",
+                                Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                            }
+                        };
+                        
                         await context.PostAsync(opsSuccessReply);
                         break;
                     case 3:
@@ -142,13 +148,17 @@
                             ResultType = ResultTypes.Error.ToString()
                         };
 
-                        IMessageActivity opsSuccessOneRoot = context.MakeMessage();
-                        opsSuccessOneRoot.Attachments = new List<Attachment>();
-
-                        var opsSuccessOneRootCard = new OperationResultsCard(successOpsOneRoot);
-                        opsSuccessOneRoot.Attachments.Add(opsSuccessOneRootCard.ToAttachment());
-
-                        await context.PostAsync(opsSuccessOneRoot);
+                        IMessageActivity opsSuccessOneRootReply = context.MakeMessage();
+                        var successOpsOneRootAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successOpsOneRoot);
+                        opsSuccessOneRootReply.Attachments = new List<Attachment>()
+                        {
+                            new Attachment()
+                            {
+                                ContentType = "application/vnd.microsoft.card.adaptive",
+                                Content = JsonConvert.DeserializeObject(successOpsOneRootAdaptiveCard)
+                            }
+                        };
+                        await context.PostAsync(opsSuccessOneRootReply);
                         break;
                     case 4:
                         var rootsDesc = "Roots are imaginary";
@@ -171,10 +181,15 @@
                         };
 
                         IMessageActivity opsSuccessImagReply = context.MakeMessage();
-                        opsSuccessImagReply.Attachments = new List<Attachment>();
-
-                        var opsSuccessImaginRootCard = new OperationResultsCard(opsSuccessImaginRootsResults);
-                        opsSuccessImagReply.Attachments.Add(opsSuccessImaginRootCard.ToAttachment());
+                        var opsSuccessImaginRootCard = OperationResultsAdaptiveCard.GetCard(opsSuccessImaginRootsResults);
+                        opsSuccessImagReply.Attachments = new List<Attachment>()
+                        {
+                            new Attachment()
+                            {
+                                ContentType = "application/vnd.microsoft.card.adaptive",
+                                Content = JsonConvert.DeserializeObject(opsSuccessImaginRootCard)
+                            }
+                        };
 
                         await context.PostAsync(opsSuccessImagReply);
                         break;
