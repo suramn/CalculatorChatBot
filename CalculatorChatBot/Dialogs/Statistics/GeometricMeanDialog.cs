@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -60,19 +61,23 @@
 
                 var results = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = geometricMean.ToString(),
+                    Input = InputString,
+                    NumericalResult = geometricMean.ToString(),
                     OutputMsg = $"Given the list: {InputString}; the geometric mean = ${geometricMean.ToString()}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.GeometricMean.ToString()
                 };
 
                 IMessageActivity opsReply = context.MakeMessage();
-                opsReply.Attachments = new List<Attachment>();
-
-                var opsCard = new OperationResultsCard(results);
-                opsReply.Attachments.Add(opsCard.ToAttachment());
-
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(results);
+                opsReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(opsReply); 
             }
             else
@@ -80,7 +85,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0", 
+                    NumericalResult = "0", 
                     OutputMsg = "Your list may be too small to calculate the geometric mean. Please try again later",
                     OperationType = CalculationTypes.Statistical.ToString(), 
                     ResultType = ResultTypes.Error.ToString()

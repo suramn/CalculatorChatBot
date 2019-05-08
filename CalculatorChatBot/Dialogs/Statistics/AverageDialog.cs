@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -54,18 +55,23 @@
                 #region Building the results object and the card
                 var results = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = decimal.Round(mean, 2).ToString(), 
+                    Input = InputString,
+                    NumericalResult = decimal.Round(mean, 2).ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the average = {decimal.Round(mean, 2)}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Average.ToString()
                 };
 
                 IMessageActivity opsReply = context.MakeMessage();
-                opsReply.Attachments = new List<Attachment>();
-
-                var opsCard = new OperationResultsCard(results);
-                opsReply.Attachments.Add(opsCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(results);
+                opsReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 await context.PostAsync(opsReply);
@@ -76,7 +82,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = "Your list may be too small to calculate an average. Please try again later.",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()

@@ -7,6 +7,7 @@
     using System.Collections.Generic;
     using CalculatorChatBot.Models;
     using CalculatorChatBot.Cards;
+    using Newtonsoft.Json;
 
     [Serializable]
     public class RmsDialog : IDialog<object>
@@ -51,26 +52,30 @@
                 var success = new OperationResults()
                 {
                     Input = InputString,
-                    Output = calculatedResult.ToString(),
-                    OutputMsg = $"", 
+                    NumericalResult = calculatedResult.ToString(),
+                    OutputMsg = $"Given the list: {InputString}, the RMS = {calculatedResult}", 
                     OperationType = CalculationTypes.Statistical.ToString(), 
                     ResultType = ResultTypes.RootMeanSquare.ToString()
                 };
 
                 IMessageActivity successReply = context.MakeMessage();
-                successReply.Attachments = new List<Attachment>();
-
-                var successOpsCard = new OperationResultsCard(success);
-                successReply.Attachments.Add(successOpsCard.ToAttachment());
-
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(success);
+                successReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(successReply);
             }
             else
             {
                 var error = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0", 
+                    Input = InputString,
+                    NumericalResult = "0", 
                     OutputMsg = "Your list may be too small to calculate the root mean square. Please try again later", 
                     OperationType = CalculationTypes.Statistical.ToString(), 
                     ResultType = ResultTypes.Error.ToString()

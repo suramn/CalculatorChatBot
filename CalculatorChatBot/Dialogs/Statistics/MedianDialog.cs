@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -59,18 +60,22 @@
                 var opsResult = new OperationResults()
                 {
                     Input = InputString,
-                    Output = decimal.Round(median, 2).ToString(), 
+                    NumericalResult = decimal.Round(median, 2).ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the median = {decimal.Round(median, 2)}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Median.ToString()
                 };
 
                 IMessageActivity opsReply = context.MakeMessage();
-                opsReply.Attachments = new List<Attachment>();
-
-
-                var operationsCard = new OperationResultsCard(opsResult);
-                opsReply.Attachments.Add(operationsCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(opsResult);
+                opsReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 await context.PostAsync(opsReply);
@@ -79,8 +84,8 @@
             {
                 var errorResult = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0", 
+                    Input = InputString,
+                    NumericalResult = "0", 
                     OutputMsg = $"Please double check the input: {InputString} and try again",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()

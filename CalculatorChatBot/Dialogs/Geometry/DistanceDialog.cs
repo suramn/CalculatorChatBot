@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -61,18 +62,23 @@
 
                 var successResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = $"{distanceFormula}", 
+                    Input = InputString,
+                    NumericalResult = distanceFormula.ToString(), 
                     OutputMsg = $"Given the points: {point1} and {point2}, the distance = {distanceFormula}", 
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Distance.ToString()
                 };
 
                 IMessageActivity successReply = context.MakeMessage();
-                successReply.Attachments = new List<Attachment>();
-
-                var successOpsCard = new OperationResultsCard(successResults);
-                successReply.Attachments.Add(successOpsCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResults);
+                successReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
 
                 await context.PostAsync(successReply); 
             }
@@ -80,8 +86,8 @@
             {
                 var errorResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0", 
+                    Input = InputString,
+                    NumericalResult = "0", 
                     OutputMsg = "There needs to be exactly 4 elements to calculate the midpoint. Please try again later", 
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Error.ToString()

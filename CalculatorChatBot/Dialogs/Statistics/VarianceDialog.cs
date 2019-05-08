@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -53,18 +54,23 @@
                 #region Building the results 
                 var results = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = decimal.Round(variance, 2).ToString(),
+                    Input = InputString,
+                    NumericalResult = decimal.Round(variance, 2).ToString(),
                     OutputMsg = $"Given the list: {InputString}; the variance = {decimal.Round(variance, 2)}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Variance.ToString()
                 };
 
                 IMessageActivity resultsReply = context.MakeMessage();
-                resultsReply.Attachments = new List<Attachment>();
-
-                var resultsCard = new OperationResultsCard(results);
-                resultsReply.Attachments.Add(resultsCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(results);
+                resultsReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };            
                 #endregion
 
                 await context.PostAsync(resultsReply);
@@ -73,8 +79,8 @@
             {
                 var errorResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0",
+                    Input = InputString,
+                    NumericalResult = "0",
                     OutputMsg = "Your list may be too small to calculate the variance. Please try again later.",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()

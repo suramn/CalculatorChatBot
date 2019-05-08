@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -47,7 +48,7 @@
                 var successResult = new OperationResults()
                 {
                     Input = InputString,
-                    Output = range.ToString(),
+                    NumericalResult = range.ToString(),
                     OutputMsg = $"Given the list: {InputString}; the range = {range}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Range.ToString()
@@ -55,10 +56,15 @@
 
                 #region Having the adaptive card created
                 IMessageActivity reply = context.MakeMessage();
-                reply.Attachments = new List<Attachment>();
-
-                var operationResultsCard = new OperationResultsCard(successResult);
-                reply.Attachments.Add(operationResultsCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResult);
+                reply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 // Sending out the reply with the card
@@ -69,7 +75,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = "The list may be too short, try again with more numbers.",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()

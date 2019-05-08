@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -49,8 +50,8 @@
 
                 var results = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = remainder.ToString(), 
+                    Input = InputString,
+                    NumericalResult = remainder.ToString(), 
                     OutputMsg = $"Given the list {InputString}; the remainder = {remainder}",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Remainder.ToString()
@@ -58,11 +59,16 @@
 
                 // Building up the adaptive card
                 IMessageActivity reply = context.MakeMessage();
-                reply.Attachments = new List<Attachment>();
-
-                var operationResultsCard = new OperationResultsCard(results);
-                reply.Attachments.Add(operationResultsCard.ToAttachment());
-                
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(results);
+                reply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
+           
                 await context.PostAsync(reply);
             }
             else
@@ -71,7 +77,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = $"The list: {InputString} may be invalid for this operation. Please double check, and try again",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Error.ToString()

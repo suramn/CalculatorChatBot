@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -47,8 +48,8 @@
             {
                 var errorResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0",
+                    Input = InputString,
+                    NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too long. I need only 2 numbers to find the length of the hypotenuse",
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Error.ToString()
@@ -77,19 +78,23 @@
 
                 var successResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = decimal.Round(decimal.Parse(c.ToString()), 2).ToString(), 
+                    Input = InputString,
+                    NumericalResult = decimal.Round(decimal.Parse(c.ToString()), 2).ToString(), 
                     OutputMsg = output,
                     OperationType = CalculationTypes.Geometric.ToString(),
                     ResultType = ResultTypes.Hypotenuse.ToString()
                 };
 
                 IMessageActivity successReply = context.MakeMessage();
-                successReply.Attachments = new List<Attachment>();
-
-                var successCard = new OperationResultsCard(successResults);
-                successReply.Attachments.Add(successCard.ToAttachment());
-
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResults);
+                successReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(successReply);
             }
 

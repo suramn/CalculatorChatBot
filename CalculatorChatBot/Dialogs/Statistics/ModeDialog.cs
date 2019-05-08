@@ -8,6 +8,7 @@
     using System.Linq;
     using CalculatorChatBot.Models;
     using CalculatorChatBot.Cards;
+    using Newtonsoft.Json;
 
     [Serializable]
     public class ModeDialog : IDialog<object>
@@ -70,18 +71,23 @@
                 #region Having the results object
                 var successResult = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString(), 
+                    Input = InputString,
+                    NumericalResult = outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the mode = {(outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString())}",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Mode.ToString()
                 };
 
                 IMessageActivity successReply = context.MakeMessage();
-                successReply.Attachments = new List<Attachment>();
-
-                var successCard = new OperationResultsCard(successResult);
-                successReply.Attachments.Add(successCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResult);
+                successReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 await context.PostAsync(successReply);
@@ -92,7 +98,7 @@
                 var errorResult = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "",
+                    NumericalResult = "0",
                     OutputMsg = $"Please check your input list: {InputString} and try again later",
                     OperationType = CalculationTypes.Statistical.ToString(),
                     ResultType = ResultTypes.Error.ToString()

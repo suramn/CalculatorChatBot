@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -44,8 +45,8 @@
             {
                 var errorResults = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "0",
+                    Input = InputString,
+                    NumericalResult = "0",
                     OutputMsg = "Your list may be too large to calculate the roots. Please try again later!",
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Error.ToString()
@@ -95,7 +96,7 @@
                         var opsError = new OperationResults()
                         {
                             Input = InputString,
-                            Output = "0",
+                            NumericalResult = "0",
                             OutputMsg = "The information provided may lead to a linear equation!",
                             OperationType = CalculationTypes.Geometric.ToString(),
                             ResultType = ResultTypes.Error.ToString()
@@ -113,21 +114,26 @@
                         r1 = (-b + Math.Sqrt(discriminant)) / (2 * a);
                         r2 = (-b - Math.Sqrt(discriminant)) / (2 * a);
 
-                        var successOps = new OperationResults()
+                        var successResults = new OperationResults()
                         {
-                            Input = InputString, 
-                            Output = $"{r1}, {r2}",
+                            Input = InputString,
+                            NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]", 
                             OperationType = CalculationTypes.Geometric.ToString(),
                             ResultType = ResultTypes.Error.ToString()
                         };
 
                         IMessageActivity opsSuccessReply = context.MakeMessage();
-                        opsSuccessReply.Attachments = new List<Attachment>();
-
-                        var opsSuccessCard = new OperationResultsCard(successOps);
-                        opsSuccessReply.Attachments.Add(opsSuccessCard.ToAttachment());
-
+                        var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResults);
+                        opsSuccessReply.Attachments = new List<Attachment>()
+                        {
+                            new Attachment()
+                            {
+                                ContentType = "application/vnd.microsoft.card.adaptive",
+                                Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                            }
+                        };
+                        
                         await context.PostAsync(opsSuccessReply);
                         break;
                     case 3:
@@ -136,19 +142,23 @@
                         var successOpsOneRoot = new OperationResults()
                         {
                             Input = InputString,
-                            Output = $"{r1}, {r2}",
+                            NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]",
                             OperationType = CalculationTypes.Geometric.ToString(),
                             ResultType = ResultTypes.Error.ToString()
                         };
 
-                        IMessageActivity opsSuccessOneRoot = context.MakeMessage();
-                        opsSuccessOneRoot.Attachments = new List<Attachment>();
-
-                        var opsSuccessOneRootCard = new OperationResultsCard(successOpsOneRoot);
-                        opsSuccessOneRoot.Attachments.Add(opsSuccessOneRootCard.ToAttachment());
-
-                        await context.PostAsync(opsSuccessOneRoot);
+                        IMessageActivity opsSuccessOneRootReply = context.MakeMessage();
+                        var successOpsOneRootAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successOpsOneRoot);
+                        opsSuccessOneRootReply.Attachments = new List<Attachment>()
+                        {
+                            new Attachment()
+                            {
+                                ContentType = "application/vnd.microsoft.card.adaptive",
+                                Content = JsonConvert.DeserializeObject(successOpsOneRootAdaptiveCard)
+                            }
+                        };
+                        await context.PostAsync(opsSuccessOneRootReply);
                         break;
                     case 4:
                         var rootsDesc = "Roots are imaginary";
@@ -163,18 +173,23 @@
 
                         var opsSuccessImaginRootsResults = new OperationResults()
                         {
-                            Input = InputString, 
-                            Output = $"{root1}, {root2}",
+                            Input = InputString,
+                            NumericalResult = $"{root1}, {root2}",
                             OutputMsg = rootsDesc + " " + root1Str + " " + root2Str,
                             OperationType = CalculationTypes.Geometric.ToString(), 
                             ResultType = ResultTypes.EquationRoots.ToString()
                         };
 
                         IMessageActivity opsSuccessImagReply = context.MakeMessage();
-                        opsSuccessImagReply.Attachments = new List<Attachment>();
-
-                        var opsSuccessImaginRootCard = new OperationResultsCard(opsSuccessImaginRootsResults);
-                        opsSuccessImagReply.Attachments.Add(opsSuccessImaginRootCard.ToAttachment());
+                        var opsSuccessImaginRootCard = OperationResultsAdaptiveCard.GetCard(opsSuccessImaginRootsResults);
+                        opsSuccessImagReply.Attachments = new List<Attachment>()
+                        {
+                            new Attachment()
+                            {
+                                ContentType = "application/vnd.microsoft.card.adaptive",
+                                Content = JsonConvert.DeserializeObject(opsSuccessImaginRootCard)
+                            }
+                        };
 
                         await context.PostAsync(opsSuccessImagReply);
                         break;

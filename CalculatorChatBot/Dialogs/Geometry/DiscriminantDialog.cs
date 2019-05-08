@@ -4,6 +4,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -47,8 +48,8 @@
                 // Error condition here
                 var errorListTooLong = new OperationResults()
                 {
-                    Input = InputString, 
-                    Output = "DNE",
+                    Input = InputString,
+                    NumericalResult = "DNE",
                     OutputMsg = $"The input list: {InputString} could be too long - there needs to be 3 numbers exactly",
                     OperationType = CalculationTypes.Geometric.ToString(), 
                     ResultType = ResultTypes.Error.ToString()
@@ -67,7 +68,7 @@
                 var errorListTooShort = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "DNE",
+                    NumericalResult = "DNE",
                     OutputMsg = $"The input list: {InputString} could be too short - there needs to be 3 numbers exactly",
                     OperationType = CalculationTypes.Geometric.ToString(),
                     ResultType = ResultTypes.Error.ToString()
@@ -109,15 +110,20 @@
                     Input = InputString,
                     OperationType = CalculationTypes.Geometric.ToString(),
                     OutputMsg = resultMsg,
-                    Output = discriminantValue.ToString(),
+                    NumericalResult = discriminantValue.ToString(),
                     ResultType = ResultTypes.Discriminant.ToString()
                 };
 
                 IMessageActivity discrimReply = context.MakeMessage();
-                discrimReply.Attachments = new List<Attachment>();
-
-                var discrimReplyCard = new OperationResultsCard(discrimResults);
-                discrimReply.Attachments.Add(discrimReplyCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(discrimResults);
+                discrimReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
 
                 await context.PostAsync(discrimReply);
                 #endregion

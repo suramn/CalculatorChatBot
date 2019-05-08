@@ -7,6 +7,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// This class will produce the overall difference of a list of numbers. If the list is too short, the 
@@ -58,7 +59,7 @@
                 var results = new OperationResults()
                 {
                     Input = InputString,
-                    Output = diff.ToString(),
+                    NumericalResult = diff.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the difference = {diff}",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Difference.ToString()
@@ -66,10 +67,15 @@
 
                 #region Creating the adaptive card
                 IMessageActivity reply = context.MakeMessage();
-                reply.Attachments = new List<Attachment>();
-
-                var operationResultsCard = new OperationResultsCard(results);
-                reply.Attachments.Add(operationResultsCard.ToAttachment());
+                var resultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(results);
+                reply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(resultsAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 await context.PostAsync(reply);
@@ -79,7 +85,7 @@
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
-                    Output = "0",
+                    NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
                     OperationType = CalculationTypes.Arithmetic.ToString(),
                     ResultType = ResultTypes.Error.ToString()
