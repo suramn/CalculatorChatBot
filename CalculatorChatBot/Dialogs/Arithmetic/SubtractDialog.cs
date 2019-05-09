@@ -34,9 +34,7 @@
             if (!string.IsNullOrEmpty(incomingInfo[1]))
             {
                 InputString = incomingInfo[1];
-
                 InputStringArray = InputString.Split(',');
-
                 InputInts = Array.ConvertAll(InputStringArray, int.Parse);
             }
         }
