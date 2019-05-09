@@ -88,11 +88,16 @@
                 };
 
                 #region Creating the adaptive card
+                var errorAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorResults);
                 IMessageActivity errorReply = context.MakeMessage();
-                errorReply.Attachments = new List<Attachment>();
-
-                var errorCard = new OperationErrorCard(errorResults);
-                errorReply.Attachments.Add(errorCard.ToAttachment());
+                errorReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 // Send the message that you need more elements to calculate the sum

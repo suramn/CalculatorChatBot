@@ -85,11 +85,15 @@
 
                 // Now having the card
                 IMessageActivity errorReply = context.MakeMessage();
-                errorReply.Attachments = new List<Attachment>();
-
-                var errorCard = new OperationErrorCard(errorResults);
-                errorReply.Attachments.Add(errorCard.ToAttachment());
-
+                var errorAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorResults);
+                errorReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(errorReply);
             }
 
