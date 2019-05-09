@@ -168,7 +168,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BotHelpers\MessageHelpers.cs" />
     <Compile Include="BotMiddleware\StripBotAtMentions.cs" />
-    <Compile Include="Cards\OperationErrorCard.cs" />
+    <Compile Include="Cards\OperationErrorAdaptiveCard.cs" />
     <Compile Include="Cards\OperationResultsAdaptiveCard.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\Arithmetic\AddDialog.cs" />

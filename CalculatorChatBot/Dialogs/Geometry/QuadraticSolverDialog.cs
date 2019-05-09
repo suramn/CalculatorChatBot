@@ -27,9 +27,7 @@
             if (!string.IsNullOrEmpty(incomingInfo[1]))
             {
                 InputString = incomingInfo[1];
-
                 InputStringArray = InputString.Split(',');
-
                 InputInts = Array.ConvertAll(InputStringArray, int.Parse);
             }
         }
@@ -53,11 +51,15 @@
                 };
 
                 IMessageActivity errorListReply = context.MakeMessage();
-                errorListReply.Attachments = new List<Attachment>();
-
-                var errorListCard = new OperationErrorCard(errorResults);
-                errorListReply.Attachments.Add(errorListCard.ToAttachment());
-
+                var errorListAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorResults);
+                errorListReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorListAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(errorListReply);
             }
             else
@@ -103,11 +105,15 @@
                         };
 
                         IMessageActivity opsErrorReply = context.MakeMessage();
-                        opsErrorReply.Attachments = new List<Attachment>();
-
-                        var opsErrorCard = new OperationErrorCard(opsError);
-                        opsErrorReply.Attachments.Add(opsErrorCard.ToAttachment());
-
+                        var opsErrorAdaptiveCard = OperationErrorAdaptiveCard.GetCard(opsError);
+                        opsErrorReply.Attachments = new List<Attachment>()
+                        {
+                            new Attachment()
+                            {
+                                ContentType = "application/vnd.microsoft.card.adaptive",
+                                Content = JsonConvert.DeserializeObject(opsErrorAdaptiveCard)
+                            }
+                        };
                         await context.PostAsync(opsErrorReply);
                         break;
                     case 2:

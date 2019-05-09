@@ -72,7 +72,7 @@
             }
             else
             {
-                var error = new OperationResults()
+                var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0", 
@@ -82,11 +82,15 @@
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();
-                errorReply.Attachments = new List<Attachment>();
-
-                var errorOpsCard = new OperationErrorCard(error);
-                errorReply.Attachments.Add(errorOpsCard.ToAttachment());
-
+                var errorReplyAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorResults);
+                errorReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorReplyAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(errorReply);
             }
 

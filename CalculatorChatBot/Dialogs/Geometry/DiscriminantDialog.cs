@@ -29,9 +29,7 @@
             if (!string.IsNullOrEmpty(incomingInfo[1]))
             {
                 InputString = incomingInfo[1];
-
                 InputStringArray = InputString.Split(',');
-
                 InputInts = Array.ConvertAll(InputStringArray, int.Parse);
             }
         }
@@ -46,7 +44,7 @@
             if (InputInts.Length > 3)
             {
                 // Error condition here
-                var errorListTooLong = new OperationResults()
+                var errorListTooLongResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "DNE",
@@ -56,16 +54,20 @@
                 };
 
                 IMessageActivity errorListTooLongReply = context.MakeMessage();
-                errorListTooLongReply.Attachments = new List<Attachment>();
-
-                var errorListTooLongCard = new OperationErrorCard(errorListTooLong);
-                errorListTooLongReply.Attachments.Add(errorListTooLongCard.ToAttachment());
-
+                var errorListTooLongAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorListTooLongResults);
+                errorListTooLongReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive", 
+                        Content = JsonConvert.DeserializeObject(errorListTooLongAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(errorListTooLongReply);
             }
             else if (InputInts.Length < 3)
             {
-                var errorListTooShort = new OperationResults()
+                var errorListTooShortResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "DNE",
@@ -75,11 +77,15 @@
                 };
 
                 IMessageActivity errorListTooShortReply = context.MakeMessage();
-                errorListTooShortReply.Attachments = new List<Attachment>();
-
-                var errorListTooShortCard = new OperationErrorCard(errorListTooShort);
-                errorListTooShortReply.Attachments.Add(errorListTooShortCard.ToAttachment());
-
+                var errorListTooShortAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorListTooShortResults);
+                errorListTooShortReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorListTooShortAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(errorListTooShortReply);
             }
             else

@@ -29,9 +29,7 @@
             if (!string.IsNullOrEmpty(incomingInfo[1]))
             {
                 InputString = incomingInfo[1];
-
                 InputStringArray = InputString.Split(',');
-
                 InputInts = Array.ConvertAll(InputStringArray, int.Parse);
             }
         }
@@ -94,11 +92,15 @@
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();
-                errorReply.Attachments = new List<Attachment>();
-
-                var errorOpsCard = new OperationErrorCard(errorResults);
-                errorReply.Attachments.Add(errorOpsCard.ToAttachment());
-
+                var errorResultsAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorResults);
+                errorReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorResultsAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(errorReply);
             }
 
