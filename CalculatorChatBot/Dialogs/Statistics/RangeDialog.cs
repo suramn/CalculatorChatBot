@@ -27,9 +27,7 @@
             if (!string.IsNullOrEmpty(incomingInfo[1]))
             {
                 InputString = incomingInfo[1];
-
                 InputStringArray = InputString.Split(',');
-
                 InputInts = Array.ConvertAll(InputStringArray, int.Parse);
             }
         }
@@ -83,10 +81,15 @@
 
                 #region Having the adaptive card created
                 IMessageActivity errorReply = context.MakeMessage();
-                errorReply.Attachments = new List<Attachment>();
-
-                var errorCard = new OperationErrorCard(errorResults);
-                errorReply.Attachments.Add(errorCard.ToAttachment());
+                var errorReplyAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorResults);
+                errorReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorReplyAdaptiveCard)
+                    }
+                };
                 #endregion
 
                 // Sending the error card

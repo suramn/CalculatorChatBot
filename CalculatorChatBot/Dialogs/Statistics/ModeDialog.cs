@@ -105,11 +105,15 @@
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();
-                errorReply.Attachments = new List<Attachment>();
-
-                var errorCard = new OperationErrorCard(errorResult);
-                errorReply.Attachments.Add(errorCard.ToAttachment());
-
+                var errorReplyAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorResult);
+                errorReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorReplyAdaptiveCard)
+                    }
+                };
                 await context.PostAsync(errorReply);
             }
 
