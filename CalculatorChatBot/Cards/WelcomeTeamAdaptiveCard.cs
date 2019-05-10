@@ -1,30 +1,30 @@
 ﻿namespace CalculatorChatBot.Cards
 {
-    using System.Collections.Generic;
     using System.IO;
     using System.Web.Hosting;
+    using System.Collections.Generic;
 
-    public class WelcomeUserAdaptiveCard
+    public class WelcomeTeamAdaptiveCard
     {
         private static readonly string CardTemplate;
 
-        static WelcomeUserAdaptiveCard()
+        static WelcomeTeamAdaptiveCard()
         {
-            var cardJsonFilePath = HostingEnvironment.MapPath("~/Cards/WelcomeUserAdaptiveCard.json");
+            var cardJsonFilePath = HostingEnvironment.MapPath("~/Cards/WelcomeTeamAdaptiveCard.json");
             CardTemplate = File.ReadAllText(cardJsonFilePath);
         }
 
         public static string GetCard()
         {
-            var welcomeUserCardTitleText = "";
-            var welcomeUserCardIntroPart1 = "";
-            var welcomeUserCardIntroPart2 = "";
+            var welcomeTeamCardTitleText = "";
+            var welcomeTeamCardIntroPart1 = "";
+            var welcomeTeamCardIntroPart2 = "";
 
             var variablesToValues = new Dictionary<string, string>()
             {
-                { "welcomeUserCardTitleText", welcomeUserCardTitleText },
-                { "welcomeUserCardIntroPart1", welcomeUserCardIntroPart1 },
-                { "welcomeUserCardIntroPart2", welcomeUserCardIntroPart2 }
+                { "welcomeTeamCardTitleText", welcomeTeamCardTitleText },
+                { "welcomeTeamCardIntroPart1", welcomeTeamCardIntroPart1 },
+                { "welcomeTeamCardIntroPart2", welcomeTeamCardIntroPart2 }
             };
 
             var cardBody = CardTemplate;

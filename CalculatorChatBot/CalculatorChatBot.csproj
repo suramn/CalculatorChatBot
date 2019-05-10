@@ -170,6 +170,7 @@
     <Compile Include="BotMiddleware\StripBotAtMentions.cs" />
     <Compile Include="Cards\OperationErrorAdaptiveCard.cs" />
     <Compile Include="Cards\OperationResultsAdaptiveCard.cs" />
+    <Compile Include="Cards\WelcomeTeamAdaptiveCard.cs" />
     <Compile Include="Cards\WelcomeUserAdaptiveCard.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\Arithmetic\AddDialog.cs" />
@@ -213,6 +214,7 @@
     <Content Include="Cards\OperationErrorAdaptiveCard.json" />
     <Content Include="Cards\OperationResultsAdaptiveCard.json" />
     <Content Include="Cards\WelcomeUserAdaptiveCard.json" />
+    <Content Include="Cards\WelcomeTeamAdaptiveCard.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
