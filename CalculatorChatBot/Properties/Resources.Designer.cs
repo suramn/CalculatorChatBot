@@ -104,5 +104,59 @@ namespace CalculatorChatBot.Properties {
                 return ResourceManager.GetString("ResultsCardTitleText", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I am a bot that can *possibly* do your math homework! Well, not all of it - not all the hard calculus problems, or the hard trigonometry problems either....
+        /// </summary>
+        internal static string WelcomeTeamCardIntroPart1 {
+            get {
+                return ResourceManager.GetString("WelcomeTeamCardIntroPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here are the categories of operations I can do: arithmetic, some geometric, and a few statistic operations. You ask me anything about calculus - my 🧠 will not work!.
+        /// </summary>
+        internal static string WelcomeTeamCardIntroPart2 {
+            get {
+                return ResourceManager.GetString("WelcomeTeamCardIntroPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello there! 👋.
+        /// </summary>
+        internal static string WelcomeTeamCardTitleText {
+            get {
+                return ResourceManager.GetString("WelcomeTeamCardTitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I am a bot that can *possibly* do your math homework! Well, not all of it - not all the hard calculus problems, or the hard trigonometry problems either....
+        /// </summary>
+        internal static string WelcomeUserCardIntroPart1 {
+            get {
+                return ResourceManager.GetString("WelcomeUserCardIntroPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here are the categories of operations I can do: arithmetic, some geometric, and a few statistic operations. You ask me anything about calculus - my 🧠 will not work!.
+        /// </summary>
+        internal static string WelcomeUserCardIntroPart2 {
+            get {
+                return ResourceManager.GetString("WelcomeUserCardIntroPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello there! 👋.
+        /// </summary>
+        internal static string WelcomeUserCardTitleText {
+            get {
+                return ResourceManager.GetString("WelcomeUserCardTitleText", resourceCulture);
+            }
+        }
     }
 }

@@ -137,4 +137,28 @@
     <value>Results</value>
     <comment>The text of the title for the results card</comment>
   </data>
+  <data name="WelcomeTeamCardIntroPart1" xml:space="preserve">
+    <value>I am a bot that can *possibly* do your math homework! Well, not all of it - not all the hard calculus problems, or the hard trigonometry problems either...</value>
+    <comment>Part 1 of the 2 part team welcome message</comment>
+  </data>
+  <data name="WelcomeTeamCardIntroPart2" xml:space="preserve">
+    <value>Here are the categories of operations I can do: arithmetic, some geometric, and a few statistic operations. You ask me anything about calculus - my 🧠 will not work!</value>
+    <comment>Part 2 of the 2 part team welcome message</comment>
+  </data>
+  <data name="WelcomeTeamCardTitleText" xml:space="preserve">
+    <value>Hello there! 👋</value>
+    <comment>Salutation text for the adaptive card - for the team situation</comment>
+  </data>
+  <data name="WelcomeUserCardIntroPart1" xml:space="preserve">
+    <value>I am a bot that can *possibly* do your math homework! Well, not all of it - not all the hard calculus problems, or the hard trigonometry problems either...</value>
+    <comment>Part 1 of the 2 part welcome message</comment>
+  </data>
+  <data name="WelcomeUserCardIntroPart2" xml:space="preserve">
+    <value>Here are the categories of operations I can do: arithmetic, some geometric, and a few statistic operations. You ask me anything about calculus - my 🧠 will not work!</value>
+    <comment>Part 2 of the 2 part welcome message</comment>
+  </data>
+  <data name="WelcomeUserCardTitleText" xml:space="preserve">
+    <value>Hello there! 👋</value>
+    <comment>Salutation text for the adaptive card - saying hello</comment>
+  </data>
 </root>
