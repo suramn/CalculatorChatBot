@@ -1,0 +1,38 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "size": "Medium",
+          "weight": "Bolder",
+          "separator": true,
+          "text": "%welcomeTeamCardTitleText%"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "%welcomeTeamCardIntroPart1%",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "spacing": "Medium",
+          "text": "%welcomeTeamCardIntroPart2%",
+          "wrap": true
+        }
+      ]
+    }
+  ],
+  "actions": [
+
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0"
+}
