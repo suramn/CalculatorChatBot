@@ -1,5 +1,6 @@
 ﻿namespace CalculatorChatBot.Cards
 {
+    using CalculatorChatBot.Properties;
     using System.Collections.Generic;
     using System.IO;
     using System.Web.Hosting;
@@ -16,9 +17,9 @@
 
         public static string GetCard()
         {
-            var welcomeUserCardTitleText = "";
-            var welcomeUserCardIntroPart1 = "";
-            var welcomeUserCardIntroPart2 = "";
+            var welcomeUserCardTitleText = Resources.WelcomeUserCardTitleText;
+            var welcomeUserCardIntroPart1 = Resources.WelcomeUserCardIntroPart1;
+            var welcomeUserCardIntroPart2 = Resources.WelcomeUserCardIntroPart2;
 
             var variablesToValues = new Dictionary<string, string>()
             {

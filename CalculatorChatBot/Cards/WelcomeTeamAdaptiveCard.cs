@@ -3,6 +3,7 @@
     using System.IO;
     using System.Web.Hosting;
     using System.Collections.Generic;
+    using CalculatorChatBot.Properties;
 
     public class WelcomeTeamAdaptiveCard
     {
@@ -16,9 +17,9 @@
 
         public static string GetCard()
         {
-            var welcomeTeamCardTitleText = "";
-            var welcomeTeamCardIntroPart1 = "";
-            var welcomeTeamCardIntroPart2 = "";
+            var welcomeTeamCardTitleText = Resources.WelcomeTeamCardTitleText;
+            var welcomeTeamCardIntroPart1 = Resources.WelcomeTeamCardIntroPart1;
+            var welcomeTeamCardIntroPart2 = Resources.WelcomeTeamCardIntroPart2;
 
             var variablesToValues = new Dictionary<string, string>()
             {
