@@ -12,6 +12,8 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
 
@@ -24,24 +26,21 @@
         /// </summary>
         [HttpPost]
         [Route("api/messages")]
-        public async Task<IHttpActionResult> PostAsync([FromBody]Activity activity)
+        public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
-            // Confirmation check - if activity is null, do nothing
-            if (activity == null)
+            using (var connectorClient = new ConnectorClient(new Uri(activity.ServiceUrl)))
             {
-                return Ok(); 
+                if (activity.Type == ActivityTypes.Message)
+                {
+                    await HandleTextMessageAsync(activity);
+                }
+                else
+                {
+                    await HandleSystemMessageAsync(activity);
+                }
             }
 
-            // Message activities are generally text messages that are sent from a user.
-            if (activity.Type == ActivityTypes.Message)
-            {
-                return await HandleTextMessageAsync(activity); 
-            }
-            else
-            {
-                // This is used to handle many other (some unsupported) types of messages
-                return await HandleSystemMessageAsync(activity); 
-            }
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         private async Task<IHttpActionResult> HandleTextMessageAsync(Activity activity)
