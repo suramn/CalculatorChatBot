@@ -106,7 +106,7 @@ namespace CalculatorChatBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I am a bot that can *possibly* do your math homework! Well, not all of it - not all the hard calculus problems, or the hard trigonometry problems either....
+        ///   Looks up a localized string similar to I am {0}, and I&apos;m installed to *{1}*.I am a bot that can *possibly* do your math homework! Well, not all of it - not all the hard calculus problems, or the hard trigonometry problems either....
         /// </summary>
         internal static string WelcomeTeamCardIntroPart1 {
             get {

@@ -138,8 +138,8 @@
     <comment>The text of the title for the results card</comment>
   </data>
   <data name="WelcomeTeamCardIntroPart1" xml:space="preserve">
-    <value>I am a bot that can *possibly* do your math homework! Well, not all of it - not all the hard calculus problems, or the hard trigonometry problems either...</value>
-    <comment>Part 1 of the 2 part team welcome message</comment>
+    <value>I am {0}, and I'm installed to *{1}*.I am a bot that can *possibly* do your math homework! Well, not all of it - not all the hard calculus problems, or the hard trigonometry problems either...</value>
+    <comment>Part 1 of the 2 part team welcome message - the placeholder {0} is the name of the bot and placeholder {1} is the name of the team</comment>
   </data>
   <data name="WelcomeTeamCardIntroPart2" xml:space="preserve">
     <value>Here are the categories of operations I can do: arithmetic, some geometric, and a few statistic operations. You ask me anything about calculus - my 🧠 will not work!</value>

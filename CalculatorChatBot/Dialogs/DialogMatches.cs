@@ -29,48 +29,30 @@
 
         public const string RemainderDialogMatch = "remainder";
         public const string ModuloDialogMatch = "modulo";
+        public const string ModulusDialogMatch = "modulus";
         #endregion
 
         #region Statistical Dialog Matches
         public const string AverageDialogMatch = "average";
         public const string MeanDialogMatch = "mean";
-
-        public const string GeometricMeanDialogMatch = "geometric mean";
-        public const string GeometricAverageDialogMatch = "geometric average";
-
+        public const string GeometricMeanDialogMatch = "geomean";
         public const string MedianDialogMatch1 = "median";
-        public const string MedianDialogMatch2 = "middle of the list";
-
         public const string ModeDialogMatch1 = "mode";
-        public const string ModeDialogMatch2 = "numbers that appear the most";
-
         public const string RangeDialogMatch1 = "range";
-        public const string RangeDialogMatch2 = "difference between greatest and smallest values";
-
         public const string VarianceDialogMatch = "variance";
-
-        public const string StandardDeviationDialogMatch1 = "standard deviation";
-        public const string StandardDeviationDialogMatch2 = "distance from the mean";
-
-        public const string RootMeanSquareDialogMatch = "root mean square";
-        public const string RmsDialogMatch = "calculate the root mean square";
+        public const string StandardDeviationDialogMatch1 = "stddev";
+        public const string RmsDialogMatch = "rms";
         #endregion
 
         #region Geometrical Dialog Matches
         public const string PythagorasDialogMatch = "pythagoras";
         public const string PythagoreanDialogMatch = "pythagorean";
-
-        public const string NumberOfRootsDialogMatch = "number of roots";
+        public const string NumberOfRootsDialogMatch = "numRoots";
         public const string DiscriminantDialogMatch = "discriminant";
-
-        public const string EquationRootsDialogMatch = "roots of the equation";
-        public const string QuadraticSolverDialogMatch = "quadratic solver";
-
+        public const string EquationRootsDialogMatch = "roots";
+        public const string QuadraticSolverDialogMatch = "quadratic";
         public const string MidPointDialogMatch = "midpoint";
-        public const string MiddleOfLineSegmentDialogMatch = "middle of line segment";
-
         public const string DistanceDialogMatch = "distance";
-        public const string DistanceFormulaDialogMatch = "distance formula";
         #endregion
     }
 }

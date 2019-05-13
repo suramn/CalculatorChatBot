@@ -82,13 +82,11 @@
                         {
                             if (member.Id == myBotId)
                             {
-                                var standByReplyTeam = message.CreateReply("The Welcome Team is under construction");
-                                await connectorClient.Conversations.ReplyToActivityAsync(standByReplyTeam);
+                                await CalculatorChatBot.WelcomeTeam(connectorClient, message, tenantId, teamId);
                             }
                             else
                             {
-                                var standByReplyUser = message.CreateReply("The Welcome User is under construction");
-                                await connectorClient.Conversations.ReplyToActivityAsync(standByReplyUser);
+                                await CalculatorChatBot.WelcomeUser(connectorClient, member.Id, tenantId, teamId, botDisplayName);
                             }
                         }
                     }
