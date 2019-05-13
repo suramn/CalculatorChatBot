@@ -1,21 +1,17 @@
 ﻿namespace CalculatorChatBot
 {
-    using CalculatorChatBot.BotHelpers;
-    using CalculatorChatBot.BotMiddleware;
-    using CalculatorChatBot.Dialogs;
-    using Microsoft.Bot.Builder.Dialogs;
-    using Microsoft.Bot.Connector;
-    using Microsoft.Bot.Connector.Teams;
-    using Microsoft.Bot.Connector.Teams.Models;
-    using Polly;
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using CalculatorChatBot.BotMiddleware;
+    using CalculatorChatBot.Dialogs;
+    using Microsoft.Azure;
+    using Microsoft.Bot.Builder.Dialogs;
+    using Microsoft.Bot.Connector;
+    using Microsoft.Bot.Connector.Teams.Models;
 
     [BotAuthentication]
     public class MessagesController : ApiController
@@ -47,7 +43,8 @@
         {
             // This is used for removing the '@botName' from the incoming message so it
             // can be parsed correctly
-            var messageActivity = StripBotAtMentions.StripAtMentionText(activity);
+            var messageActivity = activity.Conversation.ConversationType == "personal" ? activity : 
+                                  StripBotAtMentions.StripAtMentionText(activity);
             try
             {
                 // This sends all messages to the RootDialog for processing.
@@ -61,57 +58,45 @@
 
         private async Task HandleSystemMessageAsync(ConnectorClient connectorClient, Activity message)
         {
-            TeamEventBase eventData = message.GetConversationUpdateData();
-            switch (eventData.EventType)
+            try
             {
-                case TeamEventType.MembersAdded:
-                    var connector = new ConnectorClient(new Uri(message.ServiceUrl));
-                    connector.SetRetryPolicy(
-                        RetryHelpers.DefaultPolicyBuilder.WaitAndRetryAsync(new[] {
-                            TimeSpan.FromSeconds(2),
-                            TimeSpan.FromSeconds(5),
-                            TimeSpan.FromSeconds(10)
-                        }));
+                var teamsChannelData = message.GetChannelData<TeamsChannelData>();
+                var tenantId = teamsChannelData.Tenant.Id;
+                var botDisplayName = CloudConfigurationManager.GetSetting("BotDisplayName");
 
-                    var tenantId = message.GetTenantId();
-                    var botAccount = message.Recipient;
-                    var channelData = message.GetChannelData<TeamsChannelData>();
-
-                    // If the bot is in the collection of added members, then send the welcome message
-                    // to all team members
-                    if (message.MembersAdded.Any(m => m.Id.Equals(botAccount.Id)))
+                if (message.Type == ActivityTypes.ConversationUpdate)
+                {
+                    // Looking at this from the teams perspective, as opposed to 1:1
+                    if (string.IsNullOrEmpty(teamsChannelData?.Team?.Id))
                     {
-                        // Fetch members in the current conversation
-                        IList<ChannelAccount> channelAccount = await connector.Conversations.GetConversationMembersAsync(message.Conversation.Id);
-                        IEnumerable<TeamsChannelAccount> members = channelAccount.AsTeamsChannelAccounts();
+                        // conversationUpdate really applies to the 1:1 chat
+                        return;
+                    }
 
-                        // Send a OneToOne message to each other
-                        foreach (TeamsChannelAccount member in members)
+                    string myBotId = message.Recipient.Id;
+                    string teamId = message.Conversation.Id;
+
+                    if (message.MembersAdded?.Count > 0)
+                    {
+                        foreach (var member in message.MembersAdded)
                         {
-                            await MessageHelpers.SendOneToOneWelcomeMessage(connector, channelData, botAccount, member, tenantId);
+                            if (member.Id == myBotId)
+                            {
+                                var standByReplyTeam = message.CreateReply("The Welcome Team is under construction");
+                                await connectorClient.Conversations.ReplyToActivityAsync(standByReplyTeam);
+                            }
+                            else
+                            {
+                                var standByReplyUser = message.CreateReply("The Welcome User is under construction");
+                                await connectorClient.Conversations.ReplyToActivityAsync(standByReplyUser);
+                            }
                         }
                     }
-                    else
-                    {
-                        // Send the OneToOne message to new members
-                        foreach (TeamsChannelAccount member in message.MembersAdded.AsTeamsChannelAccounts())
-                        {
-                            await MessageHelpers.SendOneToOneWelcomeMessage(connector, channelData, botAccount, member, tenantId);
-                        }
-                    }
-                    break;
-                case TeamEventType.MembersRemoved:
-                    break;
-                case TeamEventType.ChannelCreated:
-                    break;
-                case TeamEventType.ChannelDeleted:
-                    break;
-                case TeamEventType.ChannelRenamed:
-                    break;
-                case TeamEventType.TeamRenamed:
-                    break;
-                default:
-                    break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError($"Exception has been hit: {ex.InnerException.ToString()}");
             }
         }
     }
