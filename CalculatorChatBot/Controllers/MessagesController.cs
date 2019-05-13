@@ -32,18 +32,18 @@
             {
                 if (activity.Type == ActivityTypes.Message)
                 {
-                    await HandleTextMessageAsync(activity);
+                    await HandleTextMessageAsync(connectorClient, activity);
                 }
                 else
                 {
-                    await HandleSystemMessageAsync(activity);
+                    await HandleSystemMessageAsync(connectorClient, activity);
                 }
             }
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        private async Task<IHttpActionResult> HandleTextMessageAsync(Activity activity)
+        private async Task HandleTextMessageAsync(ConnectorClient client, Activity activity)
         {
             // This is used for removing the '@botName' from the incoming message so it
             // can be parsed correctly
@@ -57,11 +57,9 @@
             {
                 Debug.WriteLine(ex.ToString());
             }
-
-            return Ok();
         }
 
-        private async Task<IHttpActionResult> HandleSystemMessageAsync(Activity message)
+        private async Task HandleSystemMessageAsync(ConnectorClient connectorClient, Activity message)
         {
             TeamEventBase eventData = message.GetConversationUpdateData();
             switch (eventData.EventType)
@@ -115,8 +113,6 @@
                 default:
                     break;
             }
-
-            return Ok();
         }
     }
 }
