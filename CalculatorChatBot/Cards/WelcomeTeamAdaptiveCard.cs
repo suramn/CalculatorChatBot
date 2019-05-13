@@ -15,10 +15,10 @@
             CardTemplate = File.ReadAllText(cardJsonFilePath);
         }
 
-        public static string GetCard()
+        public static string GetCard(string teamName, string botDisplayName)
         {
             var welcomeTeamCardTitleText = Resources.WelcomeTeamCardTitleText;
-            var welcomeTeamCardIntroPart1 = Resources.WelcomeTeamCardIntroPart1;
+            var welcomeTeamCardIntroPart1 = string.Format(Resources.WelcomeTeamCardIntroPart1, botDisplayName, teamName);
             var welcomeTeamCardIntroPart2 = Resources.WelcomeTeamCardIntroPart2;
 
             var variablesToValues = new Dictionary<string, string>()
