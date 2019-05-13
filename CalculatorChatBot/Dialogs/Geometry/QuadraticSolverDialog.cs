@@ -126,7 +126,7 @@
                             NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]", 
                             OperationType = CalculationTypes.Geometric.ToString(),
-                            ResultType = ResultTypes.Error.ToString()
+                            ResultType = ResultTypes.EquationRoots.ToString()
                         };
 
                         IMessageActivity opsSuccessReply = context.MakeMessage();
@@ -151,7 +151,7 @@
                             NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]",
                             OperationType = CalculationTypes.Geometric.ToString(),
-                            ResultType = ResultTypes.Error.ToString()
+                            ResultType = ResultTypes.EquationRoots.ToString()
                         };
 
                         IMessageActivity opsSuccessOneRootReply = context.MakeMessage();
