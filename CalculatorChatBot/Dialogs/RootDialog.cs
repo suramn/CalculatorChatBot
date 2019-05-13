@@ -84,6 +84,7 @@
 
         [RegexPattern(DialogMatches.RemainderDialogMatch)]
         [RegexPattern(DialogMatches.ModuloDialogMatch)]
+        [RegexPattern(DialogMatches.ModulusDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunModuloDialog(IDialogContext context, IActivity activity)
         {
@@ -109,7 +110,6 @@
         /// This will call the dialog to calculate the median
         /// </summary>
         [RegexPattern(DialogMatches.MedianDialogMatch1)]
-        [RegexPattern(DialogMatches.MedianDialogMatch2)]
         [ScorableGroup(1)]
         public async Task RunMedianDialog(IDialogContext context, IActivity activity)
         {
@@ -121,7 +121,6 @@
         /// This function will call the dialog to calculate the mode
         /// </summary>
         [RegexPattern(DialogMatches.ModeDialogMatch1)]
-        [RegexPattern(DialogMatches.ModeDialogMatch2)]
         [ScorableGroup(1)]
         public async Task RunModeDialog(IDialogContext context, IActivity activity)
         {
@@ -130,7 +129,6 @@
         }
 
         [RegexPattern(DialogMatches.RangeDialogMatch1)]
-        [RegexPattern(DialogMatches.RangeDialogMatch2)]
         [ScorableGroup(1)]
         public async Task RunRangeDialog(IDialogContext context, IActivity activity)
         {
@@ -147,7 +145,6 @@
         }
 
         [RegexPattern(DialogMatches.StandardDeviationDialogMatch1)]
-        [RegexPattern(DialogMatches.StandardDeviationDialogMatch2)]
         [ScorableGroup(1)]
         public async Task RunStandardDeviationDialog(IDialogContext context, IActivity activity)
         {
@@ -155,7 +152,6 @@
             context.Call(new StandardDeviationDialog(standardDevActivity), EndDialog); 
         }
 
-        [RegexPattern(DialogMatches.GeometricAverageDialogMatch)]
         [RegexPattern(DialogMatches.GeometricMeanDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunGeometricMeanDialog(IDialogContext context, IActivity activity)
@@ -164,7 +160,6 @@
             context.Call(new GeometricMeanDialog(geometricMeanActivity), EndDialog); 
         }
 
-        [RegexPattern(DialogMatches.RootMeanSquareDialogMatch)]
         [RegexPattern(DialogMatches.RmsDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunRmsDialog(IDialogContext context, IActivity activity)
@@ -203,7 +198,6 @@
         }
 
         [RegexPattern(DialogMatches.MidPointDialogMatch)]
-        [RegexPattern(DialogMatches.MiddleOfLineSegmentDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunMidpointDialog(IDialogContext context, IActivity activity)
         {
@@ -212,7 +206,6 @@
         }
 
         [RegexPattern(DialogMatches.DistanceDialogMatch)]
-        [RegexPattern(DialogMatches.DistanceFormulaDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunDistanceDialog(IDialogContext context, IActivity activity)
         {
