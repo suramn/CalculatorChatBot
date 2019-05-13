@@ -15,7 +15,7 @@
             CardTemplate = File.ReadAllText(cardJsonFilePath);
         }
 
-        public static string GetCard()
+        public static string GetCard(string teamName, string nameOfUserThatJustJoined, string botDisplayName)
         {
             var welcomeUserCardTitleText = Resources.WelcomeUserCardTitleText;
             var welcomeUserCardIntroPart1 = Resources.WelcomeUserCardIntroPart1;

@@ -86,8 +86,7 @@
                             }
                             else
                             {
-                                var standByReplyUser = message.CreateReply("The Welcome User is under construction");
-                                await connectorClient.Conversations.ReplyToActivityAsync(standByReplyUser);
+                                await CalculatorChatBot.WelcomeUser(connectorClient, member.Id, tenantId, teamId, botDisplayName);
                             }
                         }
                     }
