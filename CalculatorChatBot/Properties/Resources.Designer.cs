@@ -106,6 +106,15 @@ namespace CalculatorChatBot.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Take a tour.
+        /// </summary>
+        internal static string TourButtonText {
+            get {
+                return ResourceManager.GetString("TourButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I am {0}, and I&apos;m installed to *{1}*.I am a bot that can *possibly* do your math homework! Well, not all of it - not all the hard calculus problems, or the hard trigonometry problems either....
         /// </summary>
         internal static string WelcomeTeamCardIntroPart1 {
@@ -129,6 +138,15 @@ namespace CalculatorChatBot.Properties {
         internal static string WelcomeTeamCardTitleText {
             get {
                 return ResourceManager.GetString("WelcomeTeamCardTitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tour.
+        /// </summary>
+        internal static string WelcomeTourTitle {
+            get {
+                return ResourceManager.GetString("WelcomeTourTitle", resourceCulture);
             }
         }
         
