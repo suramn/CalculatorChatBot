@@ -155,6 +155,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\styles.css" />
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="Manifest\bot-icon-color-192x192.png" />
