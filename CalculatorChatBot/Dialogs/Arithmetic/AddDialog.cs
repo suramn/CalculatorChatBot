@@ -41,6 +41,8 @@
 
         public async Task StartAsync(IDialogContext context)
         {
+            var calculationType = CalculationTypes.Arithmetic;
+
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -56,13 +58,14 @@
                 }
                 #endregion
 
+                var resType = ResultTypes.Sum;
                 var results = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = sum.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the sum = {sum}",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
-                    ResultType = ResultTypes.Sum.ToString()
+                    OperationType = calculationType.GetDescription(),
+                    ResultType = resType.GetDescription()
                 };
 
                 #region Creating the adaptive card
@@ -82,14 +85,15 @@
             }
             else
             {
+                var errorResType = ResultTypes.Error;
                 // Building the error results object for the creation of the error card
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = calculationType.GetDescription(),
+                    ResultType = errorResType.GetDescription()
                 };
 
                 #region Creating the adaptive card
