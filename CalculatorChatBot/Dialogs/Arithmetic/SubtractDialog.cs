@@ -46,6 +46,7 @@
                 throw new ArgumentNullException(nameof(context)); 
             }
 
+            var operationType = CalculationTypes.Arithmetic;
             if (InputInts.Length > 1)
             {
                 int diff = InputInts[0];
@@ -54,13 +55,14 @@
                     diff -= InputInts[i];
                 }
 
+                var resultType = ResultTypes.Difference;
                 var results = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = diff.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the difference = {diff}",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
-                    ResultType = ResultTypes.Difference.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = resultType.GetDescription()
                 };
 
                 #region Creating the adaptive card
@@ -80,13 +82,14 @@
             }
             else
             {
+                var resultType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = resultType.GetDescription()
                 };
 
                 #region Creating the adaptive card

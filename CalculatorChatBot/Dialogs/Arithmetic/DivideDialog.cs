@@ -42,18 +42,20 @@
                 throw new ArgumentNullException(nameof(context)); 
             }
 
+            var operationType = CalculationTypes.Arithmetic;
             decimal quotient = 0;
             if (InputInts.Length == 2 && InputInts[1] != 0)
             {
                 quotient = Convert.ToDecimal(InputInts[0]) / InputInts[1];
+                var resultsType = ResultTypes.Quotient;
 
                 var results = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = decimal.Round(quotient, 2).ToString(),
                     OutputMsg = $"Given the list of {InputString}; the quotient = {decimal.Round(quotient, 2)}",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
-                    ResultType = ResultTypes.Quotient.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = resultsType.GetDescription()
                 };
 
                 #region Creating the adaptive card
@@ -73,13 +75,14 @@
             }
             else
             {
+                var errorType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = "The list may be too long, or one of the elements could be 0 - please try again later.",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorType.GetDescription()
                 };
 
                 #region Creating the adaptive card
