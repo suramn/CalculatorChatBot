@@ -57,12 +57,13 @@
                 var deltaX = x2 - x1;
                 var deltaY = y2 - y1;
 
-                var distanceFormula = Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+                var calculation = Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+                var distanceFormula = Convert.ToDecimal(calculation);
                 var resultsType = ResultTypes.Distance;
                 var successResults = new OperationResults()
                 {
                     Input = InputString,
-                    NumericalResult = distanceFormula.ToString(), 
+                    NumericalResult = decimal.Round(distanceFormula, 2).ToString(), 
                     OutputMsg = $"Given the points: {point1} and {point2}, the distance = {distanceFormula}", 
                     OperationType = operationType.GetDescription(), 
                     ResultType = resultsType.GetDescription()

@@ -41,6 +41,7 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Geometric;
             if (InputInts.Length > 1 && InputInts.Length == 4)
             {
                 int x1 = InputInts[0];
@@ -76,13 +77,14 @@
             }
             else
             {
+                var errorResultType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = "There needs to be exactly 4 elements to calculate the midpoint. Please try again later",
-                    OperationType = CalculationTypes.Geometric.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResultType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();

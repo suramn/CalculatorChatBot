@@ -39,6 +39,7 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Geometric;
             if (InputInts.Length > 3)
             {
                 var errorResults = new OperationResults()
@@ -46,7 +47,7 @@
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = "Your list may be too large to calculate the roots. Please try again later!",
-                    OperationType = CalculationTypes.Geometric.ToString(), 
+                    OperationType = operationType.GetDescription(), 
                     ResultType = ResultTypes.Error.ToString()
                 };
 
@@ -95,13 +96,14 @@
                 switch (m)
                 {
                     case 1:
+                        var opsErrorResultType = ResultTypes.Error;
                         var opsError = new OperationResults()
                         {
                             Input = InputString,
                             NumericalResult = "0",
                             OutputMsg = "The information provided may lead to a linear equation!",
                             OperationType = CalculationTypes.Geometric.ToString(),
-                            ResultType = ResultTypes.Error.ToString()
+                            ResultType = opsErrorResultType.GetDescription()
                         };
 
                         IMessageActivity opsErrorReply = context.MakeMessage();
@@ -125,7 +127,7 @@
                             Input = InputString,
                             NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]", 
-                            OperationType = CalculationTypes.Geometric.ToString(),
+                            OperationType = operationType.GetDescription(),
                             ResultType = ResultTypes.EquationRoots.ToString()
                         };
 
@@ -150,7 +152,7 @@
                             Input = InputString,
                             NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]",
-                            OperationType = CalculationTypes.Geometric.ToString(),
+                            OperationType = operationType.GetDescription(),
                             ResultType = ResultTypes.EquationRoots.ToString()
                         };
 
@@ -182,7 +184,7 @@
                             Input = InputString,
                             NumericalResult = $"{root1}, {root2}",
                             OutputMsg = rootsDesc + " " + root1Str + " " + root2Str,
-                            OperationType = CalculationTypes.Geometric.ToString(), 
+                            OperationType = operationType.GetDescription(), 
                             ResultType = ResultTypes.EquationRoots.ToString()
                         };
 
