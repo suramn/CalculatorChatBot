@@ -41,16 +41,18 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Geometric;
             if (InputInts.Length > 3)
             {
+                var errorListTooLongResType = ResultTypes.Error;
                 // Error condition here
                 var errorListTooLongResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "DNE",
                     OutputMsg = $"The input list: {InputString} could be too long - there needs to be 3 numbers exactly",
-                    OperationType = CalculationTypes.Geometric.ToString(), 
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(), 
+                    ResultType = errorListTooLongResType.GetDescription()
                 };
 
                 IMessageActivity errorListTooLongReply = context.MakeMessage();
@@ -67,13 +69,14 @@
             }
             else if (InputInts.Length < 3)
             {
+                var errorListTooShortResType = ResultTypes.Error;
                 var errorListTooShortResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "DNE",
                     OutputMsg = $"The input list: {InputString} could be too short - there needs to be 3 numbers exactly",
-                    OperationType = CalculationTypes.Geometric.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorListTooShortResType.GetDescription()
                 };
 
                 IMessageActivity errorListTooShortReply = context.MakeMessage();
@@ -96,6 +99,7 @@
 
                 int discriminantValue = FindDiscriminant(a, b, c);
                 var resultMsg = "";
+                var resultsType = ResultTypes.Discriminant;
 
                 if (discriminantValue > 0)
                 {
@@ -114,10 +118,10 @@
                 var discrimResults = new OperationResults()
                 {
                     Input = InputString,
-                    OperationType = CalculationTypes.Geometric.ToString(),
+                    OperationType = operationType.GetDescription(),
                     OutputMsg = resultMsg,
                     NumericalResult = discriminantValue.ToString(),
-                    ResultType = ResultTypes.Discriminant.ToString()
+                    ResultType = resultsType.GetDescription()
                 };
 
                 IMessageActivity discrimReply = context.MakeMessage();
