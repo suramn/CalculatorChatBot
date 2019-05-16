@@ -122,13 +122,14 @@
                         r1 = (-b + Math.Sqrt(discriminant)) / (2 * a);
                         r2 = (-b - Math.Sqrt(discriminant)) / (2 * a);
 
+                        var successResultType = ResultTypes.EquationRoots;
                         var successResults = new OperationResults()
                         {
                             Input = InputString,
                             NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]", 
                             OperationType = operationType.GetDescription(),
-                            ResultType = ResultTypes.EquationRoots.ToString()
+                            ResultType = successResultType.GetDescription()
                         };
 
                         IMessageActivity opsSuccessReply = context.MakeMessage();
@@ -146,14 +147,15 @@
                         break;
                     case 3:
                         r1 = r2 = (-b) / (2 * a);
-                        
+
+                        var successOpsOneRootResultType = ResultTypes.EquationRoots;
                         var successOpsOneRoot = new OperationResults()
                         {
                             Input = InputString,
                             NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]",
                             OperationType = operationType.GetDescription(),
-                            ResultType = ResultTypes.EquationRoots.ToString()
+                            ResultType = successOpsOneRootResultType.GetDescription()
                         };
 
                         IMessageActivity opsSuccessOneRootReply = context.MakeMessage();
