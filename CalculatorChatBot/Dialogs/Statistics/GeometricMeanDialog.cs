@@ -39,6 +39,7 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Statistical;
             if (InputInts.Length > 1)
             {
                 int product = InputInts[0];
@@ -55,15 +56,16 @@
                 }
 
                 // Calculating the Geometric mean here
-                var geometricMean = Math.Pow(product, 1 / InputInts.Length);
+                decimal geometricMean = Convert.ToDecimal(Math.Pow(product, 1 / InputInts.Length));
+                var resultType = ResultTypes.GeometricMean;
 
                 var results = new OperationResults()
                 {
                     Input = InputString,
-                    NumericalResult = geometricMean.ToString(),
+                    NumericalResult = decimal.Round(geometricMean, 2).ToString(),
                     OutputMsg = $"Given the list: {InputString}; the geometric mean = ${geometricMean.ToString()}",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.GeometricMean.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = resultType.GetDescription()
                 };
 
                 IMessageActivity opsReply = context.MakeMessage();
@@ -80,13 +82,14 @@
             }
             else
             {
+                var errorResType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0", 
                     OutputMsg = "Your list may be too small to calculate the geometric mean. Please try again later",
-                    OperationType = CalculationTypes.Statistical.ToString(), 
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(), 
+                    ResultType = errorResType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();

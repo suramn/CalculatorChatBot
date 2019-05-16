@@ -40,6 +40,7 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Statistical;
             if (InputInts.Length > 1)
             {
                 int sum = InputInts[0];
@@ -52,13 +53,14 @@
                 var variance = CalculateVariance(mean, InputInts);
                 var standardDev = Math.Sqrt((double)variance);
 
+                var successResultType = ResultTypes.StandardDeviation;
                 var results = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = standardDev.ToString(),
                     OutputMsg = $"Given the list: {InputString}; the standard deviation = {standardDev}",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.StandardDeviation.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = successResultType.GetDescription()
                 };
 
                 // Sending out the reply
@@ -76,13 +78,14 @@
             }
             else
             {
+                var errorResType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = "Your list may be too small to calculate the standard deviation. Please try again later",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();

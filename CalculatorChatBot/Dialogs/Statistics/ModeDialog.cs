@@ -38,6 +38,13 @@
 
         public async Task StartAsync(IDialogContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            var operationType = CalculationTypes.Statistical;
+
             // Again making sure to conduct the appropriate things
             if (InputInts.Length > 2)
             {
@@ -67,15 +74,15 @@
                 }
 
                 var outputArray = modesList.ToArray();
-
+                var successResType = ResultTypes.Mode;
                 #region Having the results object
                 var successResult = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the mode = {(outputArray.Length > 1 ? string.Join(",", outputArray) : outputArray[0].ToString())}",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Mode.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = successResType.GetDescription()
                 };
 
                 IMessageActivity successReply = context.MakeMessage();
@@ -94,14 +101,15 @@
             }
             else
             {
+                var errorResType = ResultTypes.Error;
                 // Building out the error object, reply and card
                 var errorResult = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = $"Please check your input list: {InputString} and try again later",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();

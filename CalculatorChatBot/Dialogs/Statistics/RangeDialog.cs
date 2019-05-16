@@ -34,6 +34,13 @@
 
         public async Task StartAsync(IDialogContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            var operationType = CalculationTypes.Statistical;
+
             if (InputInts.Length >= 2)
             {
                 var inputIntMax = InputInts.Max();
@@ -43,13 +50,14 @@
                 // Conduct the range calculation as max - min
                 var range = inputIntMax - inputIntMin;
 
+                var successResType = ResultTypes.Range;
                 var successResult = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = range.ToString(),
                     OutputMsg = $"Given the list: {InputString}; the range = {range}",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Range.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = successResType.GetDescription()
                 };
 
                 #region Having the adaptive card created
@@ -70,13 +78,14 @@
             }
             else
             {
+                var errorResType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = "The list may be too short, try again with more numbers.",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResType.GetDescription()
                 };
 
                 #region Having the adaptive card created
