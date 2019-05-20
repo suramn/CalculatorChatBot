@@ -1,51 +1,122 @@
-﻿body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+﻿/*General rules*/
+html {
+    height: 100%;
+}
+
+#introDiv {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0 32px 32px 32px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#matchesDiv {
+    display: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0 32px 32px 32px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.textDiv {
+    width: 536px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 auto;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.imageDiv {
+    text-align: center;
+}
+
+    .imageDiv img {
+        padding-top: 21px;
+    }
+
+body {
     width: 100%;
     height: 100%;
     margin: 0;
     flex-direction: column;
-    display: flex;
 }
 
-/*Dark Theme rules*/
-.theme-dark .bold-header {
+.bold-header {
     text-align: left;
     font-weight: bold;
     font-size: 18px;
-    color: #FFFFFF;
     letter-spacing: normal;
     line-height: 24px;
     margin: 0;
     padding-top: 32px;
 }
 
-.theme-dark .regular-content {
+.surface {
+    font-family: "Segoe UI","Helvetica Neue",Tahoma,Helvetica,Arial,sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+.regular-content {
     font-size: 12px;
-    color: #FFFFFF;
     margin: 0;
     padding-top: 6px;
     height: 36px;
+    white-space: normal;
 }
 
-.theme-dark .primary-button {
-    background: #6264A7;
+.primary-button {
     border: 0.125rem solid;
     border-color: transparent;
     border-radius: 0.1875rem;
     box-sizing: border-box;
-    color: #201F1F;
     cursor: pointer;
     font: inherit;
-    margin: 90px 0px 0px 478px;
-    height: 32px;
-    min-width: 96px;
-    font-size: 14px;
+    height: 2rem;
+    min-width: 6rem;
+    padding: 0.25rem;
+    white-space: nowrap;
+}
+
+.secondary-button {
+    border: 0.125rem solid;
+    border-color: #636262;
+    border-radius: 0.1875rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    font: inherit;
+    height: 2rem;
+    min-width: 6rem;
+    padding: 0.25rem;
+    white-space: nowrap;
+    margin-right: 0.8rem;
+}
+
+/*Dark Theme rules*/
+.theme-dark .bold-header {
+    color: #FFFFFF;
+}
+
+.theme-dark .regular-content {
+    color: #FFFFFF;
+}
+
+.theme-dark .primary-button {
+    background: #6264A7;
+    color: #201F1F;
 }
 
     .theme-dark .primary-button:hover {
-        background-color: #BDBDE6;
-        color: #201F1F;
+        background: #BDBDE6;
         border-color: transparent;
+        color: #201F1F
     }
 
     .theme-dark .primary-button:active:focus {
@@ -56,72 +127,127 @@
         outline-offset: -0.25rem
     }
 
-.theme-dark .primary-button-back {
-    background: #6264A7;
-    border: 0.125rem solid;
-    border-color: transparent;
-    border-radius: 0.1875rem;
-    box-sizing: border-box;
-    color: #201F1F;
-    cursor: pointer;
-    font: inherit;
-    margin: 90px 0px 0px 0px;
-    height: 32px;
-    min-width: 96px;
-    font-size: 14px;
+.theme-dark .secondary-button {
+    background: #2d2c2c;
+    color: #c7c6c6;
 }
 
-    .theme-dark .primary-button-back:hover {
-        background-color: #BDBDE6;
-        color: #201F1F;
+    .theme-dark .secondary-button:hover {
+        background: #636262;
         border-color: transparent;
+        color: #FFFFFF
     }
 
-    .theme-dark .primary-button-back:active:focus {
-        background: #6264A7;
+    .theme-dark .secondary-button:active:focus {
+        background: #636262;
         border-color: transparent;
-        color: #201F1F;
-        outline: 0.125rem solid #201F1F;
-        outline-offset: -0.25rem
-    }
-
-.theme-dark .primary-button-done {
-    background: #6264A7;
-    border: 0.125rem solid;
-    border-color: transparent;
-    border-radius: 0.1875rem;
-    box-sizing: border-box;
-    color: #201F1F;
-    cursor: pointer;
-    font: inherit;
-    margin: 90px 0px 0px 346px;
-    height: 32px;
-    min-width: 96px;
-    font-size: 14px;
-}
-
-    .theme-dark .primary-button-done:hover {
-        background-color: #BDBDE6;
-        color: #201F1F;
-        border-color: transparent;
-    }
-
-    .theme-dark .primary-button-done:active:focus {
-        background: #6264A7;
-        border-color: transparent;
-        color: #201F1F;
-        outline: 0.125rem solid #201F1F;
+        color: #FFFFFF;
+        outline: 0.125rem solid #FFFFFF;
         outline-offset: -0.25rem
     }
 
 .theme-dark .surface {
     color: #FFFFFF;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
 }
 
-.theme-dark .footer {
-    display: flex;
-    flex-direction: row-reverse;
+/*Default Theme rules*/
+.theme-default .bold-header {
+    color: #252424;
+}
+
+.theme-default .regular-content {
+    color: #000000;
+}
+
+.theme-default .primary-button {
+    background: #6264A7;
+    color: #FFFFFF;
+}
+
+    .theme-default .primary-button:hover {
+        background: #464775;
+        border-color: transparent;
+        color: #FFFFFF
+    }
+
+    .theme-default .primary-button:active:focus {
+        background: #464775;
+        border-color: transparent;
+        color: #FFFFFF;
+        outline: 0.125rem solid #FFFFFF;
+        outline-offset: -0.25rem
+    }
+
+.theme-default .secondary-button {
+    background: #FFFFFF;
+    color: #5c5b5b;
+}
+
+    .theme-default .secondary-button:hover {
+        background: #bdbdbd;
+        border-color: transparent;
+        color: #252424
+    }
+
+    .theme-default .secondary-button:active:focus {
+        background: #bdbdbd;
+        border-color: transparent;
+        color: #252424;
+        outline: 0.125rem solid #252424;
+        outline-offset: -0.25rem
+    }
+
+.theme-default .surface {
+    color: #252424;
+}
+
+/*High Contrast Theme rules*/
+.theme-highContrast .bold-header {
+    color: #FFFFFF;
+}
+
+.theme-highContrast .regular-content {
+    color: #FFFFFF;
+}
+
+.theme-highContrast .primary-button {
+    background: #FFFFFF;
+    color: #000000;
+}
+
+    .theme-highContrast .primary-button:hover {
+        background: #FFFF00;
+        border-color: transparent;
+        color: #000000
+    }
+
+    .theme-highContrast .primary-button:active:focus {
+        background: #FFFF00;
+        border-color: transparent;
+        color: #000000;
+        outline: 0.125rem solid transparent;
+        outline-offset: -0.25rem
+    }
+
+.theme-highContrast .secondary-button {
+    background: #000000;
+    color: #FFFFFF;
+}
+
+    .theme-highContrast .secondary-button:hover {
+        background: #FFFF00;
+        border-color: transparent;
+        color: #000000
+    }
+
+    .theme-highContrast .secondary-button:active:focus {
+        background: #FFFF00;
+        border-color: transparent;
+        color: #000000;
+        outline: 0.125rem solid transparent;
+        outline-offset: -0.25rem
+    }
+
+.theme-highContrast .surface {
+    color: #FFFFFF;
 }
