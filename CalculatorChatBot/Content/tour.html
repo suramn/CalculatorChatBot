@@ -50,7 +50,44 @@
         }
     </script>
 </head>
-<body>
-    
+<body id="themeCSS" class="theme-default">
+    <div id="introDiv" class="surface">
+        <div class="imageDiv">
+            <!--Put an image-->
+        </div>
+        <div class="textDiv">
+            <p class="bold-header">Calculator Chat Bot</p>
+            <p class="regular-content">
+                Hello there! I may not be able to do <i>all</i> of you terrible mathematics homework! However, I can be able to help you with it and all you have to do is tell me the
+                operation and follow that with a list of numbers.
+            </p>
+            <p class="regular-content">
+                For example, you want to find out the sum of a list of numbers.
+                <code>sum 1,2,3,4</code>. I'll then take the input and I know that I have to add the numbers 1,2,3,4 - for which the sum is 10
+            </p>
+        </div>
+        <div class="footer">
+            <button class="primary-button" onclick="ShowDivOnClick('descriptionDiv', 'introDiv')">
+                Next
+            </button>
+        </div>
+    </div>
+    <div id="descriptionDiv" class="surface">
+        <div class="imageDiv">
+            <!--Image goes here-->
+        </div>
+        <div class="textDiv">
+            <p class="bold-header">Feedback</p>
+            <p class="regular-content">Feedback is always welcome for extending the functionality of this application. Please post your comments on the GitHub repository</p>
+        </div>
+        <div class="footer">
+            <button class="primary-button" onclick="CloseWindow()">
+                Done
+            </button>
+            <button class="secondary-button" onclick="ShowDivOnClick('introDiv', 'descriptionDiv')">
+                Back
+            </button>
+        </div>
+    </div>
 </body>
 </html>
