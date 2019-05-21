@@ -59,7 +59,7 @@ body {
 }
 
 .surface {
-    font-family: "Segoe UI","Helvetica Neue",Tahoma,Helvetica,Arial,sans-serif;
+    font-family: "Segoe UI",Tahoma,Helvetica,Arial,sans-serif;
     font-size: 0.875rem;
     font-weight: 400;
 }
@@ -116,7 +116,7 @@ body {
     .theme-dark .primary-button:hover {
         background: #BDBDE6;
         border-color: transparent;
-        color: #201F1F
+        color: #201F1F;
     }
 
     .theme-dark .primary-button:active:focus {
@@ -124,7 +124,7 @@ body {
         border-color: transparent;
         color: #201F1F;
         outline: 0.125rem solid #201F1F;
-        outline-offset: -0.25rem
+        outline-offset: -0.25rem;
     }
 
 .theme-dark .secondary-button {
@@ -135,7 +135,7 @@ body {
     .theme-dark .secondary-button:hover {
         background: #636262;
         border-color: transparent;
-        color: #FFFFFF
+        color: #FFFFFF;
     }
 
     .theme-dark .secondary-button:active:focus {
@@ -143,7 +143,7 @@ body {
         border-color: transparent;
         color: #FFFFFF;
         outline: 0.125rem solid #FFFFFF;
-        outline-offset: -0.25rem
+        outline-offset: -0.25rem;
     }
 
 .theme-dark .surface {
@@ -167,7 +167,7 @@ body {
     .theme-default .primary-button:hover {
         background: #464775;
         border-color: transparent;
-        color: #FFFFFF
+        color: #FFFFFF;
     }
 
     .theme-default .primary-button:active:focus {
@@ -175,7 +175,7 @@ body {
         border-color: transparent;
         color: #FFFFFF;
         outline: 0.125rem solid #FFFFFF;
-        outline-offset: -0.25rem
+        outline-offset: -0.25rem;
     }
 
 .theme-default .secondary-button {
@@ -194,7 +194,7 @@ body {
         border-color: transparent;
         color: #252424;
         outline: 0.125rem solid #252424;
-        outline-offset: -0.25rem
+        outline-offset: -0.25rem;
     }
 
 .theme-default .surface {
@@ -218,7 +218,7 @@ body {
     .theme-highContrast .primary-button:hover {
         background: #FFFF00;
         border-color: transparent;
-        color: #000000
+        color: #000000;
     }
 
     .theme-highContrast .primary-button:active:focus {
@@ -226,7 +226,7 @@ body {
         border-color: transparent;
         color: #000000;
         outline: 0.125rem solid transparent;
-        outline-offset: -0.25rem
+        outline-offset: -0.25rem;
     }
 
 .theme-highContrast .secondary-button {
@@ -237,7 +237,7 @@ body {
     .theme-highContrast .secondary-button:hover {
         background: #FFFF00;
         border-color: transparent;
-        color: #000000
+        color: #000000;
     }
 
     .theme-highContrast .secondary-button:active:focus {
@@ -245,7 +245,7 @@ body {
         border-color: transparent;
         color: #000000;
         outline: 0.125rem solid transparent;
-        outline-offset: -0.25rem
+        outline-offset: -0.25rem;
     }
 
 .theme-highContrast .surface {
