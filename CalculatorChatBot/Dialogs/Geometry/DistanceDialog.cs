@@ -41,6 +41,7 @@
                 throw new ArgumentException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Geometric;
             if (InputInts.Length > 1 && InputInts.Length == 4)
             {
                 int x1 = InputInts[0];
@@ -56,15 +57,16 @@
                 var deltaX = x2 - x1;
                 var deltaY = y2 - y1;
 
-                var distanceFormula = Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
-
+                var calculation = Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+                var distanceFormula = Convert.ToDecimal(calculation);
+                var resultsType = ResultTypes.Distance;
                 var successResults = new OperationResults()
                 {
                     Input = InputString,
-                    NumericalResult = distanceFormula.ToString(), 
+                    NumericalResult = decimal.Round(distanceFormula, 2).ToString(), 
                     OutputMsg = $"Given the points: {point1} and {point2}, the distance = {distanceFormula}", 
-                    OperationType = CalculationTypes.Geometric.ToString(), 
-                    ResultType = ResultTypes.Distance.ToString()
+                    OperationType = operationType.GetDescription(), 
+                    ResultType = resultsType.GetDescription()
                 };
 
                 IMessageActivity successReply = context.MakeMessage();
@@ -82,13 +84,14 @@
             }
             else
             {
+                var errorResultType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0", 
                     OutputMsg = "There needs to be exactly 4 elements to calculate the midpoint. Please try again later", 
-                    OperationType = CalculationTypes.Geometric.ToString(), 
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(), 
+                    ResultType = errorResultType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();

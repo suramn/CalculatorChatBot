@@ -39,6 +39,7 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Statistical;
             if (InputInts.Length > 1)
             {
                 var sumOfSquares = InputInts[0];
@@ -49,13 +50,14 @@
 
                 var calculatedResult = Math.Sqrt(sumOfSquares / InputInts.Length);
 
+                var successResType = ResultTypes.RootMeanSquare;
                 var success = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = calculatedResult.ToString(),
                     OutputMsg = $"Given the list: {InputString}, the RMS = {calculatedResult}", 
-                    OperationType = CalculationTypes.Statistical.ToString(), 
-                    ResultType = ResultTypes.RootMeanSquare.ToString()
+                    OperationType = operationType.GetDescription(), 
+                    ResultType = successResType.GetDescription()
                 };
 
                 IMessageActivity successReply = context.MakeMessage();
@@ -72,13 +74,14 @@
             }
             else
             {
+                var errorResType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0", 
                     OutputMsg = "Your list may be too small to calculate the root mean square. Please try again later", 
-                    OperationType = CalculationTypes.Statistical.ToString(), 
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(), 
+                    ResultType = errorResType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();

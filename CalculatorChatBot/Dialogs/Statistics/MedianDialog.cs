@@ -35,6 +35,13 @@
 
         public async Task StartAsync(IDialogContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            var operationType = CalculationTypes.Statistical;
+
             // Performing some type of validation on the incoming data
             if (InputInts.Length > 2)
             {
@@ -55,13 +62,14 @@
                 }
 
                 #region Building out the results object and the card
+                var opsResultType = ResultTypes.Median;
                 var opsResult = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = decimal.Round(median, 2).ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the median = {decimal.Round(median, 2)}",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Median.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = opsResultType.GetDescription()
                 };
 
                 IMessageActivity opsReply = context.MakeMessage();
@@ -80,13 +88,14 @@
             }
             else
             {
+                var errorResType = ResultTypes.Error;
                 var errorResult = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0", 
                     OutputMsg = $"Please double check the input: {InputString} and try again",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();

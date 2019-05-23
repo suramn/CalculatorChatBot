@@ -42,6 +42,7 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Arithmetic;
             if (InputInts.Length == 2 && InputInts[1] != 0)
             {
                 int remainder = InputInts[0] % InputInts[1];
@@ -51,7 +52,7 @@
                     Input = InputString,
                     NumericalResult = remainder.ToString(), 
                     OutputMsg = $"Given the list {InputString}; the remainder = {remainder}",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
+                    OperationType = operationType.GetDescription(),
                     ResultType = ResultTypes.Remainder.ToString()
                 };
 
@@ -71,14 +72,15 @@
             }
             else
             {
+                var errorResultType = ResultTypes.Error;
                 // Building the error results object
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = $"The list: {InputString} may be invalid for this operation. Please double check, and try again",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResultType.GetDescription()
                 };
 
                 // Now having the card

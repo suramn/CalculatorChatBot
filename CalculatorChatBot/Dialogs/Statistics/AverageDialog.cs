@@ -40,6 +40,7 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Statistical;
             if (InputInts.Length > 1)
             {
                 int sum = InputInts[0];
@@ -49,6 +50,7 @@
                 }
 
                 decimal mean = Convert.ToDecimal(sum) / InputInts.Length;
+                var successResType = ResultTypes.Average;
 
                 #region Building the results object and the card
                 var results = new OperationResults()
@@ -56,8 +58,8 @@
                     Input = InputString,
                     NumericalResult = decimal.Round(mean, 2).ToString(), 
                     OutputMsg = $"Given the list: {InputString}; the average = {decimal.Round(mean, 2)}",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Average.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = successResType.GetDescription()
                 };
 
                 IMessageActivity opsReply = context.MakeMessage();
@@ -77,13 +79,14 @@
             else
             {
                 #region Building the error object
+                var errorResType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = "Your list may be too small to calculate an average. Please try again later.",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();

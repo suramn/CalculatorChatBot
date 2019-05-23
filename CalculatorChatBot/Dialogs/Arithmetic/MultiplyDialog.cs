@@ -42,8 +42,10 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Arithmetic;
             if (InputInts.Length > 1)
             {
+                var resultType = ResultTypes.Product;
                 int product = InputInts[0];
                 for (int i = 1; i < InputInts.Length; i++)
                 {
@@ -55,8 +57,8 @@
                     Input = InputString,
                     NumericalResult = product.ToString(),
                     OutputMsg = $"Given the list of {InputString}; the product = {product}",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
-                    ResultType = ResultTypes.Product.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = resultType.GetDescription()
                 };
 
                 #region Creating the adaptive card
@@ -76,13 +78,14 @@
             }
             else
             {
+                var errorResultType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too short - please provide more numbers",
-                    OperationType = CalculationTypes.Arithmetic.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResultType.GetDescription()
                 };
 
                 #region Creating the adaptive card

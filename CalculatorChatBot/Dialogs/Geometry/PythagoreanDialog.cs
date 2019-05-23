@@ -42,15 +42,17 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Geometric;
             if (InputInts.Length > 2)
             {
+                var errorResultType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = $"The input list: {InputString} is too long. I need only 2 numbers to find the length of the hypotenuse",
-                    OperationType = CalculationTypes.Geometric.ToString(), 
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(), 
+                    ResultType = errorResultType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();
@@ -77,13 +79,14 @@
 
                 var output = $"Given the legs of ${InputInts[0]} and ${InputInts[1]}, the hypotenuse of the right triangle is ${decimal.Round(decimal.Parse(c.ToString()), 2)}";
 
+                var resultType = ResultTypes.Hypotenuse;
                 var successResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = decimal.Round(decimal.Parse(c.ToString()), 2).ToString(), 
                     OutputMsg = output,
-                    OperationType = CalculationTypes.Geometric.ToString(),
-                    ResultType = ResultTypes.Hypotenuse.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = resultType.GetDescription()
                 };
 
                 IMessageActivity successReply = context.MakeMessage();

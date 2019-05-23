@@ -39,15 +39,17 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Geometric;
             if (InputInts.Length > 3)
             {
+                var errorResType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = "Your list may be too large to calculate the roots. Please try again later!",
-                    OperationType = CalculationTypes.Geometric.ToString(), 
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(), 
+                    ResultType = errorResType.GetDescription()
                 };
 
                 IMessageActivity errorListReply = context.MakeMessage();
@@ -95,13 +97,14 @@
                 switch (m)
                 {
                     case 1:
+                        var opsErrorResultType = ResultTypes.Error;
                         var opsError = new OperationResults()
                         {
                             Input = InputString,
                             NumericalResult = "0",
                             OutputMsg = "The information provided may lead to a linear equation!",
                             OperationType = CalculationTypes.Geometric.ToString(),
-                            ResultType = ResultTypes.Error.ToString()
+                            ResultType = opsErrorResultType.GetDescription()
                         };
 
                         IMessageActivity opsErrorReply = context.MakeMessage();
@@ -120,13 +123,14 @@
                         r1 = (-b + Math.Sqrt(discriminant)) / (2 * a);
                         r2 = (-b - Math.Sqrt(discriminant)) / (2 * a);
 
+                        var successResultType = ResultTypes.EquationRoots;
                         var successResults = new OperationResults()
                         {
                             Input = InputString,
                             NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]", 
-                            OperationType = CalculationTypes.Geometric.ToString(),
-                            ResultType = ResultTypes.EquationRoots.ToString()
+                            OperationType = operationType.GetDescription(),
+                            ResultType = successResultType.GetDescription()
                         };
 
                         IMessageActivity opsSuccessReply = context.MakeMessage();
@@ -144,14 +148,15 @@
                         break;
                     case 3:
                         r1 = r2 = (-b) / (2 * a);
-                        
+
+                        var successOpsOneRootResultType = ResultTypes.EquationRoots;
                         var successOpsOneRoot = new OperationResults()
                         {
                             Input = InputString,
                             NumericalResult = $"{r1}, {r2}",
                             OutputMsg = $"The roots are Real and Distinct - Given the list of: {InputString}, the roots are [{r1}, {r2}]",
-                            OperationType = CalculationTypes.Geometric.ToString(),
-                            ResultType = ResultTypes.EquationRoots.ToString()
+                            OperationType = operationType.GetDescription(),
+                            ResultType = successOpsOneRootResultType.GetDescription()
                         };
 
                         IMessageActivity opsSuccessOneRootReply = context.MakeMessage();
@@ -171,19 +176,20 @@
                         r1 = (-b) / (2 * a);
                         r2 = Math.Sqrt(-discriminant) / (2 * a);
 
-                        var root1Str = string.Format("First root is {0:#.##} + i {1:#.##}", r1, r2);
-                        var root2Str = string.Format("Second root is {0:#.##} - i {1:#.##}", r1, r2);
+                        var root1Str = string.Format("First root is {0:#.##} + {1:#.##}i", r1, r2);
+                        var root2Str = string.Format("Second root is {0:#.##} - {1:#.##}i", r1, r2);
 
-                        var root1 = string.Format("{0:#.##} + i {1:#.##}", r1, r2);
-                        var root2 = string.Format("{0:#.##} - i {1:#.##}", r1, r2);
+                        var root1 = string.Format("{0:#.##} + {1:#.##}i", r1, r2);
+                        var root2 = string.Format("{0:#.##} - {1:#.##}i", r1, r2);
 
+                        var imaginaryRootsResult = ResultTypes.EquationRoots;
                         var opsSuccessImaginRootsResults = new OperationResults()
                         {
                             Input = InputString,
                             NumericalResult = $"{root1}, {root2}",
                             OutputMsg = rootsDesc + " " + root1Str + " " + root2Str,
-                            OperationType = CalculationTypes.Geometric.ToString(), 
-                            ResultType = ResultTypes.EquationRoots.ToString()
+                            OperationType = operationType.GetDescription(), 
+                            ResultType = imaginaryRootsResult.GetDescription()
                         };
 
                         IMessageActivity opsSuccessImagReply = context.MakeMessage();

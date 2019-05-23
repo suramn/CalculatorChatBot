@@ -37,6 +37,7 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
+            var operationType = CalculationTypes.Statistical;
             if (InputInts.Length > 1)
             {
                 int sum = InputInts[0];
@@ -47,6 +48,7 @@
 
                 double mean = Convert.ToDouble(sum) / InputInts.Length;
                 decimal variance = CalculateVariance(mean, InputInts);
+                var successResultType = ResultTypes.Variance;
 
                 #region Building the results 
                 var results = new OperationResults()
@@ -54,8 +56,8 @@
                     Input = InputString,
                     NumericalResult = decimal.Round(variance, 2).ToString(),
                     OutputMsg = $"Given the list: {InputString}; the variance = {decimal.Round(variance, 2)}",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Variance.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = successResultType.GetDescription()
                 };
 
                 IMessageActivity resultsReply = context.MakeMessage();
@@ -74,13 +76,14 @@
             }
             else
             {
+                var errorResType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
                     OutputMsg = "Your list may be too small to calculate the variance. Please try again later.",
-                    OperationType = CalculationTypes.Statistical.ToString(),
-                    ResultType = ResultTypes.Error.ToString()
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResType.GetDescription()
                 };
 
                 IMessageActivity errorReply = context.MakeMessage();
