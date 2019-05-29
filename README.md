@@ -1,6 +1,6 @@
 # Calculator Chat Bot
 
-This is a sample Microsoft Teams bot to be able to conduct four basic arithmetic operations
+This is a sample Microsoft Teams bot to be able to conduct mathematical operations
 
 ## Premise to create bot
 
