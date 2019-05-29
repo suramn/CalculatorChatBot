@@ -8,30 +8,33 @@ The reason for having this bot created was to actually showcase some of the basi
 
 ### Requirements
 
-We are members of a company - XYZ Software LLC and we are developing bots, messaging extensions, and cards for the Microsoft Teams platform. We are given a task that requires for us to build a chat bot that can conduct four basic arithmetic operations. To review they are:
+We are members of a company - XYZ Software LLC and we are developing bots, messaging extensions, and cards for the Microsoft Teams platform. We are given a task that requires for us to build a chat bot which acts as a mathematical assistant to the users. Our mathematical assistant conducts three genres of operations: arithmetic, geometric, and statistical. 
 
-1. Addition - returning the sum of the list of numbers
+#### Arithmetic
 
-2. Subtraction - returning the difference in the list of numbers
-
-3. Multiplication - returning the product when you multiply all of the numbers
-
+1. Addition - returning the sum of the list of numbers  
+2. Subtraction - returning the difference in the list of numbers  
+3. Multiplication - returning the product when you multiply all of the numbers  
 4. Division - here we may have to implement some type of constraint saying that the number of inputs must be **two integers**
 
-#### Future Features
+#### Statistical
 
-The following features are suggested to extend the functionality of this bot to include some basic statistical computations which include:
+1. Mean - returning the average of the list of numbers
+2. Median - returns the middle of the sorted list
+3. Mode - returns which number(s) appear the most in a sorted numerical list
+4. Range - returns the difference between the largest value and the smallest value
+5. Standard Deviation - a measure that would determine how far off the data is from the mean
+6. Variance - a measure that would determine the degrees of separation from the mean
+7. Geometric Mean - the central number in a geometric progression
+8. Root Mean Square - the square root of the arithmetic mean of the squares of a set of values
 
-1. Average - also known as the mean - calculate the sum of the list of numbers, and divide by the number of integers in the list
+#### Geometry
 
-2. Median - with the list of integers provided, we calculate the middle value of the list. If the list has an odd length `list.Length % 2 == 1`, we would then access the middle element of the list. Keep in mind, that the list should be sorted. If the list has an even length `list.Length % 2 == 0`, we would then take the average of the middle two elements. Again, it is crucial that we sort the list first before doing anything.
-
-3. Mode - with the list of integers that are provided we need to see which elements of the list appear the most. In this case, a list may have three scenarios:
-   - The list is multi-modal - meaning that we have more than 1 element that appears more than once in the list
-   - The list is uni-modal - meaning that there is 1 and only 1 element that appears multiple times in the list
-   - The list contains no mode at all - meaning that this list contains unique and distinct values i.e. `[1, 0, 2, 3, 5, 52, 6]`
-
-4. Range - with the list of integers we find the difference between the lowest valued element in the list and the highest valued element in the list. So from the list in the previous example, the range = 52 - 0 = 52 because the highest value in the list is 52 and the lowest value in the list is 0.
+1. Discriminant - this value will indicate the nature of the roots for a quadratic equation
+2. Distance - this value will indicate how far apart two coordinate points are spread out. The coordinate points are 2-tuples of (x,y)
+3. Midpoint - A tuple (x,y) that would represent the middle point between two coordinate points (x,y)
+4. Pythagorean - Implements the Pythagoras Theorem. Returns the value of the hypotenuse when given values of the legs
+5. Quadratic Solver - returns the actual roots of a quadratic equation
 
 #### Some Fun Things
 
