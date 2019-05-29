@@ -54,6 +54,7 @@
         public const string MidPointDialogMatch = "midpoint";
         public const string DistanceDialogMatch = "distance";
         public const string TriangleAreaDialogMatch = "triangle-area";
+        public const string TrianglePerimDialogMatch = "triangle-perimeter";
         #endregion
     }
 }

@@ -43,7 +43,7 @@
             }
 
             var operationType = CalculationTypes.Geometric;
-            if (InputInts.Length > 2 && (InputInts[0] == 0 || InputInts[1] == 0))
+            if (InputInts.Length == 2 && (InputInts[0] == 0 || InputInts[1] == 0))
             {
                 var errorResultType = ResultTypes.Error;
                 var errorResults = new OperationResults()
