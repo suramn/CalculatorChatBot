@@ -43,14 +43,14 @@
             }
 
             var operationType = CalculationTypes.Geometric;
-            if (InputInts.Length > 2)
+            if (InputInts.Length > 2 && (InputInts[0] == 0 || InputInts[1] == 0))
             {
                 var errorResultType = ResultTypes.Error;
                 var errorResults = new OperationResults()
                 {
                     Input = InputString,
                     NumericalResult = "0",
-                    OutputMsg = $"The input list: {InputString} is too long. I need only 2 numbers to find the length of the hypotenuse",
+                    OutputMsg = $"The input list: {InputString} may not be valid. Please try again",
                     OperationType = operationType.GetDescription(),
                     ResultType = errorResultType.GetDescription()
                 };
@@ -70,12 +70,30 @@
             }
             else
             {
-                // TODO - Complete this later
+                var triangleAreaResult = Convert.ToDecimal(0.5 * InputInts[0] * InputInts[1]);
+
                 var successResultType = ResultTypes.TriangleArea;
                 var successResults = new OperationResults()
                 {
-                    
+                    Input = InputString,
+                    NumericalResult = decimal.Round(triangleAreaResult, 2).ToString(), 
+                    OutputMsg = $"Given the inputs: {InputString}, the output = {decimal.Round(triangleAreaResult, 2).ToString()}",
+                    OperationType = operationType.GetDescription(), 
+                    ResultType = successResultType.GetDescription()
                 };
+
+                IMessageActivity successReply = context.MakeMessage();
+                var successResultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResults);
+                successReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(successResultsAdaptiveCard)
+                    }
+                };
+
+                await context.PostAsync(successReply);
             }
         }
     }
