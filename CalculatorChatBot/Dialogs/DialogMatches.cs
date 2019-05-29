@@ -53,6 +53,7 @@
         public const string QuadraticSolverDialogMatch = "quadratic";
         public const string MidPointDialogMatch = "midpoint";
         public const string DistanceDialogMatch = "distance";
+        public const string TriangleAreaDialogMatch = "triangle-area";
         #endregion
     }
 }

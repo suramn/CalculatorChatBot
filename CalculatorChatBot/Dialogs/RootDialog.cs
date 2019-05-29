@@ -212,6 +212,14 @@
             var distanceResult = activity as Activity;
             context.Call(new DistanceDialog(distanceResult), EndDialog); 
         }
+
+        [RegexPattern(DialogMatches.TriangleAreaDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunTriangleAreaDialog(IDialogContext context, IActivity activity)
+        {
+            var triangleAreaResult = activity as Activity;
+            context.Call(new TriangleAreaDialog(triangleAreaResult), EndDialog);
+        }
         #endregion
 
         #region Generic help

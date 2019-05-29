@@ -81,7 +81,9 @@
         [Description("Midpoint")]
         Midpoint,
         [Description("Distance")]
-        Distance
+        Distance,
+        [Description("Area of a Triangle")]
+        TriangleArea
     }
 
     public class OperationResults
