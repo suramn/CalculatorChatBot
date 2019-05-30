@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
 
@@ -34,13 +35,20 @@
             {
                 throw new ArgumentNullException(nameof(context));
             }
+           
+            if (InputInts.Length != 1)
+            {
+                await context.PostAsync("Hitting the error condition in the Circle Area Dialog");
+            }
+            else
+            {
+                await context.PostAsync("Making sure to hit the correct branch in the Circle Area Dialog");
+            }
 
             // TODO: Implement the necessary logic - it's rather straight-forward
             // If the length of the array input is = 1 - calculate area
             // If the length of the array input is = 0 - throw the error card
             // If the length of the array input is > 1 - throw the error card as well
-
-            await context.PostAsync("Hit the circle area dialog");
         }
     }
 }

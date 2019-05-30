@@ -2,8 +2,12 @@
 {
     using System;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
+    using CalculatorChatBot.Cards;
 
     public class RectangleAreaDialog : IDialog<object>
     {
@@ -38,7 +42,36 @@
             // TODO: Complete the Rectangle area (success and failure cases)
             // TODO2: May want to also consider the square here
 
-            await context.PostAsync("hola!");
+            var operationType = CalculationTypes.Geometric;
+            if (InputInts.Length != 2)
+            {
+                var errorResultType = ResultTypes.Error;
+                var errorResults = new OperationResults()
+                {
+                    Input = InputString,
+                    NumericalResult = "0",
+                    OutputMsg = $"The input list: {InputString} may not be valid. Please try again",
+                    OperationType = operationType.GetDescription(),
+                    ResultType = errorResultType.GetDescription()
+                };
+
+                IMessageActivity errorReply = context.MakeMessage();
+                var errorResultsAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorResults);
+                errorReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorResultsAdaptiveCard)
+                    }
+                };
+
+                await context.PostAsync(errorReply);
+            }
+            else
+            {
+                await context.PostAsync("Hitting the else block!");
+            }
         }
     }
 }
