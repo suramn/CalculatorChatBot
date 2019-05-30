@@ -236,6 +236,14 @@
             var rectangleAreaResult = activity as Activity;
             context.Call(new RectangleAreaDialog(rectangleAreaResult), EndDialog);
         }
+
+        [RegexPattern(DialogMatches.CircleAreaDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunCircleAreaDialog(IDialogContext context, IActivity activity)
+        {
+            var circleAreaResult = activity as Activity;
+            context.Call(new CircleAreaDialog(circleAreaResult), EndDialog);
+        }
         #endregion
 
         #region Generic help
