@@ -228,6 +228,14 @@
             var trianglePerimResult = activity as Activity;
             context.Call(new TrianglePerimeterDialog(trianglePerimResult), EndDialog);
         }
+
+        [RegexPattern(DialogMatches.RectangleAreaDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunRectangleAreaDialog(IDialogContext context, IActivity activity)
+        {
+            var rectangleAreaResult = activity as Activity;
+            context.Call(new RectangleAreaDialog(rectangleAreaResult), EndDialog);
+        }
         #endregion
 
         #region Generic help

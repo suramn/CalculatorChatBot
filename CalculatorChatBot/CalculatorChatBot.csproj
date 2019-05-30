@@ -187,6 +187,7 @@
     <Compile Include="Dialogs\Geometry\MidpointDialog.cs" />
     <Compile Include="Dialogs\Geometry\PythagoreanDialog.cs" />
     <Compile Include="Dialogs\Geometry\QuadraticSolverDialog.cs" />
+    <Compile Include="Dialogs\Geometry\RectangleAreaDialog.cs" />
     <Compile Include="Dialogs\Geometry\TriangleAreaDialog.cs" />
     <Compile Include="Dialogs\Geometry\TrianglePerimeterDialog.cs" />
     <Compile Include="Dialogs\Statistics\AverageDialog.cs" />

@@ -4,17 +4,16 @@
     using System.Threading.Tasks;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
-    using System.Collections.Generic;
 
-    public class TrianglePerimeterDialog : IDialog<object>
+    public class RectangleAreaDialog : IDialog<object>
     {
         #region Dialog properties
-        public string[] InputStringArray { get; set; }
         public string InputString { get; set; }
+        public string[] InputStringArray { get; set; }
         public int[] InputInts { get; set; }
         #endregion
 
-        public TrianglePerimeterDialog(Activity incomingActivity)
+        public RectangleAreaDialog(Activity incomingActivity)
         {
             // Parsing through the incoming message text
             string[] incomingInfo = incomingActivity.Text.Split(' ');
@@ -36,20 +35,10 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (InputInts.Length != 3)
-            {
-                // TODO: Make sure to have some type of error/warning of the adaptive card
-                // which would make the most sense
-                await context.PostAsync("hiii");
-            }
-            else
-            {
-                // TODO: Complete with three possible cases
-                // A) Equilateral - all sides are the same value
-                // B) Isoceles - two out of three sides are the same value
-                // C) Scaled - all three sides are of different values
-                await context.PostAsync("heyooooo!");
-            }
+            // TODO: Complete the Rectangle area (success and failure cases)
+            // TODO2: May want to also consider the square here
+
+            await context.PostAsync("hola!");
         }
     }
 }
