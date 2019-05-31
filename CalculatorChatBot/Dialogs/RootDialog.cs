@@ -212,6 +212,38 @@
             var distanceResult = activity as Activity;
             context.Call(new DistanceDialog(distanceResult), EndDialog); 
         }
+
+        [RegexPattern(DialogMatches.TriangleAreaDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunTriangleAreaDialog(IDialogContext context, IActivity activity)
+        {
+            var triangleAreaResult = activity as Activity;
+            context.Call(new TriangleAreaDialog(triangleAreaResult), EndDialog);
+        }
+
+        [RegexPattern(DialogMatches.TrianglePerimDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunTrianglePerimDialog(IDialogContext context, IActivity activity)
+        {
+            var trianglePerimResult = activity as Activity;
+            context.Call(new TrianglePerimeterDialog(trianglePerimResult), EndDialog);
+        }
+
+        [RegexPattern(DialogMatches.RectangleAreaDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunRectangleAreaDialog(IDialogContext context, IActivity activity)
+        {
+            var rectangleAreaResult = activity as Activity;
+            context.Call(new RectangleAreaDialog(rectangleAreaResult), EndDialog);
+        }
+
+        [RegexPattern(DialogMatches.CircleAreaDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunCircleAreaDialog(IDialogContext context, IActivity activity)
+        {
+            var circleAreaResult = activity as Activity;
+            context.Call(new CircleAreaDialog(circleAreaResult), EndDialog);
+        }
         #endregion
 
         #region Generic help

@@ -81,7 +81,15 @@
         [Description("Midpoint")]
         Midpoint,
         [Description("Distance")]
-        Distance
+        Distance,
+        [Description("Area of a Triangle")]
+        TriangleArea,
+        [Description("Area of a Square")]
+        SquareArea,
+        [Description("Area of a Rectangle")]
+        RectangleArea,
+        [Description("Area of a Circle")]
+        CircleArea
     }
 
     public class OperationResults
