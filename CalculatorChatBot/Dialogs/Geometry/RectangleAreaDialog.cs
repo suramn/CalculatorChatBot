@@ -68,9 +68,59 @@
 
                 await context.PostAsync(errorReply);
             }
+            else if (InputInts[0] == InputInts[1])
+            {
+                var squareAreaResult = Convert.ToDecimal(Math.Pow(InputInts[0], 2));
+
+                var successResultType = ResultTypes.SquareArea;
+                var successResults = new OperationResults()
+                {
+                    Input = InputString,
+                    NumericalResult = decimal.Round(squareAreaResult, 2).ToString(),
+                    OutputMsg = $"Given the inputs: {InputString}, the output = {decimal.Round(squareAreaResult, 2).ToString()}",
+                    OperationType = operationType.GetDescription(),
+                    ResultType = successResultType.GetDescription()
+                };
+
+                IMessageActivity squareSuccessReply = context.MakeMessage();
+                var successResultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResults);
+                squareSuccessReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(successResultsAdaptiveCard)
+                    }
+                };
+
+                await context.PostAsync(squareSuccessReply);
+            }
             else
             {
-                await context.PostAsync("Hitting the else block!");
+                var rectangleAreaResult = Convert.ToDecimal(InputInts[0] * InputInts[1]);
+
+                var successResultType = ResultTypes.RectangleArea;
+                var successResults = new OperationResults()
+                {
+                    Input = InputString,
+                    NumericalResult = decimal.Round(rectangleAreaResult, 2).ToString(),
+                    OutputMsg = $"Given the inputs: {InputString}, the output = {decimal.Round(rectangleAreaResult, 2).ToString()}",
+                    OperationType = operationType.GetDescription(),
+                    ResultType = successResultType.GetDescription()
+                };
+
+                IMessageActivity successReply = context.MakeMessage();
+                var successResultsAdaptiveCard = OperationResultsAdaptiveCard.GetCard(successResults);
+                successReply.Attachments = new List<Attachment>()
+                {
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(successResultsAdaptiveCard)
+                    }
+                };
+
+                await context.PostAsync(successReply);
             }
         }
     }
