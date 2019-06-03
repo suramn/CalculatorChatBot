@@ -190,6 +190,7 @@
     <Compile Include="Dialogs\Geometry\QuadraticSolverDialog.cs" />
     <Compile Include="Dialogs\Geometry\RectangleAreaDialog.cs" />
     <Compile Include="Dialogs\Geometry\TriangleAreaDialog.cs" />
+    <Compile Include="Dialogs\Geometry\TrianglePerimDialog.cs" />
     <Compile Include="Dialogs\Statistics\AverageDialog.cs" />
     <Compile Include="Dialogs\Arithmetic\DivideDialog.cs" />
     <Compile Include="Dialogs\GreetDialog.cs" />

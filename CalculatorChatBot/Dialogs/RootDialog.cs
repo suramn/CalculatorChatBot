@@ -226,7 +226,7 @@
         public async Task RunTrianglePerimDialog(IDialogContext context, IActivity activity)
         {
             var trianglePerimResult = activity as Activity;
-            context.Call(new TrianglePerimeterDialog(trianglePerimResult), EndDialog);
+            context.Call(new TrianglePerimDialog(trianglePerimResult), EndDialog);
         }
 
         [RegexPattern(DialogMatches.RectangleAreaDialogMatch)]
