@@ -229,6 +229,14 @@
             context.Call(new TrianglePerimDialog(trianglePerimResult), EndDialog);
         }
 
+        [RegexPattern(DialogMatches.QuadrilateralPerimDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunQuadPerimDialog(IDialogContext context, IActivity activity)
+        {
+            var quadPerimResult = activity as Activity;
+            context.Call(new QuadrilateralPerimDialog(quadPerimResult), EndDialog);
+        }
+
         [RegexPattern(DialogMatches.RectangleAreaDialogMatch)]
         [ScorableGroup(1)]
         public async Task RunRectangleAreaDialog(IDialogContext context, IActivity activity)
