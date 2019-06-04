@@ -37,7 +37,14 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
-            await context.PostAsync("You have hit the quadrilateral perimeter dialog");
+            if (InputInts.Length != 4)
+            {
+                await context.PostAsync("Hit the error condition");
+            }
+            else
+            {
+                await context.PostAsync("Hit the correct case");
+            }
         }
     }
 }
