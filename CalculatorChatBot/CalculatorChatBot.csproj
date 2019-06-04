@@ -183,13 +183,16 @@
     <Compile Include="Dialogs\Arithmetic\AddDialog.cs" />
     <Compile Include="Dialogs\DialogMatches.cs" />
     <Compile Include="Dialogs\Geometry\CircleAreaDialog.cs" />
+    <Compile Include="Dialogs\Geometry\CircumferenceDialog.cs" />
     <Compile Include="Dialogs\Geometry\DiscriminantDialog.cs" />
     <Compile Include="Dialogs\Geometry\DistanceDialog.cs" />
     <Compile Include="Dialogs\Geometry\MidpointDialog.cs" />
     <Compile Include="Dialogs\Geometry\PythagoreanDialog.cs" />
     <Compile Include="Dialogs\Geometry\QuadraticSolverDialog.cs" />
     <Compile Include="Dialogs\Geometry\RectangleAreaDialog.cs" />
+    <Compile Include="Dialogs\Geometry\QuadrilateralPerimDialog.cs" />
     <Compile Include="Dialogs\Geometry\TriangleAreaDialog.cs" />
+    <Compile Include="Dialogs\Geometry\TrianglePerimDialog.cs" />
     <Compile Include="Dialogs\Statistics\AverageDialog.cs" />
     <Compile Include="Dialogs\Arithmetic\DivideDialog.cs" />
     <Compile Include="Dialogs\GreetDialog.cs" />

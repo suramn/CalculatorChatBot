@@ -226,7 +226,15 @@
         public async Task RunTrianglePerimDialog(IDialogContext context, IActivity activity)
         {
             var trianglePerimResult = activity as Activity;
-            context.Call(new TrianglePerimeterDialog(trianglePerimResult), EndDialog);
+            context.Call(new TrianglePerimDialog(trianglePerimResult), EndDialog);
+        }
+
+        [RegexPattern(DialogMatches.QuadrilateralPerimDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunQuadPerimDialog(IDialogContext context, IActivity activity)
+        {
+            var quadPerimResult = activity as Activity;
+            context.Call(new QuadrilateralPerimDialog(quadPerimResult), EndDialog);
         }
 
         [RegexPattern(DialogMatches.RectangleAreaDialogMatch)]
@@ -243,6 +251,14 @@
         {
             var circleAreaResult = activity as Activity;
             context.Call(new CircleAreaDialog(circleAreaResult), EndDialog);
+        }
+
+        [RegexPattern(DialogMatches.CicleCircumferenceDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunCircumferenceDialog(IDialogContext context, IActivity activity)
+        {
+            var circumferenceResult = activity as Activity;
+            context.Call(new CircumferenceDialog(circumferenceResult), EndDialog);
         }
         #endregion
 
