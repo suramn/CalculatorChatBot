@@ -252,6 +252,14 @@
             var circleAreaResult = activity as Activity;
             context.Call(new CircleAreaDialog(circleAreaResult), EndDialog);
         }
+
+        [RegexPattern(DialogMatches.CicleCircumferenceDialogMatch)]
+        [ScorableGroup(1)]
+        public async Task RunCircumferenceDialog(IDialogContext context, IActivity activity)
+        {
+            var circumferenceResult = activity as Activity;
+            context.Call(new CircumferenceDialog(circumferenceResult), EndDialog);
+        }
         #endregion
 
         #region Generic help

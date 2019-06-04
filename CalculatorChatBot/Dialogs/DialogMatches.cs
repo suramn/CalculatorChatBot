@@ -58,6 +58,7 @@
         public const string QuadrilateralPerimDialogMatch = "quadrilateral-perimeter";
         public const string RectangleAreaDialogMatch = "rectangle-area";
         public const string CircleAreaDialogMatch = "circle-area";
+        public const string CicleCircumferenceDialogMatch = "circumference";
         #endregion
     }
 }
