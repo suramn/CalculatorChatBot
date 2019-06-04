@@ -91,7 +91,11 @@
         [Description("Area of a Circle")]
         CircleArea,
         [Description("Triangle Perimeter")]
-        TrianglePerimeter
+        TrianglePerimeter,
+        [Description("Quadrilateral Perimeter")]
+        QuadPerimeter,
+        [Description("Square Perimeter")]
+        SquarePerimeter
     }
 
     public class OperationResults

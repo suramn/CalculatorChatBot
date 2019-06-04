@@ -1,6 +1,7 @@
 ﻿namespace CalculatorChatBot.Dialogs.Geometry
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using CalculatorChatBot.Cards;
@@ -73,7 +74,7 @@
                 // Add all sides - for the scalene and isoceles cases
                 if (!isEquilateral)
                 {
-                    var perimeter = InputInts[0] + InputInts[1] + InputInts[2];
+                    var perimeter = InputInts.Sum();
                     var perimResultType = ResultTypes.TrianglePerimeter;
                     var perimResults = new OperationResults()
                     {
