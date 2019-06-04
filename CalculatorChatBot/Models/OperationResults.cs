@@ -95,7 +95,9 @@
         [Description("Quadrilateral Perimeter")]
         QuadPerimeter,
         [Description("Square Perimeter")]
-        SquarePerimeter
+        SquarePerimeter,
+        [Description("Circumference")]
+        Circumference
     }
 
     public class OperationResults
