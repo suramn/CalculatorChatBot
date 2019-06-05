@@ -7,6 +7,7 @@
     using CalculatorChatBot.Models;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using Newtonsoft.Json;
 
     public class TrapezoidAreaDialog : IDialog<object>
     {
@@ -56,8 +57,20 @@
                 var errorAdaptiveCard = OperationErrorAdaptiveCard.GetCard(errorResults);
                 errorReply.Attachments = new List<Attachment>()
                 {
-
+                    new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(errorAdaptiveCard)
+                    }
                 };
+
+                await context.PostAsync(errorReply);
+            }
+            else
+            {
+                // TODO: Have the success condition properly flushed out here
+                // Also the code to be implemented here - is the correct area
+                // calculation
             }
         }
     }
